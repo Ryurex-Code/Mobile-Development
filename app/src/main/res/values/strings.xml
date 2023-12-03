@@ -10,4 +10,10 @@
     <string name="register">Register</string>
     <string name="need_an_account">Need an account?</string>
     <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="username_hint">Input your username</string>
+    <string name="password_register_hint">Input your password</string>
+    <string name="password_again_register_hint">Input your password again</string>
+    <string name="back">Back</string>
+    <string name="confirm">Confirm</string>
 </resources>

@@ -10,4 +10,13 @@
     <string name="register">Register</string>
     <string name="need_an_account">Need an account?</string>
     <string name="email">Email</string>
+    <string name="username_hint">Username</string>
+    <string name="Email_user">example@gmail.com</string>
+    <string name="date_hint">12 November 2023</string>
+    <string name="change_them">Change Theme Dark/White</string>
+    <string name="change_lang">Change language</string>
+    <string name="favorite">Favorite</string>
+    <string name="log_out">Log out</string>
+
+
 </resources>

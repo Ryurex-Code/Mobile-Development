@@ -34,21 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
-    <TextView
-        android:id="@+id/Username"
-        android:layout_width="230dp"
-        android:layout_height="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="70dp"
-        android:gravity="center_horizontal|top"
-        android:lineSpacingExtra="-5sp"
-        android:text="@string/username_hint"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
-
     <RelativeLayout
         android:id="@+id/iconamoon_p"
         android:layout_width="22dp"
@@ -57,9 +42,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="210dp"
-        android:clipToOutline="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="167dp"
         android:background="@drawable/pp_ic"
+        android:clipToOutline="true"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
         app:layout_constraintHorizontal_bias="0.375"
@@ -68,11 +55,35 @@
         app:layout_constraintVertical_bias="0.525" />
 
     <TextView
+        android:id="@+id/username"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/dark_blue_green"
+        android:textStyle="bold"
+        android:layout_width="230dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="70dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="-5sp"
+        android:elevation="5dp"
+        android:text="@string/username_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
+
+    <TextView
         android:id="@+id/Email"
+        android:textStyle="italic"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/dark_blue_green"
         android:layout_width="190dp"
         android:layout_height="19dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="70dp"
+        android:elevation="5dp"
         android:gravity="top"
         android:lineSpacingExtra="-2sp"
         android:text="@string/Email_user"
@@ -90,10 +101,11 @@
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="221dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="205dp"
         android:background="@drawable/date_ic"
         android:clipToOutline="true"
+        android:elevation="5dp"
         android:src="@drawable/pp_ic"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
@@ -104,29 +116,55 @@
 
     <TextView
         android:id="@+id/Dateday"
+        android:textStyle="italic"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/dark_blue_green"
         android:layout_width="190dp"
         android:layout_height="19dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="70dp"
+        android:elevation="5dp"
         android:gravity="top"
         android:lineSpacingExtra="-2sp"
         android:text="@string/date_hint"
         android:textAppearance="@style/grey_rectangle"
-        app:layout_constraintHorizontal_bias="0.744"
         app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
+        app:layout_constraintHorizontal_bias="0.744"
         app:layout_constraintStart_toStartOf="@+id/rectangle_1"
         app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="443dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="423dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/soft_peach"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/setting"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="125dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="230dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center|start"
+        android:lineSpacingExtra="-2sp"
+        android:text="@string/setting"
+        android:textColor="@color/dark_blue_green"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        android:textstyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_1" />
 
     <View
         android:id="@+id/rectangle_2"
@@ -135,12 +173,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_1_ic"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_1"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <RelativeLayout
         android:id="@+id/tabler_sun_"
@@ -158,6 +197,10 @@
 
     <TextView
         android:id="@+id/change_them"
+        android:textStyle="italic"
+        android:clickable="true"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/dark_blue_green"
         android:layout_width="280dp"
         android:layout_height="21dp"
         android:layout_alignParentLeft="true"
@@ -174,6 +217,7 @@
 
     <View
         android:id="@+id/rectangle_3"
+        android:clickable="true"
         android:layout_width="320dp"
         android:layout_height="38dp"
         android:layout_alignParentLeft="true"
@@ -204,6 +248,10 @@
 
     <TextView
         android:id="@+id/change_lang"
+        android:clickable="true"
+        android:textStyle="italic"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/dark_blue_green"
         android:layout_width="280dp"
         android:layout_height="21dp"
         android:layout_alignParentLeft="true"
@@ -222,6 +270,7 @@
 
     <View
         android:id="@+id/rectangle_4"
+        android:clickable="true"
         android:layout_width="320dp"
         android:layout_height="38dp"
         android:layout_alignParentLeft="true"
@@ -252,6 +301,10 @@
 
     <TextView
         android:id="@+id/favorite"
+        android:clickable="true"
+        android:textStyle="italic"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/dark_blue_green"
         android:layout_width="280dp"
         android:layout_height="21dp"
         android:layout_alignParentLeft="true"
@@ -270,6 +323,7 @@
 
     <View
         android:id="@+id/rectangle_5"
+        android:clickable="true"
         android:layout_width="320dp"
         android:layout_height="38dp"
         android:layout_alignParentLeft="true"
@@ -298,6 +352,10 @@
 
     <TextView
         android:id="@+id/log_out"
+        android:clickable="true"
+        android:textStyle="italic"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/dark_blue_green"
         android:layout_width="280dp"
         android:layout_height="21dp"
         android:layout_alignParentLeft="true"
@@ -323,7 +381,7 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/rectangle_2_ic"
         android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_5" />

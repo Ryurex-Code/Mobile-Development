@@ -8,7 +8,7 @@
     tools:context=".ui.profile.ProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/iv_profileimage"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
@@ -32,10 +32,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_profileimage" />
 
     <RelativeLayout
-        android:id="@+id/iconamoon_p"
+        android:id="@+id/ic_profileicon"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.525" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/tv_username"
         style="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/dark_blue_green"
         android:textStyle="bold"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
 
     <TextView
-        android:id="@+id/Email"
+        android:id="@+id/tv_Email"
         android:textStyle="italic"
         style="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/dark_blue_green"
@@ -96,7 +96,7 @@
         app:layout_constraintVertical_bias="0.537" />
 
     <RelativeLayout
-        android:id="@+id/lets_icons_"
+        android:id="@+id/ic_dateicon"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -115,7 +115,7 @@
         app:layout_constraintVertical_bias="0.687" />
 
     <TextView
-        android:id="@+id/Dateday"
+        android:id="@+id/tv_Datejoin"
         android:textStyle="italic"
         style="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/dark_blue_green"
@@ -137,7 +137,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="423dp"
         android:layout_marginBottom="30dp"
@@ -146,22 +146,21 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/setting"
+        android:id="@+id/tv_setting"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="125dp"
         android:layout_height="36dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="230dp"
-        android:layout_marginBottom="10dp"
         android:gravity="center|start"
         android:lineSpacingExtra="-2sp"
         android:text="@string/setting"
         android:textColor="@color/dark_blue_green"
         android:textSize="17dp"
-        android:textStyle="italic"
-        android:textstyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_1" />
@@ -174,15 +173,15 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_1_ic"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_1"
         app:layout_constraintVertical_bias="0.164" />
 
     <RelativeLayout
-        android:id="@+id/tabler_sun_"
+        android:id="@+id/ic_sunmoon_icon"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -196,7 +195,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_2" />
 
     <TextView
-        android:id="@+id/change_them"
+        android:id="@+id/tv_change_theme"
         android:textStyle="italic"
         android:clickable="true"
         style="@style/TextAppearance.AppCompat.Body1"
@@ -223,15 +222,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_1_ic"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="@+id/view1"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_2"
         app:layout_constraintVertical_bias="0.111" />
 
     <RelativeLayout
-        android:id="@+id/mdi_world"
+        android:id="@+id/ic_world_icon"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -247,7 +246,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_3"/>
 
     <TextView
-        android:id="@+id/change_lang"
+        android:id="@+id/tv_change_lang"
         android:clickable="true"
         android:textStyle="italic"
         style="@style/TextAppearance.AppCompat.Body1"
@@ -276,15 +275,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_1_ic"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="@+id/view1"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_3"
         app:layout_constraintVertical_bias="0.143" />
 
     <RelativeLayout
-        android:id="@+id/mdi_book_fa"
+        android:id="@+id/ic_book_fav"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -300,7 +299,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_4" />
 
     <TextView
-        android:id="@+id/favorite"
+        android:id="@+id/tv_favorite"
         android:clickable="true"
         android:textStyle="italic"
         style="@style/TextAppearance.AppCompat.Body1"
@@ -329,15 +328,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/rectangle_1_ic"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="@+id/view1"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_4"
         app:layout_constraintVertical_bias="0.252" />
 
     <RelativeLayout
-        android:id="@+id/line_md_log"
+        android:id="@+id/ic_logout_icon"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
@@ -351,7 +350,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_5" />
 
     <TextView
-        android:id="@+id/log_out"
+        android:id="@+id/tv_log_out"
         android:clickable="true"
         android:textStyle="italic"
         style="@style/TextAppearance.AppCompat.Body1"
@@ -382,8 +381,8 @@
         android:background="@drawable/rectangle_2_ic"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view1"
+        app:layout_constraintStart_toStartOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_5" />
 
 

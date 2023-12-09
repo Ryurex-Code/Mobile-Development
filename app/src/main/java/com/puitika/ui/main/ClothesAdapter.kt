@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.puitika.R
 import com.puitika.data.dummy.DetailTraditionalCloth
 
-class ClothAdapter(private val context: Context, private val cloth:List<DetailTraditionalCloth>): RecyclerView.Adapter<ClothAdapter.ViewHolder>() {
+class ClothesAdapter(private val context: Context, private val cloth:List<DetailTraditionalCloth>): RecyclerView.Adapter<ClothesAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {

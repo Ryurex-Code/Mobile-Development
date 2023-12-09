@@ -1,20 +1,25 @@
 package com.puitika.data.dummy
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class TraditionalCloth(
     val error: Boolean,
     val message:String,
     val data: List<DetailTraditionalCloth>
 )
 
+
+@Parcelize
 data class DetailTraditionalCloth(
-    val id:Int,
+    val id:Int = 1,
     val name:String,
-    val description:String,
-    val category: String,
-    val subcategory:String,
-    val origin:String,
+    val description:String = "ha",
+    val category: String = "ha",
+    val subcategory:String = "ha",
+    val origin:String = "ha",
     val imageUrl:String
-)
+): Parcelable
 
 val dummyTraditionalCloths = TraditionalCloth(
     error = false,

@@ -7,9 +7,11 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        style="@style/TextAppearance.Material3.BodyLarge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="event" />
+        android:text="Event"
+        android:textSize="30sp" />
 
 </FrameLayout>

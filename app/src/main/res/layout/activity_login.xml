@@ -100,8 +100,8 @@
     <View
         android:id="@+id/view3"
         style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="412dp"
-        android:layout_height="280dp"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
         android:background="@drawable/bottom_shape_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

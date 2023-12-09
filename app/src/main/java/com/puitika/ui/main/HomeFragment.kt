@@ -27,7 +27,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.topNavigation.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_account -> {
+                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                    true
+                }
 
+                else -> false
+            }
+        }
         initRecyclerView()
     }
 

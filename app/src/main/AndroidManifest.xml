@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Puitika"
         tools:targetApi="31">
         <activity
+            android:name=".ui.detail.DetailActivityKain"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detail.DetailActivityDaerah"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.ProfileEditActivity"
             android:exported="false" />
         <activity

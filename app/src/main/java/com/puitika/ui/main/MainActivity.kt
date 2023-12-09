@@ -16,12 +16,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER,false)
+
+        if (!isLoggedIn){
+            startActivity(Intent(this,LoginActivity::class.java))
+        }
+
         with(binding) {
             bottomNav.add(MeowBottomNavigation.Model(1, R.drawable.home_ic))
             bottomNav.add(MeowBottomNavigation.Model(2, R.drawable.scan_ic))
             bottomNav.add(MeowBottomNavigation.Model(3, R.drawable.event_ic))
             bottomNav.show(1)
-            navigation(HomeFragment())
+            navigation(HomeFragment(),true)
 
             bottomNav.setOnClickMenuListener {
                 when (it.id) {
@@ -73,3 +79,11 @@ class MainActivity : AppCompatActivity() {
         }
         binding.bottomNav.show(selectedItem, true)
     }
+
+    companion object {
+        const val EXTRA_USER = "fromLogin"
+
+    }
+}
+
+

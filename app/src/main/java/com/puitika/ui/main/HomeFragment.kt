@@ -50,6 +50,13 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = regionAdapter
         }
+        regionAdapter.setOnItemClickListener(object : RegionAdapter.OnItemClickListener {
+            override fun onClick(ivCloth: ImageView, region: DetailRegion) {
+                val intent = Intent(requireContext(), DetailDaerahActivity::class.java)
+                intent.putExtra("EXTRA_REGION", region)
+                startActivity(intent)
+            }
+        })
 
         val handler = Handler()
         val runnable = object : Runnable {

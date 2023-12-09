@@ -65,7 +65,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-11dp"
-                android:drawableEnd="@drawable/person_ic"
+                android:drawableEnd="@drawable/person_black_ic"
                 android:hint="@string/username_hint"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"

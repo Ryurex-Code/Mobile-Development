@@ -1,5 +1,6 @@
 package com.puitika.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -8,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.puitika.R
 import com.puitika.data.dummy.dummyTraditionalCloths
 import com.puitika.data.dummy.regionList
 import com.puitika.databinding.FragmentHomeBinding
+import com.puitika.ui.profile.ProfileActivity
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding

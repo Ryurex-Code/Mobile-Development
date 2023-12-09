@@ -18,6 +18,9 @@
             android:name=".ui.profile.ProfileEditActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.detail.DetailDaerahActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity

@@ -1,4 +1,4 @@
-package com.puitika.ui.main
+package com.puitika.ui.main.main
 
 import android.app.Activity
 import android.content.Context

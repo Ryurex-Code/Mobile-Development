@@ -19,6 +19,7 @@ import com.puitika.data.dummy.Region
 import com.puitika.data.dummy.dummyTraditionalCloths
 import com.puitika.databinding.FragmentHomeBinding
 import com.puitika.factory.ViewModelFactory
+import com.puitika.ui.detail.cloth_detail.ClothDetailActivity
 import com.puitika.ui.detail.region_detail.RegionDetailActivity
 import com.puitika.ui.profile.ProfileActivity
 import com.puitika.utils.Result
@@ -40,7 +41,6 @@ class HomeFragment : Fragment() {
         setViewModelFactory()
         setComponent()
         setAction()
-
     }
 
     private fun setComponent() {
@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
         handler.postDelayed(runnable, 3000)
     }
 
-    private fun showTraditionalCloth(clothes : Cloth){
+    private fun showTraditionalCloth(clothes: Cloth) {
         val clothAdapter = ClothesAdapter(requireContext(), clothes.data)
         val spanCount = 2
         binding.rvCloth.apply {
@@ -120,6 +120,13 @@ class HomeFragment : Fragment() {
                 StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
             adapter = clothAdapter
         }
+        clothAdapter.setOnItemClickListener(object : ClothesAdapter.OnItemClickListener {
+            override fun onClick(ivCloth: ImageView, cloth: DetailCloth) {
+                val intent = Intent(requireContext(), ClothDetailActivity::class.java)
+                intent.putExtra("EXTRA_CLOTH", cloth)
+                startActivity(intent)
+            }
+        })
     }
 
 }

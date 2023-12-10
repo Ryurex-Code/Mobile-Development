@@ -1,4 +1,4 @@
-package com.puitika.ui.main
+package com.puitika.ui.main.home
 
 import android.content.Context
 import android.view.LayoutInflater

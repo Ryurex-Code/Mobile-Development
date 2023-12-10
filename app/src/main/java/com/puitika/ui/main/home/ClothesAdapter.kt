@@ -42,6 +42,6 @@ class ClothesAdapter(private val context: Context, private val cloth:List<Detail
     }
 
     interface OnItemClickListener {
-        fun onClick(ivCloth: ImageView, region: DetailCloth)
+        fun onClick(ivCloth: ImageView, cloth: DetailCloth)
     }
 }

@@ -2,13 +2,15 @@ package com.puitika.ui.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.puitika.R
-import com.puitika.databinding.ActivityLoginBinding
+import androidx.activity.viewModels
 import com.puitika.databinding.ActivityRegisterBinding
+import com.puitika.factory.ViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var factory: ViewModelFactory
+    private val viewModel: RegisterViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

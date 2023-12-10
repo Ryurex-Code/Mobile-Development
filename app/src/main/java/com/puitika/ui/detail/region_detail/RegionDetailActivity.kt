@@ -1,4 +1,4 @@
-package com.puitika.ui.detail
+package com.puitika.ui.detail.region_detail
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -6,19 +6,17 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.puitika.data.dummy.DetailRegion
-import com.puitika.data.dummy.DetailTraditionalCloth
-import com.puitika.databinding.ActivityDetailDaerahBinding
-import com.puitika.utils.ViewMoreAdapter
-import java.io.Serializable
+import com.puitika.data.dummy.DetailCloth
+import com.puitika.databinding.ActivityRegionDetailBinding
 
-class DetailDaerahActivity : AppCompatActivity() {
+class RegionDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailDaerahBinding
+    private lateinit var binding: ActivityRegionDetailBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailDaerahBinding.inflate(layoutInflater)
+        binding = ActivityRegionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val region = if(Build.VERSION.SDK_INT >= 33){
@@ -44,11 +42,11 @@ class DetailDaerahActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecycleView(listKain: List<DetailTraditionalCloth>) {
+    private fun setupRecycleView(listKain: List<DetailCloth>) {
         val regionAdapter = ViewMoreAdapter(this, listKain)
         binding.rvCloth.apply {
             layoutManager = LinearLayoutManager(
-                this@DetailDaerahActivity,
+                this@RegionDetailActivity,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )

@@ -24,7 +24,7 @@
             android:name=".ui.profile.ProfileEditActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.DetailDaerahActivity"
+            android:name=".ui.detail.region_detail.RegionDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.register.RegisterActivity"
@@ -36,7 +36,7 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.main.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

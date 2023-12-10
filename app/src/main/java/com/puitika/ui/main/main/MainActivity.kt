@@ -1,4 +1,4 @@
-package com.puitika.ui.main
+package com.puitika.ui.main.main
 
 import android.app.Activity
 import android.content.Context
@@ -24,6 +24,9 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
 import com.puitika.ui.login.LoginActivity
+import com.puitika.ui.main.event.EventFragment
+import com.puitika.ui.main.home.HomeFragment
+import com.puitika.ui.main.scan.ScanFragment
 import java.io.ByteArrayOutputStream
 
 class MainActivity : AppCompatActivity() {

@@ -1,18 +1,19 @@
 package com.puitika.ui.login
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.puitika.R
+import androidx.activity.viewModels
 import com.puitika.databinding.ActivityLoginBinding
-import com.puitika.databinding.ActivityMainBinding
-import com.puitika.ui.main.MainActivity
+import com.puitika.factory.ViewModelFactory
+import com.puitika.ui.main.main.MainActivity
 import com.puitika.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var factory: ViewModelFactory
+    private val viewModel: LoginViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

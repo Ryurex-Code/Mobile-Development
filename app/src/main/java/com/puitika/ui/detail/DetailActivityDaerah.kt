@@ -7,6 +7,6 @@ import com.puitika.R
 class DetailActivityDaerah : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_daerah)
+        setContentView(R.layout.activity_region_detail)
     }
 }

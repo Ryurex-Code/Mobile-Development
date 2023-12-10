@@ -1,4 +1,4 @@
-package com.puitika.ui.main
+package com.puitika.ui.main.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.puitika.R
-import com.puitika.data.dummy.DetailTraditionalCloth
+import com.puitika.data.dummy.DetailCloth
 
-class ClothesAdapter(private val context: Context, private val cloth:List<DetailTraditionalCloth>): RecyclerView.Adapter<ClothesAdapter.ViewHolder>() {
+class ClothesAdapter(private val context: Context, private val cloth:List<DetailCloth>): RecyclerView.Adapter<ClothesAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -42,6 +42,6 @@ class ClothesAdapter(private val context: Context, private val cloth:List<Detail
     }
 
     interface OnItemClickListener {
-        fun onClick(ivCloth: ImageView, region: DetailTraditionalCloth)
+        fun onClick(ivCloth: ImageView, region: DetailCloth)
     }
 }

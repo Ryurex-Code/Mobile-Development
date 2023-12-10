@@ -8,6 +8,22 @@ android {
     namespace = "com.puitika"
     compileSdk = 34
 
+    buildTypes {
+        debug {
+            // Define BASE_URL for the debug build type
+            buildConfigField("String", "BASE_URL", "\"https://googlehiremepls.pls\"")
+        }
+        release {
+            // Define BASE_URL for the release build type
+            buildConfigField("String", "BASE_URL", "\"https://googlehiremepls.pls\"")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
     defaultConfig {
         applicationId = "com.puitika"
         minSdk = 24

@@ -41,7 +41,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/favorite_ic"
-            android:elevation="5dp"
+            android:elevation="20dp"
             app:layout_constraintEnd_toEndOf="@id/iv_region"
             app:layout_constraintTop_toTopOf="@id/iv_region" />
 
@@ -103,9 +103,7 @@
                 android:text="@string/isi_kaindaerah"
                 android:textAppearance="@style/isi_kaindaerah"
                 android:textSize="16sp" />
-            ¡
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:id="@+id/layout_title_location"

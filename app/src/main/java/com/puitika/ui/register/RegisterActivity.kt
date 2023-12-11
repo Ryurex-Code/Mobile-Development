@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.puitika.data.model.RegisterModel
 import com.puitika.databinding.ActivityRegisterBinding
 import com.puitika.factory.ViewModelFactory
 

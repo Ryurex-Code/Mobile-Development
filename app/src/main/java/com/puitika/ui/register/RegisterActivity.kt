@@ -28,7 +28,25 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
         binding.btnConfirm.setOnClickListener {
-            finish()
+            val registerModel = RegisterModel(
+                username = binding.etUsername.text.toString(),
+                email = binding.etEmail.text.toString(),
+                password = binding.etPassword.text.toString(),
+                repassword = binding.etRePassword.text.toString()
+            )
+            viewModel.register(registerModel).observe(this){result->
+                when (result) {
+                    is Result.Loading -> {}
+                    is Result.Error -> {
+                        showToast(result.data)
+                    }
+
+                    is Result.Success -> {
+                        showToast(result.data.message)
+                        finish()
+                    }
+                }
+            }
         }
     }
 }

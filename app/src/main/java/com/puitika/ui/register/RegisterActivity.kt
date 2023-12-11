@@ -49,4 +49,12 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }

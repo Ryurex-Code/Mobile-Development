@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.puitika.data.model.RegisterModel
 import com.puitika.databinding.ActivityRegisterBinding
 import com.puitika.factory.ViewModelFactory
+import com.puitika.utils.Result
 
 class RegisterActivity : AppCompatActivity() {
 

@@ -11,11 +11,11 @@ android {
     buildTypes {
         debug {
             // Define BASE_URL for the debug build type
-            buildConfigField("String", "BASE_URL", "\"https://googlehiremepls.pls\"")
+            buildConfigField("String", "BASE_URL", "\"http://34.126.157.189/\"")
         }
         release {
             // Define BASE_URL for the release build type
-            buildConfigField("String", "BASE_URL", "\"https://googlehiremepls.pls\"")
+            buildConfigField("String", "BASE_URL", "\"http://34.126.157.189/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

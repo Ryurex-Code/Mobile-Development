@@ -29,11 +29,11 @@
         android:textFontWeight="900"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_email"
+        app:layout_constraintStart_toStartOf="@+id/et_username"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/et_username"
         style="@style/TextAppearance.Material3.BodyMedium"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/et_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
     <EditText
         android:id="@+id/et_password"
@@ -231,13 +231,13 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tv_email,et_email,tv_password,et_password" />
+        app:constraint_referenced_ids="tv_email,et_username,tv_password,et_password" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tv_email,et_email,tv_password,et_password" />
+        app:constraint_referenced_ids="tv_email,et_username,tv_password,et_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,28 +1,27 @@
-package com.puitika.data.local
+package com.puitika.data.pref
 
 import android.content.Context
-import com.puitika.data.local.Preference
 import com.puitika.data.model.AccountModel
 
 class AccountPreference(context: Context) {
     private val preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    fun setLogin(value: AccountModel) {
+    fun setLogin(accountModel: AccountModel) {
         val editor = preferences.edit()
-        editor.putString(USERNAME, value.username)
-        editor.putString(EMAIL, value.email)
-        editor.putString(TOKEN, value.apiKey)
+        editor.putString(USERNAME, accountModel.username)
+        editor.putString(EMAIL, accountModel.email)
+        editor.putString(API_KEY, accountModel.apiKey)
         editor.apply()
     }
 
-    fun getUser(): AccountModel {
+    fun getAccount(): AccountModel {
         val username = preferences.getString(USERNAME, null)
         val email = preferences.getString(EMAIL, null)
-        val token = preferences.getString(TOKEN, null)
-        return AccountModel(username, email, token)
+        val apiKey = preferences.getString(API_KEY, null)
+        return AccountModel(username, email, apiKey)
     }
 
-    fun removeUser() {
+    fun removeAccount() {
         val editor = preferences.edit().clear()
         editor.apply()
     }
@@ -34,8 +33,8 @@ class AccountPreference(context: Context) {
 
     companion object {
         private const val PREFS_NAME = "account_pref"
-        private const val EMAIL = "email"
         private const val USERNAME = "username"
-        private const val TOKEN = "token"
+        private const val EMAIL = "email"
+        private const val API_KEY = "api_key"
     }
 }

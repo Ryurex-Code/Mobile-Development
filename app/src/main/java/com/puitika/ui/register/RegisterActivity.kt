@@ -2,7 +2,7 @@ package com.puitika.ui.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import com.puitika.utils.showToast
 import androidx.activity.viewModels
 import com.puitika.data.model.RegisterModel
 import com.puitika.databinding.ActivityRegisterBinding
@@ -38,11 +38,11 @@ class RegisterActivity : AppCompatActivity() {
                 when (result) {
                     is Result.Loading -> {}
                     is Result.Error -> {
-                        showToast(result.data)
+                        showToast(this,result.data)
                     }
 
                     is Result.Success -> {
-                        showToast(result.data.message)
+                        showToast(this,result.data.message)
                         finish()
                     }
                 }
@@ -52,9 +52,5 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -37,15 +37,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
+
+        if (!isLoggedIn) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER,false)
-
-        if (!isLoggedIn){
-            startActivity(Intent(this,LoginActivity::class.java))
-        }
 
         with(binding) {
             bottomNav.add(MeowBottomNavigation.Model(1, R.drawable.home_ic))

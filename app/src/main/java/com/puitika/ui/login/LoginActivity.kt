@@ -9,6 +9,8 @@ import com.puitika.databinding.ActivityLoginBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.main.main.MainActivity
 import com.puitika.ui.register.RegisterActivity
+import com.puitika.utils.Result
+import com.puitika.utils.showToast
 
 class LoginActivity : AppCompatActivity() {
 

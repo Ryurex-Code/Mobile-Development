@@ -26,6 +26,10 @@ class LoginActivity : AppCompatActivity() {
         setAction()
     }
 
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
     private fun setAction(){
         binding.btnLogin.setOnClickListener {
             intent = Intent(this, MainActivity::class.java)

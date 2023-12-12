@@ -9,8 +9,8 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/menu_account"
-        android:icon="@drawable/person_brandy_ic"
-        android:title="Account"
+        android:id="@+id/menu_addevent"
+        android:icon="@drawable/ic_addevent"
+        android:title="addevent"
         app:showAsAction="ifRoom"/>
 </menu>

@@ -71,11 +71,15 @@ class HomeFragment : Fragment() {
                     startActivity(Intent(requireContext(), ProfileActivity::class.java))
                     true
                 }
-
+                R.id.menu_notif -> {
+                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
     }
+
 
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)

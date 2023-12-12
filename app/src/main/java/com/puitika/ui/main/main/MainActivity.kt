@@ -50,12 +50,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER,false)
-
-        if (!isLoggedIn){
-            startActivity(Intent(this,LoginActivity::class.java))
-        }
-
         with(binding) {
             bottomNav.add(MeowBottomNavigation.Model(1, R.drawable.home_ic))
             bottomNav.add(MeowBottomNavigation.Model(2, R.drawable.scan_ic))

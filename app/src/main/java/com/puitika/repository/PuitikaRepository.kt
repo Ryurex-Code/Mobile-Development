@@ -7,7 +7,9 @@ import com.puitika.data.dummy.Region
 import com.puitika.data.dummy.dummyTraditionalCloths
 import com.puitika.data.dummy.regionList
 import com.puitika.data.local.AccountPreference
+import com.puitika.data.request.RegisterRequest
 import com.puitika.data.remote.network.ApiService
+import com.puitika.data.remote.response.RegisterResponse
 import com.puitika.utils.Result
 import java.lang.Exception
 
@@ -15,6 +17,17 @@ class PuitikaRepository(
     private val preference: AccountPreference,
     private val apiService: ApiService
 ) {
+
+    fun register(body : RegisterRequest) : LiveData<Result<RegisterResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val res = apiService.register(body)
+            if (res.status == "success") emit(Result.Success(res))
+            else emit(Result.Error(res.message))
+        }catch (e : Exception){
+            emit(Result.Error(e.message.toString()))
+        }
+    }
 
     fun getRegions(): LiveData<Result<Region>> = liveData {
         emit(Result.Loading)

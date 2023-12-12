@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Puitika"
         tools:targetApi="31" >
         <activity
+            android:name=".ui.main.event.NotifActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.event.EventDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.cloth_detail.ClothDetailActivity"
             android:exported="false" />
         <activity

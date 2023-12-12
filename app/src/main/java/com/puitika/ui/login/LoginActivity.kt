@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         setViewModelFactory()
         setAction()
-
     }
 
     private fun setAction(){

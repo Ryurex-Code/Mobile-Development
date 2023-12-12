@@ -32,9 +32,26 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setAction() {
         binding.btnLogin.setOnClickListener {
-            intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("fromLogin", true)
-            startActivity(intent)
+            val loginModel = LoginModel(
+                username = binding.etUsername.text.toString(),
+                password = binding.etPassword.text.toString()
+            )
+            viewModel.login(loginModel).observe(this) { result ->
+                when (result) {
+                    is Result.Loading -> {}
+                    is Result.Error -> {
+                        showToast(this, result.data)
+                    }
+
+                    is Result.Success -> {
+                        showToast(this, result.data.message)
+                        startActivity(Intent(this, MainActivity::class.java))
+                        intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("fromLogin", true)
+                        startActivity(intent)
+                    }
+                }
+            }
         }
         binding.tvRegister.setOnClickListener{
             startActivity(Intent(this,RegisterActivity::class.java))

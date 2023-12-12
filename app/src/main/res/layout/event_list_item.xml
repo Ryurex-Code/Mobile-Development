@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_itemlist_event"
-    android:elevation="4dp"
+    android:outlineSpotShadowColor="@color/black"
     android:layout_margin="8dp">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="12dp">
 
-        <ImageView
-            android:id="@+id/event_item_image"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/white_smoke"
-            android:contentDescription="@string/event_image_description"
-            android:scaleType="centerCrop" />
+            android:layout_height="210dp"
+            android:background="@drawable/rounded_itemlist_event">
 
-        <TextView
-            android:id="@+id/tv_event_name"
-            style="@style/TextAppearance.Material3.BodyLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/event_item_image"
-            android:layout_marginTop="20dp"
-            android:padding="8dp"
-            android:textColor="@color/white_smoke"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_event_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/white_smoke"
+                android:contentDescription="@string/event_image_description"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_event_name"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_event_item_image"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/brandy"
+                android:gravity="center" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
-
-

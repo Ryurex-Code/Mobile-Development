@@ -372,19 +372,5 @@
         app:layout_constraintStart_toStartOf="@+id/rectangle_5"
         app:layout_constraintTop_toTopOf="@+id/rectangle_5"/>
 
-    <View
-        android:id="@+id/rectangle_6"
-        android:layout_width="363dp"
-        android:layout_height="33dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/rectangle_2_ic"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view1"
-        app:layout_constraintStart_toStartOf="@+id/view1"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_5" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

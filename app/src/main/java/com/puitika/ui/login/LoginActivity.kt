@@ -53,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.tvRegister.setOnClickListener{
-            startActivity(Intent(this,RegisterActivity::class.java))
+        binding.tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }

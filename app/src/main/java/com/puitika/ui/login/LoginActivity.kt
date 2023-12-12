@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.puitika.data.model.LoginModel
 import com.puitika.databinding.ActivityLoginBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.main.main.MainActivity

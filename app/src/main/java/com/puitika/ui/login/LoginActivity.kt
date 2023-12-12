@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         factory = ViewModelFactory.getInstance(binding.root.context)
     }
 
-    private fun setAction(){
+    private fun setAction() {
         binding.btnLogin.setOnClickListener {
             intent = Intent(this, MainActivity::class.java)
             intent.putExtra("fromLogin", true)

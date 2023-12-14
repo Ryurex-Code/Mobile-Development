@@ -59,11 +59,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val onBackStackChangedListener =
-        FragmentManager.OnBackStackChangedListener {
-            val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
-            currentFragment?.let { updateBottomNavigation(it) }
-        }
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {

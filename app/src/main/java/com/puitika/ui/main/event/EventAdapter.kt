@@ -28,8 +28,8 @@ class EventAdapter(private val context: Context, private val eventList: List<Det
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val event = eventList[position]
 
-        Glide.with(context).load(event.BannerURL).into(holder.ivEvent)
-        holder.tvEventName.text = event.Name
+        Glide.with(context).load(event.gambar).into(holder.ivEvent)
+        holder.tvEventName.text = event.nama
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.onClick(it, event)
@@ -45,7 +45,9 @@ class EventAdapter(private val context: Context, private val eventList: List<Det
         val tvEventName: TextView = itemView.findViewById(R.id.tv_event_name)
     }
 
+
     interface OnItemClickListener {
         fun onClick(clickedView: View, event: DetailEvent)
     }
 }
+

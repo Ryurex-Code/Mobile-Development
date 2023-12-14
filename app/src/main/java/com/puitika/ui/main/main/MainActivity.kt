@@ -51,35 +51,11 @@ class MainActivity : AppCompatActivity() {
                     3 -> navigation(EventFragment())
                 }
             }
-        }
-
-        supportFragmentManager.addOnBackStackChangedListener(onBackStackChangedListener)
-    }
-
-    private fun showScanOptionsPopup(menuId: Int) {
-        val popupView = LayoutInflater.from(this).inflate(R.layout.fragment_popup, null)
-
-        val layoutParams = WindowManager.LayoutParams()
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
-
-        val popupWindow = PopupWindow(
-            popupView,
-            layoutParams.width,
-            layoutParams.height
-        )
-
-        popupWindow.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
-
-        val buttonCamera = popupView.findViewById<Button>(R.id.button_camera)
-        val buttonGallery = popupView.findViewById<Button>(R.id.button_gallery)
-        val imageViewClose = popupView.findViewById<ImageView>(R.id.imageViewClose)
-        val imageViewCloseup = popupView.findViewById<ImageView>(R.id.imageViewCloseup)
-
-        buttonCamera.setOnClickListener {
-            Toast.makeText(this, "Camera selected", Toast.LENGTH_SHORT).show()
-            popupWindow.dismiss()
-            openCameraAndCaptureImage()
+            bottomNav.setOnReselectListener {
+                when(it.id){
+                    2 -> navigation(ScanFragment())
+                }
+            }
         }
 
         buttonGallery.setOnClickListener {

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_notif"
-        android:icon="@drawable/ic_notif"
-        android:title="Notification"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/menu_account"
         android:icon="@drawable/person_brandy_ic"
         android:title="Account"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_addevent"
+        android:icon="@drawable/ic_addevent"
+        android:title="addevent"
+        app:showAsAction="ifRoom" />
 </menu>

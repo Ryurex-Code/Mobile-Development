@@ -9,23 +9,11 @@
     android:paddingBottom="10dp"
     tools:context=".ui.main.event.EventDetailActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/cardview"
                 android:layout_width="0dp"
                 android:layout_height="270dp"
-                android:layout_marginTop="-50dp"
+                android:layout_marginTop="-40dp"
                 app:cardCornerRadius="70dp"
                 app:cardElevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +21,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/iv_imageView2"
+                    android:id="@+id/iv_imageview2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:elevation="50dp"
@@ -42,9 +30,22 @@
 
             </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview1"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="-57dp"
+            android:layout_marginEnd="50dp"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/brandy"
+            app:layout_constraintTop_toBottomOf="@+id/cardview">
+        </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cardview2"
                 android:layout_width="0dp"
                 android:layout_height="175dp"
                 android:layout_marginStart="50dp"
@@ -52,13 +53,12 @@
                 android:layout_marginEnd="50dp"
                 android:background="@color/white_smoke"
                 android:elevation="5dp"
-                android:outlineSpotShadowColor="@color/black"
+                android:outlineSpotShadowColor="#4F000000"
                 app:cardCornerRadius="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintTop_toBottomOf="@+id/cardview">
 
-                <!-- Add your content inside this CardView -->
                 <TextView
                     android:id="@+id/tv_eventname"
                     android:layout_width="match_parent"
@@ -71,12 +71,40 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_eventtime"
+                    android:id="@+id/tv_eventtimestart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="70dp"
+                    android:padding="12dp"
+                    android:text="08.00 am"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_blue_green"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description1" />
+
+                <TextView
+                    android:id="@+id/tv_strip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:padding="12dp"
-                    android:text="08.00 am - 13.00 pm"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_blue_green"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description1" />
+
+                <TextView
+                    android:id="@+id/tv_eventtimeend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="70dp"
+                    android:padding="12dp"
+                    android:text="13.00 pm"
                     android:textAlignment="center"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="15dp"
@@ -110,30 +138,35 @@
 
             </androidx.cardview.widget.CardView>
 
-            <RelativeLayout
-                android:id="@+id/v_greyshape"
+
+
+    <ScrollView
+        android:id="@+id/scrollview3"
+        android:layout_width="match_parent"
+        android:layout_height="355dp"
+        android:layout_marginTop="100dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/cardview">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="355dp"
+            android:background="@color/grey"
+            android:paddingTop="100dp">
+
+            <TextView
+                android:id="@+id/tv_detail_event"
                 android:layout_width="match_parent"
                 android:layout_height="355dp"
-                android:layout_marginTop="100dp"
-                android:background="@color/grey"
-                app:layout_constraintTop_toTopOf="@+id/cardView2">
+                android:layout_marginHorizontal="20dp"
+                android:text="isguigiuahfoa ... (your text)"
+                android:textAlignment="textStart"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_detail_event"
-                    android:layout_width="match_parent"
-                    android:layout_height="455dp"
-                    android:text="isguigiuahfoa nvaneounaevoinaevnaeonaj  naovnoanvoaenvo ianoanonaeovmacnapvn ajkjbkkjajbioeifioe iefiffiof eioefni einf o einf poaif oani akm aa ooie ijfoina efi ineaio jaooiv ejoinoif iaip aepjfj poe foijaww foia f eiioif a pojoijf  eiiokf[pjfojf fjijoihiojap f fjia[q fm foqhf fkoiiqoijfiqf foinfoq poq fjqih fiooihhqf pfhaf "
-                    android:textSize="20dp"
-                    android:textAlignment="textStart"
-                    android:elevation="5dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="100dp"
-                    android:layout_marginBottom="5dp">
-
-                </TextView>
-            </RelativeLayout>
-
-
+            </TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

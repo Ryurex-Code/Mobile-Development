@@ -57,31 +57,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        buttonGallery.setOnClickListener {
-            Toast.makeText(this, "Gallery selected", Toast.LENGTH_SHORT).show()
-            popupWindow.dismiss()
-            openGalleryAndSelectImage()
-        }
-
-        imageViewClose.setOnClickListener {
-            popupWindow.dismiss()
-        }
-
-        imageViewCloseup.setOnClickListener {
-            popupWindow.dismiss()
-        }
-
-        val translateAnimation = TranslateAnimation(0f, 0f, layoutParams.height.toFloat(), 0f)
-        translateAnimation.duration = 500
-        popupView.startAnimation(translateAnimation)
-
-        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        supportFragmentManager.removeOnBackStackChangedListener(onBackStackChangedListener)
     }
 
     private val onBackStackChangedListener =

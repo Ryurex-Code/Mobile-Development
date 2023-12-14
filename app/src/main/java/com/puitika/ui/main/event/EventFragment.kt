@@ -30,10 +30,7 @@ class EventFragment : Fragment() {
         binding = FragmentEventBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        toolbar = view.findViewById(R.id.toolbar)
-        setupToolbar()
-
-        recyclerView = binding.recyclerViewEvents
+        recyclerView = binding.recyclerivewevents
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         eventAdapter = EventAdapter(requireContext(), eventList.data)
@@ -57,12 +54,8 @@ class EventFragment : Fragment() {
 
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menu_notif -> {
-                    startActivity(Intent(requireContext(), NotifActivity::class.java))
-                    true
-                }
                 R.id.menu_addevent -> {
-                    startActivity(Intent(requireContext(), EventFormActivity::class.java))
+                    startActivity(Intent(requireContext(), AddEventFormActivity::class.java))
                     true
                 }
                 else -> false
@@ -72,7 +65,7 @@ class EventFragment : Fragment() {
 
     private fun navigateToDetailEvent(detailEvent: DetailEvent) {
         val intent = Intent(requireContext(), EventDetailActivity::class.java)
-        intent.putExtra("Id", detailEvent.id)
+        intent.putExtra("EXTRA_EVENT", detailEvent)
         startActivity(intent)
     }
 

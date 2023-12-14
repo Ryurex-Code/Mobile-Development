@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigation(fragment: Fragment, isFromLogin:Boolean = false, isToScan:Boolean = false) {
+    private fun navigation(fragment:Fragment, isFromLogin:Boolean = false){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)

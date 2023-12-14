@@ -83,59 +83,6 @@ class MainActivity : AppCompatActivity() {
         const val EXTRA_USER = "fromLogin"
 
     }
-
-    private fun openCameraAndCaptureImage() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takePictureIntent.resolveActivity(packageManager) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-        }
-    }
-    private fun openGalleryAndSelectImage() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        galleryIntent.type = "image/*"
-        startActivityForResult(galleryIntent, REQUEST_IMAGE_GALLERY)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when (requestCode) {
-            REQUEST_IMAGE_CAPTURE -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    handleImageResult(data?.extras?.get("data") as Bitmap)
-                }
-            }
-            REQUEST_IMAGE_GALLERY -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    // Gambar dari galeri dipilih
-                    val selectedImageUri = data?.data
-                    val selectedImagePath = getRealPathFromURI(selectedImageUri)
-                    handleImageResult(BitmapFactory.decodeFile(selectedImagePath))
-                }
-            }
-        }
-    }
-
-    private fun handleImageResult(imageBitmap: Bitmap) {
-        val intent = Intent(this, ScanFragment::class.java)
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        intent.putExtra("imageBitmap", byteArray)
-        startActivity(intent)
-    }
-
-    private fun getRealPathFromURI(uri: Uri?): String {
-        val cursor = contentResolver.query(uri!!, null, null, null, null)
-        val index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor.moveToFirst()
-        val result = cursor.getString(index)
-        cursor.close()
-        return result
-    }
-
-
-
 }
 
 

@@ -9,6 +9,7 @@ import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
 import com.puitika.databinding.FragmentPopupBinding
 import com.puitika.databinding.FragmentScanBinding
+import com.puitika.ui.login.LoginActivity
 import com.puitika.ui.main.event.EventFragment
 import com.puitika.ui.main.home.HomeFragment
 import com.puitika.ui.main.scan.ScanFragment

@@ -33,8 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupBottomNav()
+    }
 
-
+    private fun setupBottomNav() {
         with(binding) {
             bottomNav.add(MeowBottomNavigation.Model(1, R.drawable.home_ic))
             bottomNav.add(MeowBottomNavigation.Model(2, R.drawable.scan_ic))

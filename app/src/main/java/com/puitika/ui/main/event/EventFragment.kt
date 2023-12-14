@@ -15,6 +15,7 @@ import com.puitika.databinding.FragmentEventBinding
 import com.puitika.data.dummy.eventList
 import androidx.appcompat.widget.Toolbar
 import com.puitika.data.dummy.DetailEvent
+import com.puitika.ui.profile.ProfileActivity
 
 class EventFragment : Fragment() {
 
@@ -41,23 +42,22 @@ class EventFragment : Fragment() {
                 navigateToDetailEvent(event)
             }
         })
-
-        // Set the options menu for this fragment
-        setHasOptionsMenu(true)
-
         return view
     }
 
-    private fun setupToolbar() {
-        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
-        toolbar.setTitle(R.string.app_name)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setAction()
+    }
 
-        toolbar.setOnMenuItemClickListener { menuItem ->
+    private fun setAction() {
+        binding.topNavigation.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_addevent -> {
                     startActivity(Intent(requireContext(), AddEventFormActivity::class.java))
                     true
                 }
+
                 else -> false
             }
         }

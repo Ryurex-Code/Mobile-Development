@@ -64,8 +64,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
-        if (!first){
-        fragmentTransaction.addToBackStack(null)}
+        if (!isFromLogin)fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         updateBottomNavigation(fragment)
     }

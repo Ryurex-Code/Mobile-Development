@@ -28,8 +28,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="301dp"
-        android:layout_height="321dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:translationZ="100dp"
         app:cardBackgroundColor="@color/brandy"
         app:cardCornerRadius="10dp"

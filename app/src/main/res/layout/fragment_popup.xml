@@ -29,7 +29,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/button_camera"
+            android:id="@+id/btn_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -39,7 +39,7 @@
             android:text="@string/button_camera" />
 
         <Button
-            android:id="@+id/button_gallery"
+            android:id="@+id/btn_galery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Body1"
@@ -48,13 +48,14 @@
             android:text="@string/button_gallery" />
 
         <FrameLayout
+            android:id="@+id/layout_btn_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal|bottom">
 
             <ImageView
-                android:id="@+id/imageViewClose"
+                android:id="@+id/iv_close"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_close"

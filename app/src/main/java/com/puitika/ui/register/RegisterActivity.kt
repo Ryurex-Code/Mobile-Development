@@ -2,9 +2,12 @@ package com.puitika.ui.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.puitika.utils.showToast
 import androidx.activity.viewModels
+import com.puitika.data.model.RegisterModel
 import com.puitika.databinding.ActivityRegisterBinding
 import com.puitika.factory.ViewModelFactory
+import com.puitika.utils.Result
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -16,7 +19,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setViewModelFactory()
         setAction()
     }
 
@@ -25,7 +28,29 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
         binding.btnConfirm.setOnClickListener {
-            finish()
+            val registerModel = RegisterModel(
+                username = binding.etUsername.text.toString(),
+                email = binding.etEmail.text.toString(),
+                password = binding.etPassword.text.toString(),
+                repassword = binding.etRePassword.text.toString()
+            )
+            viewModel.register(registerModel).observe(this){result->
+                when (result) {
+                    is Result.Loading -> {}
+                    is Result.Error -> {
+                        showToast(this,result.data)
+                    }
+
+                    is Result.Success -> {
+                        showToast(this,result.data.message)
+                        finish()
+                    }
+                }
+            }
         }
+    }
+
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
     }
 }

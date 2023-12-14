@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class AccountModel (
-    val username: String? = null,
-    val email :String? = null,
-    val token: String? = null
+    val username: String?,
+    val email :String?,
+    val apiKey: String?
 ) : Parcelable

@@ -11,7 +11,7 @@ class AccountPreference(context: Context) {
         val editor = preferences.edit()
         editor.putString(USERNAME, value.username)
         editor.putString(EMAIL, value.email)
-        editor.putString(TOKEN, value.token)
+        editor.putString(TOKEN, value.apiKey)
         editor.apply()
     }
 

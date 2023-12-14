@@ -14,7 +14,6 @@ import android.view.WindowManager
 import android.view.animation.TranslateAnimation
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +23,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
 import com.puitika.ui.login.LoginActivity
+import com.puitika.ui.main.event.AddEventFormActivity
 import com.puitika.ui.main.event.EventFragment
 import com.puitika.ui.main.home.HomeFragment
 import com.puitika.ui.main.scan.ScanFragment
@@ -34,17 +34,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_GALLERY = 2
+    private var scanOptionsPopup: PopupWindow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
 
-        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER,false)
-
-        if (!isLoggedIn){
-            startActivity(Intent(this,LoginActivity::class.java))
+        if (!isLoggedIn) {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         with(binding) {
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
             bottomNav.add(MeowBottomNavigation.Model(2, R.drawable.scan_ic))
             bottomNav.add(MeowBottomNavigation.Model(3, R.drawable.event_ic))
             bottomNav.show(1)
-            navigation(HomeFragment(),true)
+            navigation(HomeFragment(), true)
 
             bottomNav.setOnClickMenuListener {
                 when (it.id) {
-                    1 -> navigation(HomeFragment(),false)
+                    1 -> navigation(HomeFragment(), false)
                     2 -> showScanOptionsPopup(it.id)
-                    3 -> navigation(EventFragment(),false)
+                    3 -> navigation(EventFragment(), false)
                 }
             }
         }
@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showScanOptionsPopup(menuId: Int) {
+        if (scanOptionsPopup != null && scanOptionsPopup?.isShowing == true) {
+            // Popup is already open, do nothing
+            return
+        }
+
         val popupView = LayoutInflater.from(this).inflate(R.layout.fragment_popup, null)
 
         val layoutParams = WindowManager.LayoutParams()
@@ -98,6 +103,11 @@ class MainActivity : AppCompatActivity() {
             openGalleryAndSelectImage()
         }
 
+        popupWindow.setOnDismissListener {
+            // Set scanOptionsPopup to null when the popup is dismissed
+            scanOptionsPopup = null
+        }
+
         imageViewClose.setOnClickListener {
             popupWindow.dismiss()
         }
@@ -111,11 +121,13 @@ class MainActivity : AppCompatActivity() {
         popupView.startAnimation(translateAnimation)
 
         popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+        scanOptionsPopup = popupWindow
     }
 
     override fun onDestroy() {
         super.onDestroy()
         supportFragmentManager.removeOnBackStackChangedListener(onBackStackChangedListener)
+        scanOptionsPopup = null
     }
 
     private val onBackStackChangedListener =
@@ -132,12 +144,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigation(fragment: Fragment, first:Boolean) {
+    private fun navigation(fragment: Fragment, first: Boolean) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
-        if (!first){
-        fragmentTransaction.addToBackStack(null)}
+        if (!first) {
+            fragmentTransaction.addToBackStack(null)
+        }
         fragmentTransaction.commit()
         updateBottomNavigation(fragment)
     }
@@ -154,7 +167,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USER = "fromLogin"
-
     }
 
     private fun openCameraAndCaptureImage() {
@@ -163,8 +175,10 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         }
     }
+
     private fun openGalleryAndSelectImage() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val galleryIntent =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryIntent.type = "image/*"
         startActivityForResult(galleryIntent, REQUEST_IMAGE_GALLERY)
     }
@@ -206,9 +220,4 @@ class MainActivity : AppCompatActivity() {
         cursor.close()
         return result
     }
-
-
-
 }
-
-

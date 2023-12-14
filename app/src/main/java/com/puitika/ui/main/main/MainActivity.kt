@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
 
             bottomNav.setOnClickMenuListener {
                 when (it.id) {
-                    1 -> navigation(HomeFragment(),false)
-                    2 -> showScanOptionsPopup(it.id)
-                    3 -> navigation(EventFragment(),false)
+                    1 -> navigation(HomeFragment())
+                    2 -> navigation(ScanFragment())
+                    3 -> navigation(EventFragment())
                 }
             }
         }

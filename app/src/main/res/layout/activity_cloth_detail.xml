@@ -7,216 +7,218 @@
     android:background="@color/geyser"
     tools:context=".ui.detail.cloth_detail.ClothDetailActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/iv_cloth"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:elevation="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_puitika"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:elevation="2dp"
+            android:src="@drawable/black_gradient"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cloth"
+            app:layout_constraintEnd_toEndOf="@id/iv_cloth"
+            app:layout_constraintStart_toStartOf="@id/iv_cloth" />
+
+        <TextView
+            android:id="@+id/tv_cloth"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:elevation="3dp"
+            android:text="Cloth's Name"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cloth"
+            app:layout_constraintStart_toStartOf="@id/iv_cloth" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/layout_ib_favorite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="2dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_cloth"
+            app:layout_constraintTop_toTopOf="@+id/iv_cloth" />
+
+        <ImageButton
+            android:id="@+id/ib_favorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/favorite_ic"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/layout_ib_favorite"
+            app:layout_constraintEnd_toEndOf="@id/layout_ib_favorite"
+            app:layout_constraintStart_toStartOf="@id/layout_ib_favorite"
+            app:layout_constraintTop_toTopOf="@id/layout_ib_favorite" />
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/layout_title_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp">
-
-            <ImageView
-                android:id="@+id/iv_cloth"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:elevation="1dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_puitika"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:elevation="2dp"
-                android:src="@drawable/black_gradient"
-                app:layout_constraintBottom_toBottomOf="@id/iv_cloth"
-                app:layout_constraintEnd_toEndOf="@id/iv_cloth"
-                app:layout_constraintStart_toStartOf="@id/iv_cloth" />
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/brandy"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cloth">
 
             <TextView
-                android:id="@+id/tv_cloth"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:id="@+id/tv_title_description"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brandy"
+                android:elevation="5dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="@string/desc_kaindaerah"
+                android:textColor="@color/burnham"
+                android:textFontWeight="900"
+                android:textSize="20sp" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/layout_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_title_description">
+
+            <TextView
+                android:id="@+id/tv_description"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/isi_kaindaerah"
+                android:textAppearance="@style/isi_kaindaerah"
+                android:textSize="16sp" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/layout_title_category"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/brandy"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintEnd_toStartOf="@+id/layout_title_sub_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_description">
+
+            <TextView
+                android:id="@+id/title_category"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="15dp"
-                android:elevation="3dp"
-                android:text="Cloth's Name"
-                android:textColor="@color/white"
-                android:textSize="28sp"
-                app:layout_constraintBottom_toBottomOf="@id/iv_cloth"
-                app:layout_constraintStart_toStartOf="@id/iv_cloth" />
+                android:layout_gravity="center"
+                android:background="@color/brandy"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="Category"
+                android:textColor="@color/burnham"
+                android:textFontWeight="900"
+                android:textSize="20sp" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/layout_ib_favorite"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:elevation="2dp"
-                app:layout_constraintEnd_toEndOf="@id/iv_cloth"
-                app:layout_constraintTop_toTopOf="@+id/iv_cloth" />
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/layout_title_sub_category"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/brandy"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layout_title_category"
+            app:layout_constraintTop_toBottomOf="@id/layout_description">
 
-            <ImageButton
-                android:id="@+id/ib_favorite"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/favorite_ic"
-                android:elevation="2dp"
-                app:layout_constraintBottom_toBottomOf="@id/layout_ib_favorite"
-                app:layout_constraintEnd_toEndOf="@id/layout_ib_favorite"
-                app:layout_constraintStart_toStartOf="@id/layout_ib_favorite"
-                app:layout_constraintTop_toTopOf="@id/layout_ib_favorite" />
-
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/layout_title_description"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/title_sub_category"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/brandy"
-                app:cardCornerRadius="100dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_cloth">
+                android:layout_gravity="center"
+                android:background="@color/brandy"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="Sub-Category"
+                android:textColor="@color/burnham"
+                android:textFontWeight="900"
+                android:textSize="20sp" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
-                <TextView
-                    android:id="@+id/tv_title_description"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/brandy"
-                    android:elevation="5dp"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:text="@string/desc_kaindaerah"
-                    android:textColor="@color/burnham"
-                    android:textFontWeight="900"
-                    android:textSize="20sp" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/layout_tv_category"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/layout_title_category"
+            app:layout_constraintStart_toStartOf="@+id/layout_title_category"
+            app:layout_constraintTop_toBottomOf="@id/layout_title_category">
 
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/layout_description"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_category"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_title_description">
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="Batik"
+                android:textFontWeight="900"
+                android:textSize="15sp" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
-                <TextView
-                    android:id="@+id/tv_description"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/isi_kaindaerah"
-                    android:textAppearance="@style/isi_kaindaerah"
-                    android:textSize="16sp" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/layout_tv_sub_category"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/layout_title_sub_category"
+            app:layout_constraintStart_toStartOf="@+id/layout_title_sub_category"
+            app:layout_constraintTop_toBottomOf="@+id/layout_title_sub_category">
 
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/layout_title_category"
-                android:layout_width="160dp"
+            <TextView
+                android:id="@+id/tv_sub_category"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/brandy"
-                app:cardCornerRadius="100dp"
-                app:layout_constraintEnd_toStartOf="@+id/layout_title_sub_category"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_description">
-
-                <TextView
-                    android:id="@+id/title_category"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/brandy"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:text="Category"
-                    android:textColor="@color/burnham"
-                    android:textFontWeight="900"
-                    android:textSize="20sp" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/layout_title_sub_category"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/brandy"
-                app:cardCornerRadius="100dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/layout_title_category"
-                app:layout_constraintTop_toBottomOf="@id/layout_description">
-
-                <TextView
-                    android:id="@+id/title_sub_category"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/brandy"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:text="Sub-Category"
-                    android:textColor="@color/burnham"
-                    android:textFontWeight="900"
-                    android:textSize="20sp" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/layout_tv_category"
-                android:layout_width="130dp"
-                android:layout_height="35dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/layout_title_category"
-                app:layout_constraintStart_toStartOf="@+id/layout_title_category"
-                app:layout_constraintTop_toBottomOf="@id/layout_title_category">
-
-                <TextView
-                    android:id="@+id/tv_category"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:text="Batik"
-                    android:textFontWeight="900"
-                    android:textSize="15sp" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/layout_tv_sub_category"
-                android:layout_width="130dp"
-                android:layout_height="35dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/layout_title_sub_category"
-                app:layout_constraintStart_toStartOf="@+id/layout_title_sub_category"
-                app:layout_constraintTop_toBottomOf="@+id/layout_title_sub_category">
-
-                <TextView
-                    android:id="@+id/tv_sub_category"
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="5dp"
-                    android:text="Batik Celup"
-                    android:textFontWeight="900"
-                    android:textSize="15sp" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="Batik Celup"
+                android:textFontWeight="900"
+                android:textSize="15sp" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

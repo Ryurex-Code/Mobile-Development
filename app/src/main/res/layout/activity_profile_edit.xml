@@ -8,7 +8,7 @@
     tools:context=".ui.profile.ProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_circleImageView"
+        android:id="@+id/iv_circleimageview"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_circleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_circleimageview" />
 
     <RelativeLayout
         android:id="@+id/ic_profileicon"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
 
     <TextView
-        android:id="@+id/tv_Email"
+        android:id="@+id/tv_email"
         android:textStyle="italic"
         style="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/dark_blue_green"
@@ -154,7 +154,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <EditText
-        android:id="@+id/et_editDay"
+        android:id="@+id/et_editday"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="30dp"
         android:layout_height="19dp"
@@ -171,7 +171,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
 
     <EditText
-        android:id="@+id/et_editMonth"
+        android:id="@+id/et_editmonth"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="90dp"
         android:layout_height="19dp"
@@ -187,7 +187,7 @@
         app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
 
     <EditText
-        android:id="@+id/et_editYear"
+        android:id="@+id/et_edityear"
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="40dp"
         android:layout_height="19dp"

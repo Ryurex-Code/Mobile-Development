@@ -1,39 +1,22 @@
 package com.puitika.ui.main.main
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.WindowManager
-import android.view.animation.TranslateAnimation
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.PopupWindow
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
-import com.puitika.ui.login.LoginActivity
+import com.puitika.databinding.FragmentPopupBinding
+import com.puitika.databinding.FragmentScanBinding
 import com.puitika.ui.main.event.EventFragment
 import com.puitika.ui.main.home.HomeFragment
 import com.puitika.ui.main.scan.ScanFragment
-import java.io.ByteArrayOutputStream
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val REQUEST_IMAGE_GALLERY = 2
+    private lateinit var bindingPopup: FragmentPopupBinding
+    private lateinit var bindingScan: FragmentScanBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

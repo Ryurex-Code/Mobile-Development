@@ -28,8 +28,6 @@ import com.puitika.ui.main.scan.ScanFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bindingPopup: FragmentPopupBinding
-    private lateinit var bindingScan: FragmentScanBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,9 +8,4 @@
         android:title="Account"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/menu_addevent"
-        android:icon="@drawable/ic_addevent"
-        android:title="addevent"
-        app:showAsAction="ifRoom" />
 </menu>

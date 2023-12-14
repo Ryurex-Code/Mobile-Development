@@ -1,24 +1,29 @@
 package com.puitika.data.dummy
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class Event(
     val error: Boolean,
     val message: String,
     val data: List<DetailEvent>
 )
 
+@Parcelize
 data class DetailEvent(
     val id: Int,
-    val eventName: String,
-    val eventDate: String,
-    val eventDescription: String,
-    val eventType: String,
-    val ticketPrice: String,
-    val contactPerson: String,
-    val organizer: String,
-    val eventLocation: String,
-    val eventTime: String,
-    val eventBannerURL: String,
-)
+    val nama: String,
+    val waktu: String,
+    val description: String,
+    val jenis: String,
+    val harga: String,
+    val contact: String,
+    val penyelenggara: String,
+    val lokasi: String,
+    val mulai: String,
+    val selesai: String,
+    val gambar: String,
+): Parcelable
 
 val eventList = Event(
     error = false,
@@ -26,68 +31,89 @@ val eventList = Event(
     data = listOf(
         DetailEvent(
             id = 1,
-            eventName = "Nama Event 1",
-            eventDate = "Sabtu, 10 Desember 2023",
-            eventDescription = "Deskripsi Event 1",
-            eventType = "Terbuka",
-            ticketPrice = "Rp. 0",
-            contactPerson = "08123456789",
-            organizer = "Penyelenggara Event 1",
-            eventLocation = "Lokasi Event 1",
-            eventTime = "10.00am - 11.00pm",
-            eventBannerURL = "https://katasatu.co.id/wp-content/uploads/2021/11/Spanduk-FBK-copy-scaled.jpg"
+            nama = " Festival Tenun Tradisional Bugis ",
+            waktu = "Sabtu, 10 Desember 2023",
+            description = "Description \"Ikuti festival tenun Bugis tradisional kami di mana Anda dapat merasakan warisan budaya kaya dari Tenun. Jelajahi berbagai tekstil tenunan tangan dan pelajari seni tenun yang rumit. Masuk gratis!\",\n " +
+                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
+                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
+                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo  ",
+            jenis = "Terbuka",
+            harga = "Rp. 0",
+            contact = "08123456789",
+            penyelenggara = "Penyelenggara Event 1",
+            lokasi = "Lokasi Event 1",
+            mulai = "10.00am",
+            selesai = "11.00pm",
+            gambar = "https://katasatu.co.id/wp-content/uploads/2021/11/Spanduk-FBK-copy-scaled.jpg"
         ),
         DetailEvent(
             id = 2,
-            eventName = "Nama Event 2",
-            eventDate = "Minggu, 15 Januari 2024",
-            eventDescription = "Deskripsi Event 2",
-            eventType = "Tertutup",
-            ticketPrice = "Rp. 150.000",
-            contactPerson = "08234567890",
-            organizer = "Penyelenggara Event 2",
-            eventLocation = "Lokasi Event 2",
-            eventTime = "11.00am - 10.00pm",
-            eventBannerURL = "https://www.loveindonesia.com/images/thingstodo/3849/web.jpg"
+            nama = "Festival Batik Bordir Tenun & Scarf 2020",
+            waktu = "Minggu, 15 Januari 2024",
+            description = "Description \"Ikuti festival Batik Bordir Tenun & Scarf kami yang akan menampilkan ragam batik, bordir, dan scarf terbaik. Acara ini tertutup dan tiket dapat dibeli seharga Rp. 150.000. Hubungi kami di 08234567890 untuk informasi lebih lanjut.\",\n" +
+                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
+                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
+                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            jenis = "Tertutup",
+            harga = "Rp. 150.000",
+            contact = "08234567890",
+            penyelenggara = "Penyelenggara Event 2",
+            lokasi = "Lokasi Event 2",
+            mulai = "11.00am",
+            selesai = "10.00pm",
+            gambar = "https://www.loveindonesia.com/images/thingstodo/3849/web.jpg"
         ),
         DetailEvent(
             id = 3,
-            eventName = "Nama Event 3",
-            eventDate = "Selasa, 20 Februari 2024",
-            eventDescription = "Deskripsi Event 3",
-            eventType = "Terbuka",
-            ticketPrice = "Rp. 0",
-            contactPerson = "08765432100",
-            organizer = "Penyelenggara Event 3",
-            eventLocation = "Lokasi Event 3",
-            eventTime = "2.00pm - 7.00pm",
-            eventBannerURL = "https://beritajatim.com/wp-content/uploads/2022/07/IMG-20220707-WA0037.jpg"
+            nama = "Lomba Desain Motif Tenun Ikat Kota Kediri, Wali Kota Kediri ",
+            waktu = "Selasa, 20 Februari 2024",
+            description = "Description \"Ikuti lomba desain motif tenun ikat di Kota Kediri, yang dihadiri oleh Wali Kota Kediri. Lomba ini terbuka untuk umum, dan tidak ada biaya pendaftaran. Hubungi kami di 08765432100 untuk informasi lebih lanjut.\",\n" +
+                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
+                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
+                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            jenis = "Terbuka",
+            harga = "Rp. 0",
+            contact = "08765432100",
+            penyelenggara = "Penyelenggara Event 3",
+            lokasi = "Lokasi Event 3",
+            mulai = "2.00pm",
+            selesai = "7.00pm",
+            gambar = "https://beritajatim.com/wp-content/uploads/2022/07/IMG-20220707-WA0037.jpg"
         ),
         DetailEvent(
             id = 4,
-            eventName = "Nama Event 4",
-            eventDate = "Kamis, 5 Maret 2024",
-            eventDescription = "Deskripsi Event 4",
-            eventType = "Tertutup",
-            ticketPrice = "Rp. 200.000",
-            contactPerson = "08987654321",
-            organizer = "Penyelenggara Event 4",
-            eventLocation = "Lokasi Event 4",
-            eventTime = "9.00am - 5.00pm",
-            eventBannerURL = "https://media.goopps.com/upload/module/b_event/event-1554446698-1889.jpg"
+            nama = "Festival Batik Bordir Tenun Nusantara 2018",
+            waktu = "Kamis, 5 Maret 2024",
+            description = "Description \"Ikuti Festival Batik Bordir Tenun Nusantara 2018 yang menghadirkan karya-karya terbaik dari seluruh Nusantara. Acara ini tertutup, dan tiket bisa dibeli seharga Rp. 200.000. Hubungi kami di 08987654321 untuk pembelian tiket.\",\n" +
+                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
+                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
+                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            jenis = "Tertutup",
+            harga = "Rp. 200.000",
+            contact = "08987654321",
+            penyelenggara = "Penyelenggara Event 4",
+            lokasi = "Lokasi Event 4",
+            mulai = "9.00am",
+            selesai = "5.00pm",
+            gambar = "https://media.goopps.com/upload/module/b_event/event-1554446698-1889.jpg"
         ),
         DetailEvent(
             id = 5,
-            eventName = "Nama Event 5",
-            eventDate = "Sabtu, 15 April 2024",
-            eventDescription = "Deskripsi Event 5",
-            eventType = "Terbuka",
-            ticketPrice = "Rp. 50.000",
-            contactPerson = "08112233445",
-            organizer = "Penyelenggara Event 5",
-            eventLocation = "Lokasi Event 5",
-            eventTime = "3.00pm - 10.00pm",
-            eventBannerURL = "https://1.bp.blogspot.com/-DbbbpYHE1lg/WuBUmu5LRhI/AAAAAAAAraI/3uWC2m98t5c7rncrUAMD8j0HE_Qfiyg1gCLcBGAs/s1600/Festival%2BBatik%252C%2BBordir%2Bdan%2BTenun%2BNusantara%2B2018.jpg"
+            nama = "Festival Batik Bordir Tenun Jumputan 2018",
+            waktu = "Sabtu, 15 April 2024",
+            description = "Description \"Rasakan keindahan Batik Jumputan di festival terbuka kami. Bergabunglah untuk satu hari penuh warna-warni, desain kreatif, dan pertunjukan budaya. Tiket tersedia seharga Rp. 50.000. Jangan lewatkan perayaan ekspresi artistik ini!\",\n" +
+                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
+                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
+                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            jenis = "Terbuka",
+            harga = "Rp. 50.000",
+            contact = "08112233445",
+            penyelenggara = "Penyelenggara Event 5",
+            lokasi = "Lokasi Event 5",
+            mulai = "3.00pm",
+            selesai = "10.00pm",
+            gambar = "https://1.bp.blogspot.com/-DbbbpYHE1lg/WuBUmu5LRhI/AAAAAAAAraI/3uWC2m98t5c7rncrUAMD8j0HE_Qfiyg1gCLcBGAs/s1600/Festival%2BBatik%252C%2BBordir%2Bdan%2BTenun%2BNusantara%2B2018.jpg"
         )
     )
 )
+

@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/brandy">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:background="@color/dark_blue_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_event"
+        app:title="Puitika Warna"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+        app:titleTextColor="@color/white" />
 
-        <!-- Your TextView for the title "Event" -->
-        <TextView
-            style="@style/TextAppearance.Material3.BodyLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Event"
-            android:textSize="30sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerivewevents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
 
-        <!-- Add the RecyclerView to display a list of events -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewEvents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

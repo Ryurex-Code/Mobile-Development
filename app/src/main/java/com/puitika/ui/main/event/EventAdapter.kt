@@ -26,12 +26,13 @@ class EventAdapter(private val context: Context, private val eventList: List<Det
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(context).load(eventList[position].eventBannerURL).into(holder.imageView)
-        holder.tvEventName.text = eventList[position].eventName
+        val event = eventList[position]
 
+        Glide.with(context).load(event.gambar).into(holder.ivEvent)
+        holder.tvEventName.text = event.nama
 
         holder.itemView.setOnClickListener {
-            onItemClickListener?.onClick(holder.imageView, eventList[position])
+            onItemClickListener?.onClick(it, event)
         }
     }
 
@@ -40,11 +41,13 @@ class EventAdapter(private val context: Context, private val eventList: List<Det
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.event_item_image)
+        val ivEvent: ImageView = itemView.findViewById(R.id.iv_event_item_image)
         val tvEventName: TextView = itemView.findViewById(R.id.tv_event_name)
     }
 
+
     interface OnItemClickListener {
-        fun onClick(imageView: ImageView, event: DetailEvent)
+        fun onClick(clickedView: View, event: DetailEvent)
     }
 }
+

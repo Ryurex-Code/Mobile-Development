@@ -21,6 +21,7 @@ import com.puitika.databinding.FragmentHomeBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.detail.cloth_detail.ClothDetailActivity
 import com.puitika.ui.detail.region_detail.RegionDetailActivity
+import com.puitika.ui.main.event.AddEventFormActivity
 import com.puitika.ui.profile.ProfileActivity
 import com.puitika.utils.Result
 
@@ -71,11 +72,15 @@ class HomeFragment : Fragment() {
                     startActivity(Intent(requireContext(), ProfileActivity::class.java))
                     true
                 }
-
+                R.id.menu_addevent -> {
+                    startActivity(Intent(requireContext(), AddEventFormActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
     }
+
 
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)

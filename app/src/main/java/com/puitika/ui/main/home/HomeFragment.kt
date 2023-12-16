@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
         factory = ViewModelFactory.getInstance(binding.root.context)
     }
 
-    private fun showRegion(regionList: Region) {
+    private fun showRegion(regionList: RegionResponse) {
         val regionAdapter = RegionAdapter(requireContext(), regionList.data)
         binding.rvRegion.apply {
             layoutManager =
@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
             adapter = regionAdapter
         }
         regionAdapter.setOnItemClickListener(object : RegionAdapter.OnItemClickListener {
-            override fun onClick(ivCloth: ImageView, region: DetailRegion) {
+            override fun onClick(imageView: ImageView, region: RegionDetail) {
                 val intent = Intent(requireContext(), RegionDetailActivity::class.java)
                 intent.putExtra("EXTRA_REGION", region)
                 startActivity(intent)

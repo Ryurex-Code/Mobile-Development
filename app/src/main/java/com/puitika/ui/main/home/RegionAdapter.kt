@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.puitika.R
 import com.puitika.data.remote.response.RegionDetail
 
-class RegionAdapter(private val context: Context, private val regionList: List<DetailRegion>) :
+class RegionAdapter(private val context: Context, private val regionList: List<RegionDetail>) :
     RecyclerView.Adapter<RegionAdapter.ViewHolder>() {
 
     private var onItemClickListener: OnItemClickListener? = null

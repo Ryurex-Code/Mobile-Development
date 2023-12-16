@@ -17,7 +17,7 @@ class ClothDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val cloth = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra("EXTRA_CLOTH", DetailCloth::class.java)
+            intent.getParcelableExtra("EXTRA_CLOTH", ClothDetail::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra("EXTRA_CLOTH")
@@ -28,7 +28,7 @@ class ClothDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView(cloth: DetailCloth) {
+    private fun setupView(cloth: ClothDetail) {
         Glide.with(this).load(cloth.imageUrl).into(binding.ivCloth)
         binding.apply {
             tvCloth.text = cloth.name

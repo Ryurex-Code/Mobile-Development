@@ -37,6 +37,9 @@ class EventDetailActivity : AppCompatActivity() {
             tvEventdate.text = event.waktu
             tvLocation.text = event.lokasi
             tvDetailEvent.text = event.description
+            tvHargaTiketDetail.text = event.harga
+            tvContactPersonDetail.text = event.contact
+
         }
     }
 }

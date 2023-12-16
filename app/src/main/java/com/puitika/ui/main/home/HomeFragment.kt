@@ -116,7 +116,7 @@ class HomeFragment : Fragment() {
         handler.postDelayed(runnable, 3000)
     }
 
-    private fun showTraditionalCloth(clothes: Cloth) {
+    private fun showTraditionalCloth(clothes: ClothResponse) {
         val clothAdapter = ClothesAdapter(requireContext(), clothes.data)
         val spanCount = 2
         binding.rvCloth.apply {
@@ -125,7 +125,7 @@ class HomeFragment : Fragment() {
             adapter = clothAdapter
         }
         clothAdapter.setOnItemClickListener(object : ClothesAdapter.OnItemClickListener {
-            override fun onClick(ivCloth: ImageView, cloth: DetailCloth) {
+            override fun onClick(ivCloth: ImageView, cloth: ClothDetail) {
                 val intent = Intent(requireContext(), ClothDetailActivity::class.java)
                 intent.putExtra("EXTRA_CLOTH", cloth)
                 startActivity(intent)

@@ -17,4 +17,12 @@ interface ApiService {
 
     @POST("/login")
     suspend fun login(@Body body: LoginRequest) : LoginResponse
+
+    @GET("/region")
+    suspend fun getRegion(
+    ): RegionResponse
+
+    @GET("/cloth")
+    suspend fun getCloth(
+    ): ClothResponse
 }

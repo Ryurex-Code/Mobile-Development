@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.puitika.R
-import com.puitika.data.dummy.DetailCloth
+import com.puitika.data.remote.response.RegionCloth
 
-class ViewMoreAdapter(private val context: Context, private val cloth:List<DetailCloth>): RecyclerView.Adapter<ViewMoreAdapter.ViewHolder>() {
+class ViewMoreAdapter(private val context: Context, private val cloth:List<RegionCloth>): RecyclerView.Adapter<ViewMoreAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -42,6 +42,6 @@ class ViewMoreAdapter(private val context: Context, private val cloth:List<Detai
     }
 
     interface OnItemClickListener {
-        fun onClick(ivCloth: ImageView, region: DetailCloth)
+        fun onClick(ivCloth: ImageView, region: RegionCloth)
     }
 }

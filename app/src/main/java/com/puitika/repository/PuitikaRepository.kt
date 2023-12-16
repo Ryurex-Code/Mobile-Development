@@ -2,14 +2,12 @@ package com.puitika.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.puitika.data.dummy.Cloth
-import com.puitika.data.dummy.Region
-import com.puitika.data.dummy.dummyTraditionalCloths
-import com.puitika.data.dummy.regionList
 import com.puitika.data.local.AccountPreference
 import com.puitika.data.request.RegisterRequest
 import com.puitika.data.remote.network.ApiService
+import com.puitika.data.remote.response.ClothResponse
 import com.puitika.data.remote.response.LoginResponse
+import com.puitika.data.remote.response.RegionResponse
 import com.puitika.data.remote.response.RegisterResponse
 import com.puitika.data.request.LoginRequest
 import com.puitika.utils.Result
@@ -42,27 +40,23 @@ class PuitikaRepository(
         }
     }
 
-    fun getRegions(): LiveData<Result<Region>> = liveData {
+    fun getRegions(): LiveData<Result<RegionResponse>> = liveData {
         emit(Result.Loading)
         try {
-            if (regionList.error) {
-                emit(Result.Error(regionList.message))
-            } else {
-                emit(Result.Success(regionList))
-            }
+            val res = apiService.getRegion()
+            if(!res.error) emit(Result.Success(res))
+            else emit(Result.Error(res.status))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         }
     }
 
-    fun getClothes(): LiveData<Result<Cloth>> = liveData {
+    fun getClothes(): LiveData<Result<ClothResponse>> = liveData {
         emit(Result.Loading)
         try {
-            if (dummyTraditionalCloths.error) {
-                emit(Result.Error(dummyTraditionalCloths.message))
-            } else {
-                emit(Result.Success(dummyTraditionalCloths))
-            }
+            val res = apiService.getCloth()
+            if(!res.error) emit(Result.Success(res))
+            else emit(Result.Error(res.status))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         }

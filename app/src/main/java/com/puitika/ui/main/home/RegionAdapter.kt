@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.puitika.R
-import com.puitika.data.dummy.DetailRegion
+import com.puitika.data.remote.response.RegionDetail
 
-class RegionAdapter(private val context: Context, private val regionList: List<DetailRegion>) :
+class RegionAdapter(private val context: Context, private val regionList: List<RegionDetail>) :
     RecyclerView.Adapter<RegionAdapter.ViewHolder>() {
 
     private var onItemClickListener: OnItemClickListener? = null
@@ -44,6 +44,6 @@ class RegionAdapter(private val context: Context, private val regionList: List<D
     }
 
     interface OnItemClickListener {
-        fun onClick(imageView: ImageView, region: DetailRegion)
+        fun onClick(imageView: ImageView, region: RegionDetail)
     }
 }

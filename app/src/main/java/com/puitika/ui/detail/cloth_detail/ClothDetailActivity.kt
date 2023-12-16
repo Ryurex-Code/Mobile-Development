@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.puitika.data.dummy.DetailCloth
+import com.puitika.data.remote.response.ClothDetail
 import com.puitika.databinding.ActivityClothDetailBinding
 
 class ClothDetailActivity : AppCompatActivity() {
@@ -17,7 +17,7 @@ class ClothDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val cloth = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra("EXTRA_CLOTH", DetailCloth::class.java)
+            intent.getParcelableExtra("EXTRA_CLOTH", ClothDetail::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra("EXTRA_CLOTH")
@@ -28,13 +28,13 @@ class ClothDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView(cloth: DetailCloth) {
+    private fun setupView(cloth: ClothDetail) {
         Glide.with(this).load(cloth.imageUrl).into(binding.ivCloth)
         binding.apply {
             tvCloth.text = cloth.name
             tvDescription.text = cloth.description
             tvCategory.text = cloth.category
-            tvSubCategory.text = cloth.subcategory
+            tvSubCategory.text = cloth.subCategory
         }
     }
 

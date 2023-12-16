@@ -33,15 +33,12 @@ val eventList = Event(
             id = 1,
             nama = " Festival Tenun Tradisional Bugis ",
             waktu = "Sabtu, 10 Desember 2023",
-            description = "Description \"Ikuti festival tenun Bugis tradisional kami di mana Anda dapat merasakan warisan budaya kaya dari Tenun. Jelajahi berbagai tekstil tenunan tangan dan pelajari seni tenun yang rumit. Masuk gratis!\",\n " +
-                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
-                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
-                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo  ",
+            description = "Ikuti festival tenun Bugis tradisional kami di mana Anda dapat merasakan warisan budaya kaya dari Tenun. Jelajahi berbagai tekstil tenunan tangan dan pelajari seni tenun yang rumit. Masuk gratis!",
             jenis = "Terbuka",
             harga = "Rp. 0",
             contact = "08123456789",
             penyelenggara = "Penyelenggara Event 1",
-            lokasi = "Lokasi Event 1",
+            lokasi = "Rumah adat Saoraja Latenri Bali",
             mulai = "10.00am",
             selesai = "11.00pm",
             gambar = "https://katasatu.co.id/wp-content/uploads/2021/11/Spanduk-FBK-copy-scaled.jpg"
@@ -50,10 +47,7 @@ val eventList = Event(
             id = 2,
             nama = "Festival Batik Bordir Tenun & Scarf 2020",
             waktu = "Minggu, 15 Januari 2024",
-            description = "Description \"Ikuti festival Batik Bordir Tenun & Scarf kami yang akan menampilkan ragam batik, bordir, dan scarf terbaik. Acara ini tertutup dan tiket dapat dibeli seharga Rp. 150.000. Hubungi kami di 08234567890 untuk informasi lebih lanjut.\",\n" +
-                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
-                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
-                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            description = "Ikuti festival Batik Bordir Tenun & Scarf kami yang akan menampilkan ragam batik, bordir, dan scarf terbaik. Acara ini tertutup dan tiket dapat dibeli seharga Rp. 150.000. Hubungi kami di 08234567890 untuk informasi lebih lanjut.",
             jenis = "Tertutup",
             harga = "Rp. 150.000",
             contact = "08234567890",
@@ -65,12 +59,9 @@ val eventList = Event(
         ),
         DetailEvent(
             id = 3,
-            nama = "Lomba Desain Motif Tenun Ikat Kota Kediri, Wali Kota Kediri ",
+            nama = "Lomba Desain Motif Tenun Ikat Kota Kediri",
             waktu = "Selasa, 20 Februari 2024",
-            description = "Description \"Ikuti lomba desain motif tenun ikat di Kota Kediri, yang dihadiri oleh Wali Kota Kediri. Lomba ini terbuka untuk umum, dan tidak ada biaya pendaftaran. Hubungi kami di 08765432100 untuk informasi lebih lanjut.\",\n" +
-                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
-                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
-                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            description = "Ikuti lomba desain motif tenun ikat di Kota Kediri, yang dihadiri oleh Wali Kota Kediri. Lomba ini terbuka untuk umum, dan tidak ada biaya pendaftaran. Hubungi kami di 08765432100 untuk informasi lebih lanjut.",
             jenis = "Terbuka",
             harga = "Rp. 0",
             contact = "08765432100",
@@ -84,10 +75,7 @@ val eventList = Event(
             id = 4,
             nama = "Festival Batik Bordir Tenun Nusantara 2018",
             waktu = "Kamis, 5 Maret 2024",
-            description = "Description \"Ikuti Festival Batik Bordir Tenun Nusantara 2018 yang menghadirkan karya-karya terbaik dari seluruh Nusantara. Acara ini tertutup, dan tiket bisa dibeli seharga Rp. 200.000. Hubungi kami di 08987654321 untuk pembelian tiket.\",\n" +
-                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
-                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
-                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            description = "Ikuti Festival Batik Bordir Tenun Nusantara 2018 yang menghadirkan karya-karya terbaik dari seluruh Nusantara. Acara ini tertutup, dan tiket bisa dibeli seharga Rp. 200.000. Hubungi kami di 08987654321 untuk pembelian tiket.",
             jenis = "Tertutup",
             harga = "Rp. 200.000",
             contact = "08987654321",
@@ -101,10 +89,7 @@ val eventList = Event(
             id = 5,
             nama = "Festival Batik Bordir Tenun Jumputan 2018",
             waktu = "Sabtu, 15 April 2024",
-            description = "Description \"Rasakan keindahan Batik Jumputan di festival terbuka kami. Bergabunglah untuk satu hari penuh warna-warni, desain kreatif, dan pertunjukan budaya. Tiket tersedia seharga Rp. 50.000. Jangan lewatkan perayaan ekspresi artistik ini!\",\n" +
-                    "Lorem ipsum maktanuanv a ashbianfiuauc nusiw fun sausn uqw9fn nsuiu is fhqn ufvmamoa fi iqnfu  efueu q0ao sj weewew 09na meki ansuifna pukmak miaf kuufqf 7f f\n" +
-                    "affa faf jijnifa ujoamf unf jiqinqinqif iqnifninfq \n" +
-                    "asfjania asfnahfjasf fonajf oinfoamfokaf aoino fooa foia f oaj fjajlka vogwoimg oignofoka f ooif qo fo fonfo ",
+            description = "Rasakan keindahan Batik Jumputan di festival terbuka kami. Bergabunglah untuk satu hari penuh warna-warni, desain kreatif, dan pertunjukan budaya. Tiket tersedia seharga Rp. 50.000. Jangan lewatkan perayaan ekspresi artistik ini!",
             jenis = "Terbuka",
             harga = "Rp. 50.000",
             contact = "08112233445",

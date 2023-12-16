@@ -40,14 +40,12 @@ class PuitikaRepository(
         }
     }
 
-    fun getRegions(): LiveData<Result<Region>> = liveData {
+    fun getRegions(): LiveData<Result<RegionResponse>> = liveData {
         emit(Result.Loading)
         try {
-            if (regionList.error) {
-                emit(Result.Error(regionList.message))
-            } else {
-                emit(Result.Success(regionList))
-            }
+            val res = apiService.getRegion()
+            if(!res.error) emit(Result.Success(res))
+            else emit(Result.Error(res.status))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         }

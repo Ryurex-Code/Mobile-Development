@@ -44,6 +44,6 @@ class RegionAdapter(private val context: Context, private val regionList: List<R
     }
 
     interface OnItemClickListener {
-        fun onClick(imageView: ImageView, region: DetailRegion)
+        fun onClick(imageView: ImageView, region: RegionDetail)
     }
 }

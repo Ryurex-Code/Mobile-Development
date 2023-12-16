@@ -12,11 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.puitika.R
-import com.puitika.data.dummy.Cloth
-import com.puitika.data.dummy.DetailCloth
-import com.puitika.data.dummy.DetailRegion
-import com.puitika.data.dummy.Region
-import com.puitika.data.dummy.dummyTraditionalCloths
+import com.puitika.data.remote.response.ClothDetail
+import com.puitika.data.remote.response.ClothResponse
+import com.puitika.data.remote.response.RegionDetail
+import com.puitika.data.remote.response.RegionResponse
 import com.puitika.databinding.FragmentHomeBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.detail.cloth_detail.ClothDetailActivity

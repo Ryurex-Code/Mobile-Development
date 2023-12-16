@@ -34,7 +34,7 @@ class ClothDetailActivity : AppCompatActivity() {
             tvCloth.text = cloth.name
             tvDescription.text = cloth.description
             tvCategory.text = cloth.category
-            tvSubCategory.text = cloth.subcategory
+            tvSubCategory.text = cloth.subCategory
         }
     }
 

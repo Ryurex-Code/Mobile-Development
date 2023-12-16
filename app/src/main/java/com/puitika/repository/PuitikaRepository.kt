@@ -2,14 +2,12 @@ package com.puitika.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.puitika.data.dummy.Cloth
-import com.puitika.data.dummy.Region
-import com.puitika.data.dummy.dummyTraditionalCloths
-import com.puitika.data.dummy.regionList
 import com.puitika.data.local.AccountPreference
 import com.puitika.data.request.RegisterRequest
 import com.puitika.data.remote.network.ApiService
+import com.puitika.data.remote.response.ClothResponse
 import com.puitika.data.remote.response.LoginResponse
+import com.puitika.data.remote.response.RegionResponse
 import com.puitika.data.remote.response.RegisterResponse
 import com.puitika.data.request.LoginRequest
 import com.puitika.utils.Result

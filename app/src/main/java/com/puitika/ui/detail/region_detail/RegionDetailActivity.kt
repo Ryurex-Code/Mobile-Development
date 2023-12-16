@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.puitika.data.dummy.DetailRegion
-import com.puitika.data.dummy.DetailCloth
+import com.puitika.data.remote.response.RegionCloth
+import com.puitika.data.remote.response.RegionDetail
 import com.puitika.databinding.ActivityRegionDetailBinding
 
 class RegionDetailActivity : AppCompatActivity() {

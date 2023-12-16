@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.puitika.data.dummy.DetailCloth
+import com.puitika.data.remote.response.ClothDetail
 import com.puitika.databinding.ActivityClothDetailBinding
 
 class ClothDetailActivity : AppCompatActivity() {

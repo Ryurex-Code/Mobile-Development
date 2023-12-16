@@ -51,14 +51,12 @@ class PuitikaRepository(
         }
     }
 
-    fun getClothes(): LiveData<Result<Cloth>> = liveData {
+    fun getClothes(): LiveData<Result<ClothResponse>> = liveData {
         emit(Result.Loading)
         try {
-            if (dummyTraditionalCloths.error) {
-                emit(Result.Error(dummyTraditionalCloths.message))
-            } else {
-                emit(Result.Success(dummyTraditionalCloths))
-            }
+            val res = apiService.getCloth()
+            if(!res.error) emit(Result.Success(res))
+            else emit(Result.Error(res.status))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         }

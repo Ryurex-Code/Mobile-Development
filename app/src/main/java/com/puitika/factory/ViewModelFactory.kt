@@ -35,6 +35,9 @@ class ViewModelFactory(private val repository: PuitikaRepository) : ViewModelPro
         if (modelClass.isAssignableFrom(EventViewModel::class.java)) {
             return EventViewModel(repository) as T
         }
+        if (modelClass.isAssignableFrom(AddEventFormViewModel::class.java)) {
+            return AddEventFormViewModel(repository) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 

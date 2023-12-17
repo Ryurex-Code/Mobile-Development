@@ -167,7 +167,7 @@ class AddEventFormActivity : AppCompatActivity() {
         val eventTimeStart = etEventTimeStart.text.toString()
         val eventTimeEnd = etEventTimeEnd.text.toString()
         val image = imageViewToBase64(findViewById(R.id.iv_bannerimage))
-        Log.d("IMAGE", image)
+        Log.d("IMAGE", image.take(10))
 
         // Get selected radio button ID
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
@@ -222,7 +222,7 @@ class AddEventFormActivity : AppCompatActivity() {
 
         // Convert ByteArray to Base64 String
         val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+        return "data:image/png;base64,${Base64.encodeToString(byteArray, Base64.NO_WRAP)}"
     }
 
     private fun showDatePickerDialog() {

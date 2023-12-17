@@ -1,10 +1,17 @@
 package com.puitika.ui.profile
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,25 +21,24 @@ import com.puitika.ui.profile.ProfileEditActivity
 
 class ProfileActivity : AppCompatActivity() {
 
+    private lateinit var progressBar: ProgressBar
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        // Find the RelativeLayout and TextView by their IDs
         val icWorldIcon = findViewById<RelativeLayout>(R.id.ic_world_icon)
         val tvChangeLang = findViewById<TextView>(R.id.tv_change_lang)
 
-        // Set an OnClickListener for the RelativeLayout
         icWorldIcon.setOnClickListener {
-            // Handle click on the RelativeLayout
             openLanguageSettings()
         }
 
-        // Set an OnClickListener for the TextView
         tvChangeLang.setOnClickListener {
-            // Handle click on the TextView
             openLanguageSettings()
         }
+        logout()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,15 +59,44 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun logout() {
         val tvLogOut = findViewById<TextView>(R.id.tv_log_out)
+
         tvLogOut.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            showLogoutConfirmationDialog()
         }
     }
 
     private fun openLanguageSettings() {
-        // Intent untuk membuka pengaturan bahasa di aplikasi Pengaturan (Settings)
         val languageIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
         startActivity(languageIntent)
+    }
+    private fun showLogoutConfirmationDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.fragment_popup_confirmlogout)
+
+        val progressBarLogout = dialog.findViewById<ProgressBar>(R.id.progress_bar)
+        val btnNoLogout = dialog.findViewById<Button>(R.id.button_nologout)
+        val btnYesLogout = dialog.findViewById<Button>(R.id.button_yeslogout)
+
+        btnNoLogout.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnYesLogout.setOnClickListener {
+            progressBarLogout.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                progressBarLogout.visibility = View.GONE
+
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+
+                dialog.dismiss()
+            }, 2000)
+        }
+        progressBarLogout.visibility = View.GONE
+
+        dialog.show()
     }
 }

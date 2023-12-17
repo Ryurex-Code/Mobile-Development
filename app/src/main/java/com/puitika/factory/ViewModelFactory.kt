@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puitika.di.Injection
 import com.puitika.repository.PuitikaRepository
 import com.puitika.ui.login.LoginViewModel
+import com.puitika.ui.main.event.AddEventFormViewModel
 import com.puitika.ui.main.event.EventViewModel
 import com.puitika.ui.main.home.HomeViewModel
 import com.puitika.ui.main.main.MainViewModel
@@ -33,6 +34,9 @@ class ViewModelFactory(private val repository: PuitikaRepository) : ViewModelPro
         }
         if (modelClass.isAssignableFrom(EventViewModel::class.java)) {
             return EventViewModel(repository) as T
+        }
+        if (modelClass.isAssignableFrom(AddEventFormViewModel::class.java)) {
+            return AddEventFormViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

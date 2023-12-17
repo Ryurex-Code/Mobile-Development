@@ -4,7 +4,8 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.puitika.data.dummy.DetailEvent
+import com.puitika.BuildConfig.BASE_URL
+import com.puitika.data.remote.response.EventDetail
 import com.puitika.databinding.ActivityEventDetailBinding
 
 class EventDetailActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class EventDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val event = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra("EXTRA_EVENT", DetailEvent::class.java)
+            intent.getParcelableExtra("EXTRA_EVENT", EventDetail::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra("EXTRA_EVENT")
@@ -28,8 +29,8 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView(event: DetailEvent) {
-        Glide.with(this).load(event.gambar).into(binding.ivImageview2)
+    private fun setupView(event: EventDetail) {
+        Glide.with(this).load("${BASE_URL}${event.gambar}").into(binding.ivImageview2)
         binding.apply {
             tvEventname.text = event.nama
             tvEventtimestart.text = event.mulai

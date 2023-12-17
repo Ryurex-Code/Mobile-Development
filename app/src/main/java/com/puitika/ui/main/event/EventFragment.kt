@@ -2,10 +2,13 @@ package com.puitika.ui.main.event
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +26,8 @@ class EventFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
     private lateinit var toolbar: Toolbar
+    private lateinit var progressBar: ProgressBar
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +35,8 @@ class EventFragment : Fragment() {
     ): View? {
         binding = FragmentEventBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        progressBar = binding.progressBar
 
         recyclerView = binding.recyclerivewevents
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -47,7 +54,9 @@ class EventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar.visibility = View.VISIBLE
         setAction()
+        loadData()
     }
 
     private fun setAction() {
@@ -68,5 +77,9 @@ class EventFragment : Fragment() {
         intent.putExtra("EXTRA_EVENT", detailEvent)
         startActivity(intent)
     }
-
+    private fun loadData() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBar.visibility = View.GONE
+        }, 1000)
+    }
 }

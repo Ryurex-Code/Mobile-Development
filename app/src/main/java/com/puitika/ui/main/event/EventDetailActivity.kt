@@ -4,7 +4,8 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.puitika.data.dummy.DetailEvent
+import com.puitika.BuildConfig.BASE_URL
+import com.puitika.data.remote.response.EventDetail
 import com.puitika.databinding.ActivityEventDetailBinding
 
 class EventDetailActivity : AppCompatActivity() {

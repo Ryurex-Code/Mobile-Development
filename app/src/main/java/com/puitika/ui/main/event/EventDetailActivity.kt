@@ -18,7 +18,7 @@ class EventDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val event = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra("EXTRA_EVENT", DetailEvent::class.java)
+            intent.getParcelableExtra("EXTRA_EVENT", EventDetail::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra("EXTRA_EVENT")

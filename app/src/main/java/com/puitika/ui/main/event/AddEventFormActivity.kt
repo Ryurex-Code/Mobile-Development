@@ -47,6 +47,10 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var etEventTimeStart: EditText
     private lateinit var etEventTimeEnd: EditText
     private lateinit var ivCalender: ImageView
+    private lateinit var binding: ActivityAddEventFormBinding
+    private lateinit var factory: ViewModelFactory
+    private val viewModel: AddEventFormViewModel by viewModels { factory }
+
 
     companion object {
         private const val REQUEST_CODE_PERMISSION = 123
@@ -56,6 +60,9 @@ class AddEventFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_event_form)
+        binding = ActivityAddEventFormBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setViewModelFactory()
 
         val backButton = findViewById<MaterialButton>(R.id.btn_back)
         backButton.setOnClickListener {
@@ -159,28 +166,63 @@ class AddEventFormActivity : AppCompatActivity() {
         val eventLocation = findViewById<EditText>(R.id.et_eventlocation).text.toString()
         val eventTimeStart = etEventTimeStart.text.toString()
         val eventTimeEnd = etEventTimeEnd.text.toString()
-        val imagePath = getImagePathFromImageView(findViewById(R.id.iv_bannerimage))
+        val image = imageViewToBase64(findViewById(R.id.iv_bannerimage))
+        Log.d("IMAGE", image)
 
         // Get selected radio button ID
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
-        val selectedRadioButton = findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-        val eventType = selectedRadioButton.text.toString()
+        val checkedRadioButtonId = radioGroup.checkedRadioButtonId
 
-        // TODO: Implement the logic to send data to your API
-        // Example: retrofit.create(ApiService::class.java).sendEventData(eventName, eventDateDay, eventDescription, eventType, ticketPrice, contactPerson, organizer, eventLocation, eventTimeStart, eventTimeEnd)
+        if (checkedRadioButtonId != -1) {
+            val selectedRadioButton = findViewById<RadioButton>(checkedRadioButtonId)
+
+            val eventType = selectedRadioButton.text.toString()
+
+            viewModel.createEvent(
+                CreateEventModel(
+                    nama = eventName,
+                    waktu = eventDateDay,
+                    description = eventDescription,
+                    jenis = eventType,
+                    harga = ticketPrice,
+                    contact = contactPerson,
+                    penyelenggara = organizer,
+                    lokasi = eventLocation,
+                    mulai = eventTimeStart,
+                    selesai =eventTimeEnd,
+                    gambar = image
+                )
+            ).observe(this){ result ->
+                when (result) {
+                    is Result.Loading -> {
+                        showToast(this@AddEventFormActivity, "Loading")
+                    }
+                    is Result.Error -> {
+                        showToast(this@AddEventFormActivity, "Failed")
+                    }
+                    is Result.Success -> {
+                        showToast(this@AddEventFormActivity,"Success")
+                    }
+                }
+            }
+            // Now you can use the eventType variable
+        } else {
+            // Handle the case where no radio button is selected
+            showToast(this@AddEventFormActivity, "MINIMAL MAKSIMAL")
+        }
     }
 
-    private fun getImagePathFromImageView(imageView: ImageView): String {
-        val drawable = imageView.drawable
-        val bitmap = (drawable as BitmapDrawable).bitmap
 
-        val tempDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        val tempFile = File.createTempFile("tempImage", ".jpg", tempDir)
-        val outputStream = FileOutputStream(tempFile)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        outputStream.close()
+    fun imageViewToBase64(imageView: ImageView): String {
+        val bitmap: Bitmap = imageView.drawable.toBitmap() // Convert ImageView to Bitmap
+        val byteArrayOutputStream = ByteArrayOutputStream()
 
-        return tempFile.absolutePath
+        // Compress the Bitmap to PNG format
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+
+        // Convert ByteArray to Base64 String
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 
     private fun showDatePickerDialog() {
@@ -238,6 +280,10 @@ class AddEventFormActivity : AppCompatActivity() {
         }
 
         timePickerDialog.show()
+    }
+
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
     }
 }
 

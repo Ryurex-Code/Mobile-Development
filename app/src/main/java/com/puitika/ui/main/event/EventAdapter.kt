@@ -8,8 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.puitika.BuildConfig.BASE_URL
 import com.puitika.R
-import com.puitika.data.dummy.DetailEvent
+import com.puitika.data.remote.response.EventDetail
 
 class EventAdapter(private val context: Context, private val eventList: List<DetailEvent>) :
     RecyclerView.Adapter<EventAdapter.ViewHolder>() {

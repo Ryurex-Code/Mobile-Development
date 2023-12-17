@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.puitika.R
 import com.puitika.databinding.FragmentEventBinding
-import com.puitika.data.dummy.eventList
 import androidx.appcompat.widget.Toolbar
-import com.puitika.data.dummy.DetailEvent
-import com.puitika.ui.profile.ProfileActivity
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.puitika.data.remote.response.EventDetail
+import com.puitika.data.remote.response.EventResponse
+import com.puitika.factory.ViewModelFactory
+import com.puitika.utils.Result
 
 class EventFragment : Fragment() {
 

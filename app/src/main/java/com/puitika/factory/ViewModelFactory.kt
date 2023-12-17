@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.puitika.di.Injection
 import com.puitika.repository.PuitikaRepository
 import com.puitika.ui.login.LoginViewModel
+import com.puitika.ui.main.event.AddEventFormViewModel
 import com.puitika.ui.main.event.EventViewModel
 import com.puitika.ui.main.home.HomeViewModel
 import com.puitika.ui.main.main.MainViewModel

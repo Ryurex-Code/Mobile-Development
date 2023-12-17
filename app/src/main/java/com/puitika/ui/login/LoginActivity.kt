@@ -1,8 +1,13 @@
 package com.puitika.ui.login
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.view.Window
 import androidx.activity.viewModels
 import com.puitika.data.model.LoginModel
 import com.puitika.databinding.ActivityLoginBinding
@@ -32,29 +37,62 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setAction() {
         binding.btnLogin.setOnClickListener {
+            showProgressBar()
+
             val loginModel = LoginModel(
                 username = binding.etUsername.text.toString(),
                 password = binding.etPassword.text.toString()
             )
-            viewModel.login(loginModel).observe(this) { result ->
-                when (result) {
-                    is Result.Loading -> {}
-                    is Result.Error -> {
-                        showToast(this, result.data)
-                    }
+            Handler(Looper.getMainLooper()).postDelayed({
+                viewModel.login(loginModel).observe(this) { result ->
+                    hideProgressBar()
+                    when (result) {
+                        is Result.Success -> {
+                            showSuccessDialog()
+                            startActivity(Intent(this, MainActivity::class.java).apply {
+                                putExtra("fromLogin", true)
+                            })
+                        }
 
-                    is Result.Success -> {
-                        showToast(this, result.data.message)
-                        startActivity(Intent(this, MainActivity::class.java))
-                        intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("fromLogin", true)
-                        startActivity(intent)
+
+                        is Result.Error -> {
+                            showToast(this, result.data)
+                        }
+
+                        else -> {}
                     }
                 }
-            }
+            }, 1000)
         }
+
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            hideProgressBar()
+        }, 1000)
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+
+    private fun showSuccessDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
+
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismiss()
+        }, 1000)
     }
 }

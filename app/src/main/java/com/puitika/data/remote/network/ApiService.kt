@@ -22,10 +22,14 @@ interface ApiService {
     suspend fun login(@Body body: LoginRequest) : LoginResponse
 
     @GET("/region")
-    suspend fun getRegion(
-    ): RegionResponse
+    suspend fun getRegion(): RegionResponse
 
     @GET("/cloth")
-    suspend fun getCloth(
-    ): ClothResponse
+    suspend fun getCloth(): ClothResponse
+
+    @GET("/events")
+    suspend fun getEvent(): EventResponse
+
+    @POST("/createEvent")
+    suspend fun createEvent(@Body body : CreateEventRequest) : CreateEventResponse
 }

@@ -1,7 +1,9 @@
 package com.puitika.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.puitika.data.dummy.Event
 import com.puitika.data.local.AccountPreference
 import com.puitika.data.request.RegisterRequest
 import com.puitika.data.remote.network.ApiService
@@ -65,6 +67,28 @@ class PuitikaRepository(
         }
     }
 
+    fun getEvents(): LiveData<Result<EventResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val res = apiService.getEvent()
+            if(!res.error) emit(Result.Success(res))
+            else emit(Result.Error(res.status))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun createEvent(body: CreateEventRequest): LiveData<Result<CreateEventResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val res = apiService.createEvent(body)
+            if (res.status == "success") emit(Result.Success(res))
+            else emit(Result.Error(res.message))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: PuitikaRepository? = null
@@ -77,3 +101,4 @@ class PuitikaRepository(
             }.also { instance = it }
     }
 }
+

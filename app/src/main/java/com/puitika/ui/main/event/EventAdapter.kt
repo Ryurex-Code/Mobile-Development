@@ -12,7 +12,7 @@ import com.puitika.BuildConfig.BASE_URL
 import com.puitika.R
 import com.puitika.data.remote.response.EventDetail
 
-class EventAdapter(private val context: Context, private val eventList: List<DetailEvent>) :
+class EventAdapter(private val context: Context, private val eventList: List<EventDetail>) :
     RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     private var onItemClickListener: OnItemClickListener? = null
@@ -29,7 +29,7 @@ class EventAdapter(private val context: Context, private val eventList: List<Det
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val event = eventList[position]
 
-        Glide.with(context).load(event.gambar).into(holder.ivEvent)
+        Glide.with(context).load("${BASE_URL}${event.gambar}").into(holder.ivEvent)
         holder.tvEventName.text = event.nama
 
         holder.itemView.setOnClickListener {
@@ -48,7 +48,7 @@ class EventAdapter(private val context: Context, private val eventList: List<Det
 
 
     interface OnItemClickListener {
-        fun onClick(clickedView: View, event: DetailEvent)
+        fun onClick(clickedView: View, event: EventDetail)
     }
 }
 

@@ -3,8 +3,13 @@ package com.puitika.ui.detail.region_detail
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.puitika.R
 import com.puitika.data.dummy.DetailRegion
 import com.puitika.data.dummy.DetailCloth
 import com.puitika.databinding.ActivityRegionDetailBinding
@@ -12,12 +17,21 @@ import com.puitika.databinding.ActivityRegionDetailBinding
 class RegionDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegionDetailBinding
+    private lateinit var progressBar: ProgressBar
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        progressBar = findViewById(R.id.progress_bar)
+
+        progressBar.visibility = View.VISIBLE
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            progressBar.visibility = View.GONE
+        }, 1000)
 
         val region = if(Build.VERSION.SDK_INT >= 33){
             intent.getParcelableExtra<DetailRegion>("EXTRA_REGION", DetailRegion::class.java)

@@ -4,7 +4,7 @@ data class CreateEventModel(
     val nama: String,
     val waktu: String,
     val description: String,
-    val jenis: String,
+    val jenis: Boolean,
     val harga: String,
     val contact: String,
     val penyelenggara: String,

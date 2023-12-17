@@ -183,7 +183,7 @@ class AddEventFormActivity : AppCompatActivity() {
                     nama = eventName,
                     waktu = eventDateDay,
                     description = eventDescription,
-                    jenis = eventType,
+                    jenis = if (eventType == "Terbuka") true else false,
                     harga = ticketPrice,
                     contact = contactPerson,
                     penyelenggara = organizer,

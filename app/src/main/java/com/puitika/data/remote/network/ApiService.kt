@@ -29,7 +29,8 @@ interface ApiService {
 
     @GET("/events")
     suspend fun getEvent(): EventResponse
-
+    
+    @Headers("Accept: application/json")
     @POST("/createEvent")
     suspend fun createEvent(@Body body : CreateEventRequest) : CreateEventResponse
 }

@@ -18,6 +18,20 @@
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
         app:titleTextColor="@color/white" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/dark_blue_green"
+        android:visibility="gone"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

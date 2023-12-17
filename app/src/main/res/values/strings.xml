@@ -40,4 +40,10 @@
     <string name="button_camera">Camera</string>
     <string name="pilih_sumber_gambar">Scan your cloth</string>
     <string name="event_image_description">event image desc</string>
+    <string name="confirm_ask">Are you sure ?</string>
+    <string name="confirm_desc">We will inform your event if its fullfill \nrequirements at the notification</string>
+    <string name="button_Noconfirm">No</string>
+    <string name="button_Yesconfirm">Yes</string>
+    <string name="loggedin">You are logged in</string>
+    <string name="acc_created">Your Account have \nbeen created</string>
 </resources>

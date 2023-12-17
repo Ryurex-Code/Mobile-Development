@@ -29,8 +29,8 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView(event: DetailEvent) {
-        Glide.with(this).load(event.gambar).into(binding.ivImageview2)
+    private fun setupView(event: EventDetail) {
+        Glide.with(this).load("${BASE_URL}${event.gambar}").into(binding.ivImageview2)
         binding.apply {
             tvEventname.text = event.nama
             tvEventtimestart.text = event.mulai

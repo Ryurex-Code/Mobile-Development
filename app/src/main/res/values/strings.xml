@@ -30,12 +30,9 @@
     <string name="yes">confirm</string>
     <string name="cancel">Cancel</string>
     <string name="namakain_daerah">Sulawesi Selatan</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="desc_kaindaerah">Description</string>
     <string name="isi_kaindaerah">Motif ini biasanya berupa gari-garis dengan bentuk-bentuk pada seluruh bagian kain dengan warna yang berbeda.\u00e2\u0080\u00a8\u00e2\u0080\u00a8Motif kain khas Toraja ini mengandung makna yang cukup dalam, yakni:\nNilai sopan santun\nSaling berjalan sepadan\nMenghargai satu sama lain\nKehidupan Toraja\n\n Read more...\n\n</string>
     <string name="locate_kaindaerah">Location</string>
-    <string name="asal_daerah">Asal Daerah Asli : Daerah pegunungan bagian utara Sulawesi Selatan.</string>
-    <string name="view_more">View more</string>
     <string name="button_gallery">Gallery</string>
     <string name="button_camera">Camera</string>
     <string name="pilih_sumber_gambar">Scan your cloth</string>
@@ -45,5 +42,4 @@
     <string name="button_Noconfirm">No</string>
     <string name="button_Yesconfirm">Yes</string>
     <string name="loggedin">You are logged in</string>
-    <string name="acc_created">Your Account have \nbeen created</string>
 </resources>

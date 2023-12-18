@@ -2,9 +2,14 @@ package com.puitika.ui.main.event
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.puitika.R
@@ -25,12 +30,28 @@ class EventFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private val viewModel: EventViewModel by viewModels { factory }
     private lateinit var toolbar: Toolbar
+    private lateinit var progressBar: ProgressBar
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEventBinding.inflate(inflater, container, false)
+
+        progressBar = binding.progressBar
+
+        recyclerView = binding.recyclerivewevents
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        eventAdapter = EventAdapter(requireContext(), eventList.data)
+        recyclerView.adapter = eventAdapter
+
+        eventAdapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {
+            override fun onClick(clickedView: View, event: DetailEvent) {
+                navigateToDetailEvent(event)
+            }
+        })
         return binding.root
     }
 
@@ -38,7 +59,7 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setViewModelFactory()
         setComponent()
-        setAction()
+        setAction
     }
 
     private fun setComponent() {

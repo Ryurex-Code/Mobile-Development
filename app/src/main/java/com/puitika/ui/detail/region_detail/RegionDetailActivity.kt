@@ -3,6 +3,10 @@ package com.puitika.ui.detail.region_detail
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.puitika.data.remote.response.RegionCloth
@@ -18,7 +22,6 @@ class RegionDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val region = if(Build.VERSION.SDK_INT >= 33){
             intent.getParcelableExtra("EXTRA_REGION", RegionDetail::class.java)
         }else{

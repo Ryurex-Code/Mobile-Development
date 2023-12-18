@@ -3,6 +3,7 @@ package com.puitika.ui.main.event
 import android.Manifest
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +17,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -71,8 +73,13 @@ class AddEventFormActivity : AppCompatActivity() {
 
         val confirmButton = findViewById<Button>(R.id.btn_confirm)
         confirmButton.setOnClickListener {
-            sendDataToApi()
+            if (isEventDataComplete()) {
+                showConfirmationDialog()
+            } else {
+                Toast.makeText(this, "Anda belum melengkapi data event!", Toast.LENGTH_SHORT).show()
+            }
         }
+
         val ivCalender = findViewById<ImageView>(R.id.iv_calender)
         ivCalender.setOnClickListener {
             showDatePickerDialog()
@@ -83,7 +90,6 @@ class AddEventFormActivity : AppCompatActivity() {
             showDatePickerDialog()
         }
 
-        // Ganti iv_calender menjadi et_dateday agar bisa menampilkan kalender saat diklik
         etDateDay.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 showDatePickerDialog()
@@ -111,6 +117,7 @@ class AddEventFormActivity : AppCompatActivity() {
             pickImage()
         }
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -282,6 +289,85 @@ class AddEventFormActivity : AppCompatActivity() {
         timePickerDialog.show()
     }
 
+    private fun isEventDataComplete(): Boolean {
+        val eventName = findViewById<EditText>(R.id.et_eventname).text.toString()
+        val eventDateDay = findViewById<EditText>(R.id.et_dateday).text.toString()
+        val eventDescription = findViewById<EditText>(R.id.et_descevent).text.toString()
+        val ticketPrice = findViewById<EditText>(R.id.et_ticketprice).text.toString()
+        val contactPerson = findViewById<EditText>(R.id.et_contactperson).text.toString()
+        val organizer = findViewById<EditText>(R.id.et_organizer).text.toString()
+        val eventLocation = findViewById<EditText>(R.id.et_eventlocation).text.toString()
+        val eventTimeStart = etEventTimeStart.text.toString()
+        val eventTimeEnd = etEventTimeEnd.text.toString()
+
+        return eventName.isNotEmpty() &&
+                eventDateDay.isNotEmpty() &&
+                eventDescription.isNotEmpty() &&
+                ticketPrice.isNotEmpty() &&
+                contactPerson.isNotEmpty() &&
+                organizer.isNotEmpty() &&
+                eventLocation.isNotEmpty() &&
+                eventTimeStart.isNotEmpty() &&
+                eventTimeEnd.isNotEmpty()
+    }
+    private fun showConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.fragment_popup_confirmevent, null)
+        builder.setView(dialogView)
+
+        val btnNoConfirm = dialogView.findViewById<Button>(R.id.button_noconfirm)
+        val btnYesConfirm = dialogView.findViewById<Button>(R.id.button_yesconfirm)
+        val tvAskConfirm = dialogView.findViewById<TextView>(R.id.tv_askconfirm)
+        val tvAskDesc = dialogView.findViewById<TextView>(R.id.tv_askdesc)
+
+        tvAskConfirm.text = "Are you sure?"
+        tvAskDesc.text = "We will inform your event if it fulfills requirements at the notification"
+
+        val alertDialog = builder.create()
+
+        btnNoConfirm.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        btnYesConfirm.setOnClickListener {
+            alertDialog.dismiss()
+            //sendDataToApi(alertDialog)
+        }
+
+        alertDialog.show()
+    }
+
+    // private fun sendDataToApi(dialog: AlertDialog) {
+    //val apiResult = sendDataToApi()
+
+    //    if (apiResult) {
+    //         showSuccessDialog()
+    //    } else {
+    //         showFailureDialog()
+    //    }
+    // }
+    private fun showSuccessDialog() {
+        val successDialog = AlertDialog.Builder(this)
+            .setTitle("Selamat!")
+            .setMessage("Event Anda berhasil didaftarkan.")
+            .setPositiveButton("OK") { _, _ ->
+            }
+            .create()
+
+        successDialog.show()
+    }
+
+    private fun showFailureDialog() {
+        val failureDialog = AlertDialog.Builder(this)
+            .setTitle("Gagal")
+            .setMessage("Sepertinya ada gangguan koneksi. Silakan coba lagi nanti.")
+            .setPositiveButton("OK") { _, _ ->
+            }
+            .create()
+
+        failureDialog.show()
+    }
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)
     }

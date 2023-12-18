@@ -3,6 +3,10 @@ package com.puitika.ui.detail.cloth_detail
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.widget.ProgressBar
 import com.bumptech.glide.Glide
 import com.puitika.data.remote.response.ClothDetail
 import com.puitika.databinding.ActivityClothDetailBinding

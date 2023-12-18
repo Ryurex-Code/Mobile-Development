@@ -172,8 +172,8 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="412dp"
-        android:layout_height="280dp"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
         android:background="@drawable/bottom_shape_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +185,7 @@
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:elevation="10dp"
         android:text="@string/back"
@@ -202,7 +202,7 @@
         android:layout_width="120dp"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:elevation="10dp"
         android:text="@string/confirm"
@@ -213,5 +213,17 @@
         app:layout_constraintStart_toEndOf="@+id/btn_back"
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
-
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/dark_blue_green"
+        android:visibility="gone"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

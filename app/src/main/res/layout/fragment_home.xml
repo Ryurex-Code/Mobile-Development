@@ -32,31 +32,6 @@
             android:paddingHorizontal="16dp"
             tools:context=".ui.main.home.HomeFragment">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/app_bar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="-14dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.search.SearchBar
-                    android:id="@+id/search_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="km mw cari apa" />
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <com.google.android.material.search.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_anchor="@id/search_bar"
-                tools:ignore="NotSibling">
-                <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
-            </com.google.android.material.search.SearchView>
-
             <TextView
                 android:id="@+id/textView"
                 style="@style/TextAppearance.Material3.BodyLarge"
@@ -66,7 +41,7 @@
                 android:textFontWeight="900"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                 android:id="@+id/region_layout"

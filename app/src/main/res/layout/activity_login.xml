@@ -7,6 +7,19 @@
     android:background="@color/brandy"
     tools:context=".ui.login.LoginActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/dark_blue_green"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_puitika"
         android:layout_width="150dp"
@@ -19,13 +32,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_username"
         style="@style/TextAppearance.Material3.BodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:paddingStart="3dp"
-        android:text="@string/email"
+        android:text="@string/username"
         android:textFontWeight="900"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -46,7 +59,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_username" />
 
     <TextView
         android:id="@+id/tv_password"
@@ -231,13 +244,13 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tv_email,et_username,tv_password,et_password" />
+        app:constraint_referenced_ids="tv_username,et_username,tv_password,et_password" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tv_email,et_username,tv_password,et_password" />
+        app:constraint_referenced_ids="tv_username,et_username,tv_password,et_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

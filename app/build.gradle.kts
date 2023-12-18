@@ -100,4 +100,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
     implementation ("com.makeramen:roundedimageview:2.3.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.airbnb.android:lottie:3.7.0")
+    implementation ("androidx.cardview:cardview:1.0.0")
+
 }

@@ -43,9 +43,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBarHome = view.findViewById(R.id.progress_bar)
 
-        loadData()
         setViewModelFactory()
         setComponent()
         setAction()
@@ -85,10 +83,6 @@ class HomeFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.menu_account -> {
                     startActivity(Intent(requireContext(), ProfileActivity::class.java))
-                    true
-                }
-                R.id.menu_addevent -> {
-                    startActivity(Intent(requireContext(), AddEventFormActivity::class.java))
                     true
                 }
                 else -> false
@@ -147,11 +141,6 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         })
-    }
-    private fun loadData() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            progressBarHome.visibility = View.GONE
-        }, 2000)
     }
 }
 

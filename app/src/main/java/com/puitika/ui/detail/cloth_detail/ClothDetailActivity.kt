@@ -15,19 +15,11 @@ import com.puitika.databinding.ActivityClothDetailBinding
 class ClothDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClothDetailBinding
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClothDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        progressBar = findViewById(R.id.progress_bar)
-        progressBar.visibility = View.VISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            // Hide the progress bar once the data is loaded
-            progressBar.visibility = View.GONE
-        }, 1000)
-
 
         val cloth = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra("EXTRA_CLOTH", DetailCloth::class.java)

@@ -11,15 +11,19 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.text.InputType
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -33,6 +37,7 @@ import com.puitika.databinding.ActivityClothDetailBinding
 import com.puitika.databinding.FragmentHomeBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.main.home.HomeViewModel
+import com.puitika.ui.main.main.MainActivity
 import com.puitika.utils.Result
 import com.puitika.utils.showToast
 import java.io.ByteArrayOutputStream
@@ -48,7 +53,6 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var etDateDay: EditText
     private lateinit var etEventTimeStart: EditText
     private lateinit var etEventTimeEnd: EditText
-    private lateinit var ivCalender: ImageView
     private lateinit var binding: ActivityAddEventFormBinding
     private lateinit var factory: ViewModelFactory
     private val viewModel: AddEventFormViewModel by viewModels { factory }
@@ -179,18 +183,15 @@ class AddEventFormActivity : AppCompatActivity() {
         // Get selected radio button ID
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
         val checkedRadioButtonId = radioGroup.checkedRadioButtonId
+        Log.d("HAHAAHH", checkedRadioButtonId.toString())
 
         if (checkedRadioButtonId != -1) {
-            val selectedRadioButton = findViewById<RadioButton>(checkedRadioButtonId)
-
-            val eventType = selectedRadioButton.text.toString()
-
             viewModel.createEvent(
                 CreateEventModel(
                     nama = eventName,
                     waktu = eventDateDay,
                     description = eventDescription,
-                    jenis = if (eventType == "Terbuka") true else false,
+                    jenis = checkedRadioButtonId==2131362368,
                     harga = ticketPrice,
                     contact = contactPerson,
                     penyelenggara = organizer,
@@ -202,20 +203,26 @@ class AddEventFormActivity : AppCompatActivity() {
             ).observe(this){ result ->
                 when (result) {
                     is Result.Loading -> {
-                        showToast(this@AddEventFormActivity, "Loading")
+
                     }
                     is Result.Error -> {
-                        showToast(this@AddEventFormActivity, "Failed")
+                        showCustomDialog(result.data, false)
                     }
                     is Result.Success -> {
-                        showToast(this@AddEventFormActivity,"Success")
+                        showCustomDialog(result.data.message, true)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            intent.putExtra("fromAddEvent", true)
+                            startActivity(intent)
+                        }, 2000)
                     }
                 }
             }
             // Now you can use the eventType variable
         } else {
             // Handle the case where no radio button is selected
-            showToast(this@AddEventFormActivity, "MINIMAL MAKSIMAL")
+            showToast(this@AddEventFormActivity, "Please Choose Event Type")
         }
     }
 
@@ -332,7 +339,7 @@ class AddEventFormActivity : AppCompatActivity() {
 
         btnYesConfirm.setOnClickListener {
             alertDialog.dismiss()
-            //sendDataToApi(alertDialog)
+            sendDataToApi()
         }
 
         alertDialog.show()
@@ -352,6 +359,10 @@ class AddEventFormActivity : AppCompatActivity() {
             .setTitle("Selamat!")
             .setMessage("Event Anda berhasil didaftarkan.")
             .setPositiveButton("OK") { _, _ ->
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.putExtra("fromAddEvent", true)
+                startActivity(intent)
             }
             .create()
 
@@ -363,6 +374,7 @@ class AddEventFormActivity : AppCompatActivity() {
             .setTitle("Gagal")
             .setMessage("Sepertinya ada gangguan koneksi. Silakan coba lagi nanti.")
             .setPositiveButton("OK") { _, _ ->
+
             }
             .create()
 
@@ -370,6 +382,33 @@ class AddEventFormActivity : AppCompatActivity() {
     }
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
+    private fun showCustomDialog(message: String, success: Boolean) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
+
+        // Assuming there's a TextView in your layout to display the message
+        val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
+        messageTextView.text = message
+        val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
+        val cancelImageView: ImageFilterView = dialog.findViewById(R.id.iv_cancel)
+
+        if (success) {
+            checkListImageView.visibility = View.VISIBLE
+            cancelImageView.visibility = View.GONE
+        } else {
+            checkListImageView.visibility = View.GONE
+            cancelImageView.visibility = View.VISIBLE
+        }
+
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismiss()
+        }, 2000)
     }
 }
 

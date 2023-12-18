@@ -38,9 +38,21 @@
             android:id="@+id/iv_checklist"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_chec">
+
+        </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:visibility="gone"
+            android:id="@+id/iv_cancel"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_cancel">
 
         </androidx.constraintlayout.utils.widget.ImageFilterView>
 

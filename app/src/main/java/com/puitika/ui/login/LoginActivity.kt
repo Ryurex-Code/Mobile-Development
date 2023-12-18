@@ -8,7 +8,10 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.Window
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.constraintlayout.utils.widget.ImageFilterView
+import com.puitika.R
 import com.puitika.data.model.LoginModel
 import com.puitika.databinding.ActivityLoginBinding
 import com.puitika.factory.ViewModelFactory
@@ -43,26 +46,34 @@ class LoginActivity : AppCompatActivity() {
                 username = binding.etUsername.text.toString(),
                 password = binding.etPassword.text.toString()
             )
-            Handler(Looper.getMainLooper()).postDelayed({
-                viewModel.login(loginModel).observe(this) { result ->
-                    hideProgressBar()
-                    when (result) {
-                        is Result.Success -> {
-                            showSuccessDialog()
+            viewModel.login(loginModel).observe(this) { result ->
+                when (result) {
+                    is Result.Loading -> {
+                        showProgressBar()
+                    }
+
+                    is Result.Success -> {
+                        hideProgressBar()
+                        showCustomDialog("You are logged in",true)
+                        Handler(Looper.getMainLooper()).postDelayed({
                             startActivity(Intent(this, MainActivity::class.java).apply {
                                 putExtra("fromLogin", true)
                             })
-                        }
-
-
-                        is Result.Error -> {
-                            showToast(this, result.data)
-                        }
-
-                        else -> {}
+                        }, 2000)
                     }
+
+
+                    is Result.Error -> {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            hideProgressBar()
+                            showCustomDialog(result.data, false)
+                        }, 1000)
+
+                    }
+
+                    else -> {}
                 }
-            }, 1000)
+            }
         }
 
         binding.tvRegister.setOnClickListener {
@@ -72,10 +83,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showProgressBar() {
         binding.progressBar.visibility = View.VISIBLE
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            hideProgressBar()
-        }, 1000)
     }
 
     private fun hideProgressBar() {
@@ -83,16 +90,31 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun showSuccessDialog() {
+    private fun showCustomDialog(message: String, success: Boolean) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
 
+        // Assuming there's a TextView in your layout to display the message
+        val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
+        messageTextView.text = message
+        val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
+        val cancelImageView: ImageFilterView = dialog.findViewById(R.id.iv_cancel)
+
+        if (success) {
+            checkListImageView.visibility = View.VISIBLE
+            cancelImageView.visibility = View.GONE
+        } else {
+            checkListImageView.visibility = View.GONE
+            cancelImageView.visibility = View.VISIBLE
+        }
+
         dialog.show()
 
         Handler(Looper.getMainLooper()).postDelayed({
             dialog.dismiss()
-        }, 1000)
+        }, 2000)
     }
+
 }

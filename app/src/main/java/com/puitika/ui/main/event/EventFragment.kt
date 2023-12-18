@@ -38,20 +38,6 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEventBinding.inflate(inflater, container, false)
-
-        progressBar = binding.progressBar
-
-        recyclerView = binding.recyclerivewevents
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        eventAdapter = EventAdapter(requireContext(), eventList.data)
-        recyclerView.adapter = eventAdapter
-
-        eventAdapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {
-            override fun onClick(clickedView: View, event: DetailEvent) {
-                navigateToDetailEvent(event)
-            }
-        })
         return binding.root
     }
 
@@ -59,7 +45,7 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setViewModelFactory()
         setComponent()
-        setAction
+        setAction()
     }
 
     private fun setComponent() {
@@ -92,7 +78,7 @@ class EventFragment : Fragment() {
         recyclerView = binding.recyclerivewevents
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        eventAdapter = EventAdapter(requireContext(), event.data.events)
+        eventAdapter = EventAdapter(requireContext(), event.data.events.reversed())
         recyclerView.adapter = eventAdapter
 
         eventAdapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {

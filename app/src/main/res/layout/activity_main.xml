@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
-
     android:layout_height="match_parent"
     tools:context=".ui.main.main.MainActivity">
 
     <RelativeLayout
         android:id="@+id/container"
+        android:background="@color/geyser"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
@@ -24,6 +24,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/geyser"
         app:mbn_backgroundBottomColor="@color/dark_blue_green"
         app:mbn_circleColor="@color/brandy"
         app:mbn_countBackgroundColor="@color/brandy"

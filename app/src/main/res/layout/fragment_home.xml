@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_blue_green"
+        app:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,61 +30,79 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
             tools:context=".ui.main.home.HomeFragment">
 
-            <TextView
-                android:id="@+id/textView"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Region"
-                android:textFontWeight="900"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/region_layout"
+            <LinearLayout
+                android:id="@+id/layout_region"
                 android:layout_width="match_parent"
+                android:paddingHorizontal="16dp"
+                android:background="@color/brandy"
                 android:layout_height="wrap_content"
-                android:elevation="2dp"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:paddingBottom="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/TextAppearance.Material3.BodyLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Region"
+                    android:textColor="@color/burnham"
+                    android:textFontWeight="900"
+                    android:textSize="30sp" />
+
+                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                    android:id="@+id/region_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:elevation="2dp"
+                    app:cardCornerRadius="20dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_region"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:elevation="30dp"
+                        android:orientation="horizontal" />
+                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_cloth"
+                android:background="@color/geyser"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_region" >
+                <TextView
+                    android:id="@+id/tv_kain"
+                    android:paddingHorizontal="16dp"
+                    style="@style/TextAppearance.Material3.BodyLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Traditional Cloth"
+                    android:textFontWeight="900"
+                    android:textSize="30sp"
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_region"
+                    android:id="@+id/rv_cloth"
+                    android:paddingHorizontal="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:elevation="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal" />
-            </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_kain"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Traditional Cloth"
-                android:textFontWeight="900"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/region_layout" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_cloth"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_kain" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

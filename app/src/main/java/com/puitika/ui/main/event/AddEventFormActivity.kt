@@ -118,7 +118,19 @@ class AddEventFormActivity : AppCompatActivity() {
 
         val cardViewBanner = findViewById<MaterialCardView>(R.id.cardview_10)
         cardViewBanner.setOnClickListener {
-            pickImage()
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    REQUEST_CODE_PERMISSION
+                )
+            } else {
+                pickImage()
+            }
         }
     }
 
@@ -134,28 +146,16 @@ class AddEventFormActivity : AppCompatActivity() {
         ) {
             pickImage()
         } else {
-            Toast.makeText(this, "Izin akses galeri ditolak", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Permission to access gallery denied", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun pickImage() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                REQUEST_CODE_PERMISSION
-            )
-        } else {
-            val pickIntent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            )
-            startActivityForResult(pickIntent, REQUEST_CODE_PICK_IMAGE)
-        }
+        val pickIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startActivityForResult(pickIntent, REQUEST_CODE_PICK_IMAGE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

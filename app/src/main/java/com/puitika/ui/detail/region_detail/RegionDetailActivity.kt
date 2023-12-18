@@ -9,9 +9,8 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.puitika.R
-import com.puitika.data.dummy.DetailRegion
-import com.puitika.data.dummy.DetailCloth
+import com.puitika.data.remote.response.RegionCloth
+import com.puitika.data.remote.response.RegionDetail
 import com.puitika.databinding.ActivityRegionDetailBinding
 
 class RegionDetailActivity : AppCompatActivity() {
@@ -24,11 +23,10 @@ class RegionDetailActivity : AppCompatActivity() {
         binding = ActivityRegionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val region = if(Build.VERSION.SDK_INT >= 33){
-            intent.getParcelableExtra<DetailRegion>("EXTRA_REGION", DetailRegion::class.java)
-
+            intent.getParcelableExtra("EXTRA_REGION", RegionDetail::class.java)
         }else{
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra<DetailRegion>("EXTRA_REGION")
+            intent.getParcelableExtra("EXTRA_REGION")
         }
 
         if(region!=null){
@@ -38,7 +36,7 @@ class RegionDetailActivity : AppCompatActivity() {
 
     }
 
-    private fun setupView(region: DetailRegion) {
+    private fun setupView(region: RegionDetail) {
         Glide.with(this).load(region.imageURL).into(binding.ivRegion)
         binding.apply {
             tvRegion.text = region.name
@@ -46,7 +44,7 @@ class RegionDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecycleView(listKain: List<DetailCloth>) {
+    private fun setupRecycleView(listKain: List<RegionCloth>) {
         val regionAdapter = ViewMoreAdapter(this, listKain)
         binding.rvCloth.apply {
             layoutManager = LinearLayoutManager(

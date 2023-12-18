@@ -14,11 +14,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.puitika.R
-import com.puitika.data.dummy.Cloth
-import com.puitika.data.dummy.DetailCloth
-import com.puitika.data.dummy.DetailRegion
-import com.puitika.data.dummy.Region
-import com.puitika.data.dummy.dummyTraditionalCloths
+import com.puitika.data.remote.response.ClothDetail
+import com.puitika.data.remote.response.ClothResponse
+import com.puitika.data.remote.response.RegionDetail
+import com.puitika.data.remote.response.RegionResponse
 import com.puitika.databinding.FragmentHomeBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.detail.cloth_detail.ClothDetailActivity
@@ -95,7 +94,7 @@ class HomeFragment : Fragment() {
         factory = ViewModelFactory.getInstance(binding.root.context)
     }
 
-    private fun showRegion(regionList: Region) {
+    private fun showRegion(regionList: RegionResponse) {
         val regionAdapter = RegionAdapter(requireContext(), regionList.data)
         binding.rvRegion.apply {
             layoutManager =
@@ -103,7 +102,7 @@ class HomeFragment : Fragment() {
             adapter = regionAdapter
         }
         regionAdapter.setOnItemClickListener(object : RegionAdapter.OnItemClickListener {
-            override fun onClick(ivCloth: ImageView, region: DetailRegion) {
+            override fun onClick(imageView: ImageView, region: RegionDetail) {
                 val intent = Intent(requireContext(), RegionDetailActivity::class.java)
                 intent.putExtra("EXTRA_REGION", region)
                 startActivity(intent)
@@ -126,7 +125,7 @@ class HomeFragment : Fragment() {
         handler.postDelayed(runnable, 3000)
     }
 
-    private fun showTraditionalCloth(clothes: Cloth) {
+    private fun showTraditionalCloth(clothes: ClothResponse) {
         val clothAdapter = ClothesAdapter(requireContext(), clothes.data)
         val spanCount = 2
         binding.rvCloth.apply {
@@ -135,7 +134,7 @@ class HomeFragment : Fragment() {
             adapter = clothAdapter
         }
         clothAdapter.setOnItemClickListener(object : ClothesAdapter.OnItemClickListener {
-            override fun onClick(ivCloth: ImageView, cloth: DetailCloth) {
+            override fun onClick(ivCloth: ImageView, cloth: ClothDetail) {
                 val intent = Intent(requireContext(), ClothDetailActivity::class.java)
                 intent.putExtra("EXTRA_CLOTH", cloth)
                 startActivity(intent)

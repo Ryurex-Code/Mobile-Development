@@ -11,20 +11,24 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.puitika.R
 import com.puitika.databinding.FragmentEventBinding
-import com.puitika.data.dummy.eventList
 import androidx.appcompat.widget.Toolbar
-import com.puitika.data.dummy.DetailEvent
-import com.puitika.ui.profile.ProfileActivity
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.puitika.data.remote.response.EventDetail
+import com.puitika.data.remote.response.EventResponse
+import com.puitika.factory.ViewModelFactory
+import com.puitika.utils.Result
 
 class EventFragment : Fragment() {
 
     private lateinit var binding: FragmentEventBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
+    private lateinit var factory: ViewModelFactory
+    private val viewModel: EventViewModel by viewModels { factory }
     private lateinit var toolbar: Toolbar
     private lateinit var progressBar: ProgressBar
 
@@ -34,7 +38,6 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEventBinding.inflate(inflater, container, false)
-        val view = binding.root
 
         progressBar = binding.progressBar
 
@@ -49,15 +52,28 @@ class EventFragment : Fragment() {
                 navigateToDetailEvent(event)
             }
         })
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar.visibility = View.VISIBLE
-        setAction()
-        loadData()
+        setViewModelFactory()
+        setComponent()
+        setAction
     }
+
+    private fun setComponent() {
+        viewModel.getEvents().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {}
+                is Result.Error -> {}
+                is Result.Success -> {
+                    showEvent(result.data)
+                }
+            }
+        }
+    }
+
 
     private fun setAction() {
         binding.topNavigation.setOnMenuItemClickListener { menuItem ->
@@ -72,14 +88,27 @@ class EventFragment : Fragment() {
         }
     }
 
-    private fun navigateToDetailEvent(detailEvent: DetailEvent) {
+    private fun showEvent(event : EventResponse){
+        recyclerView = binding.recyclerivewevents
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        eventAdapter = EventAdapter(requireContext(), event.data.events)
+        recyclerView.adapter = eventAdapter
+
+        eventAdapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {
+            override fun onClick(clickedView: View, event: EventDetail) {
+                navigateToDetailEvent(event)
+            }
+        })
+    }
+
+    private fun navigateToDetailEvent(detailEvent: EventDetail) {
         val intent = Intent(requireContext(), EventDetailActivity::class.java)
         intent.putExtra("EXTRA_EVENT", detailEvent)
         startActivity(intent)
     }
-    private fun loadData() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            progressBar.visibility = View.GONE
-        }, 1000)
+
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
     }
 }

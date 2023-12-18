@@ -17,22 +17,12 @@ import com.puitika.databinding.ActivityRegionDetailBinding
 class RegionDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegionDetailBinding
-    private lateinit var progressBar: ProgressBar
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        progressBar = findViewById(R.id.progress_bar)
-
-        progressBar.visibility = View.VISIBLE
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            progressBar.visibility = View.GONE
-        }, 1000)
-
         val region = if(Build.VERSION.SDK_INT >= 33){
             intent.getParcelableExtra<DetailRegion>("EXTRA_REGION", DetailRegion::class.java)
 

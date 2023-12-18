@@ -56,9 +56,10 @@ class LoginActivity : AppCompatActivity() {
                         hideProgressBar()
                         showCustomDialog("You are logged in",true)
                         Handler(Looper.getMainLooper()).postDelayed({
-                            startActivity(Intent(this, MainActivity::class.java).apply {
-                                putExtra("fromLogin", true)
-                            })
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            intent.putExtra("fromLogin", true)
+                            startActivity(intent)
                         }, 2000)
                     }
 
@@ -116,5 +117,4 @@ class LoginActivity : AppCompatActivity() {
             dialog.dismiss()
         }, 2000)
     }
-
 }

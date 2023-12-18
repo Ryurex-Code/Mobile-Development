@@ -36,6 +36,7 @@
                 android:id="@+id/layout_iv_photo"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:visibility="gone"
                 android:layout_margin="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

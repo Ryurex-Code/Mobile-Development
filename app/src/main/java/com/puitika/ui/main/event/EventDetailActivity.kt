@@ -8,6 +8,7 @@ import com.puitika.BuildConfig.BASE_URL
 import com.puitika.data.remote.response.EventDetail
 import com.puitika.databinding.ActivityEventDetailBinding
 
+
 class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventDetailBinding
@@ -30,7 +31,7 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun setupView(event: EventDetail) {
-        Glide.with(this).load("${BASE_URL}${event.gambar}").into(binding.ivImageview2)
+        Glide.with(this).load("${BASE_URL}${event.gambar}").into(binding.zoomableImageView)
         binding.apply {
             tvEventname.text = event.nama
             tvEventtimestart.text = event.mulai
@@ -40,7 +41,6 @@ class EventDetailActivity : AppCompatActivity() {
             tvDetailEvent.text = event.description
             tvHargaTiketDetail.text = event.harga
             tvContactPersonDetail.text = event.contact
-
         }
     }
 }

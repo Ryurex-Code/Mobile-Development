@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
+        val fromEvent = intent.getBooleanExtra(FROM_EVENT, false)
 
 //        if (!isLoggedIn) {
 //            startActivity(Intent(this, LoginActivity::class.java))
@@ -42,10 +43,13 @@ class MainActivity : AppCompatActivity() {
 //            startActivity(intent)
 //
 //        }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBottomNav()
+
+        if (fromEvent) {
+            navigation(EventFragment())
+        }
     }
 
     private fun setupBottomNav() {
@@ -92,5 +96,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USER = "fromLogin"
+        const val FROM_EVENT = "fromAddEvent"
     }
 }

@@ -245,7 +245,6 @@
                         app:layout_constraintEnd_toEndOf="parent">
 
                         <RadioButton
-                            android:text="Terbuka"
                             android:id="@+id/rb_opened"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
@@ -260,7 +259,6 @@
                             android:textColor="@color/dark_blue_green"/>
 
                         <RadioButton
-                            android:text="Tertutup"
                             android:id="@+id/rb_closed"
                             android:layout_width="25dp"
                             android:layout_height="25dp"

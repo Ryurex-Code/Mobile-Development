@@ -119,6 +119,7 @@ class ScanFragment : Fragment() {
             binding.ivPhoto.setPadding(0, 0, 0, 0)
             binding.ivPhoto.setImageURI(it)
             binding.btnScan.visibility = View.VISIBLE
+            binding.layoutIvPhoto.visibility = View.VISIBLE
         }
     }
 

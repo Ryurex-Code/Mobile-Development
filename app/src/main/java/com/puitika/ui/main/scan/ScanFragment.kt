@@ -15,6 +15,7 @@ import android.widget.PopupWindow
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.puitika.R
 import com.puitika.data.model.ScanModel
@@ -99,10 +100,15 @@ class ScanFragment : Fragment() {
 
     private fun showResult(scanModelList: List<ScanModel>) {
         val adapter = ScanModelAdapter(requireContext(), scanModelList)
-        binding.rvScan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        // Use GridLayoutManager with 2 columns
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+
+        binding.rvScan.layoutManager = layoutManager
         binding.rvScan.adapter = adapter
         binding.rvScan.visibility = View.VISIBLE
     }
+
 
     private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.TakePicture()

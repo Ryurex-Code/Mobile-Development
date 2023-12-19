@@ -59,6 +59,8 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var etEventTimeEnd: EditText
     private lateinit var binding: ActivityAddEventFormBinding
     private lateinit var factory: ViewModelFactory
+    private lateinit var radioGroup: RadioGroup
+    private lateinit var etTicketPrice: EditText
     private val viewModel: AddEventFormViewModel by viewModels { factory }
 
 
@@ -128,6 +130,17 @@ class AddEventFormActivity : AppCompatActivity() {
         val cardViewBanner = findViewById<MaterialCardView>(R.id.cardview_10)
         cardViewBanner.setOnClickListener {
             pickImage()
+        }
+        radioGroup = findViewById(R.id.radioGroup)
+        etTicketPrice = findViewById(R.id.et_ticketprice)
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.rb_opened) {
+                etTicketPrice.setText("0")
+                etTicketPrice.isEnabled = false
+            } else {
+                etTicketPrice.isEnabled = true
+            }
         }
     }
 

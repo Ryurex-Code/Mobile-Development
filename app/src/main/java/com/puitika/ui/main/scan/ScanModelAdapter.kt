@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
 import com.puitika.R
 import com.puitika.data.model.ScanModel
+import com.puitika.data.remote.response.PrediksiItem
 
-class ScanModelAdapter(private val context: Context, private val scanModelList: List<ScanModel>) :
+class ScanModelAdapter(private val context: Context, private val scanModelList: List<PrediksiItem>) :
     RecyclerView.Adapter<ScanModelAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +24,7 @@ class ScanModelAdapter(private val context: Context, private val scanModelList: 
         val scanModel = scanModelList[position]
 
         // Set data to views
-        holder.tvPercent.text = scanModel.percent
+        holder.tvPercent.text = "${scanModel.percent.substring(0,4)}%"
         holder.tvRegion.text = scanModel.region
     }
 

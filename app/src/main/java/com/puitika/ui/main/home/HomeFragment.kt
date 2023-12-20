@@ -23,8 +23,10 @@ import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.detail.cloth_detail.ClothDetailActivity
 import com.puitika.ui.detail.region_detail.RegionDetailActivity
 import com.puitika.ui.main.event.AddEventFormActivity
+import com.puitika.ui.main.main.MainActivity
 import com.puitika.ui.profile.ProfileActivity
 import com.puitika.utils.Result
+import com.puitika.utils.showToast
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -51,22 +53,37 @@ class HomeFragment : Fragment() {
         viewModel.getRegions().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
+                    binding.layoutShimmerRegion.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
+                    binding.layoutShimmerRegion.visibility = View.VISIBLE
+                    showToast(requireActivity(),result.data)
                 }
                 is Result.Success -> {
-                    showRegion(result.data)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.layoutShimmerRegion.visibility = View.GONE
+                        binding.regionLayout.visibility = View.VISIBLE
+                        showRegion(result.data)
+                    }, 1000)
                 }
             }
         }
         viewModel.getClothes().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
+                    binding.layoutShimmerCloth.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
+                    binding.layoutShimmerCloth.visibility = View.VISIBLE
+                    showToast(requireActivity(),result.data)
                 }
                 is Result.Success -> {
-                    showTraditionalCloth(result.data)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.layoutShimmerCloth.visibility = View.GONE
+                        binding.rvCloth.visibility = View.VISIBLE
+                        showTraditionalCloth(result.data)
+                    }, 1000)
+
                 }
             }
         }

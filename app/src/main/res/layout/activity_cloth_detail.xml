@@ -12,21 +12,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp">
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@color/dark_blue_green"
-            android:visibility="gone"
-            android:elevation="10dp"
-            android:layout_marginTop="380dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
         <ImageView
             android:id="@+id/iv_cloth"
             android:layout_width="match_parent"
@@ -145,16 +130,17 @@
             <TextView
                 android:id="@+id/title_category"
                 style="@style/TextAppearance.AppCompat.Title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:background="@color/brandy"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="5dp"
                 android:text="Category"
                 android:textColor="@color/burnham"
                 android:textFontWeight="900"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
@@ -172,16 +158,17 @@
             <TextView
                 android:id="@+id/title_sub_category"
                 style="@style/TextAppearance.AppCompat.Title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:background="@color/brandy"
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="5dp"
                 android:text="Sub-Category"
                 android:textColor="@color/burnham"
                 android:textFontWeight="900"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView

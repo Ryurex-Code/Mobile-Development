@@ -29,9 +29,6 @@ class EventFragment : Fragment() {
     private lateinit var eventAdapter: EventAdapter
     private lateinit var factory: ViewModelFactory
     private val viewModel: EventViewModel by viewModels { factory }
-    private lateinit var toolbar: Toolbar
-    private lateinit var progressBar: ProgressBar
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,10 +48,18 @@ class EventFragment : Fragment() {
     private fun setComponent() {
         viewModel.getEvents().observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> {}
-                is Result.Error -> {}
+                is Result.Loading -> {
+                    binding.layoutShimmerEvent.visibility = View.VISIBLE
+                }
+                is Result.Error -> {
+                    binding.layoutShimmerEvent.visibility = View.VISIBLE
+                }
                 is Result.Success -> {
-                    showEvent(result.data)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.layoutShimmerEvent.visibility = View.GONE
+                        binding.recyclerivewevents.visibility = View.VISIBLE
+                        showEvent(result.data)
+                    }, 1000)
                 }
             }
         }

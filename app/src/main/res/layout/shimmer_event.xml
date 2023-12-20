@@ -22,7 +22,7 @@
                 android:id="@+id/iv_event_item_image"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@color/white_smoke"
+                android:background="@color/shimmer"
                 android:contentDescription="@string/event_image_description"
                 android:scaleType="centerCrop" />
 
@@ -39,7 +39,7 @@
                 android:shadowDy="5"
                 android:maxLines="1"
                 android:shadowRadius="5"
-                android:text="Kain tenun toraja"
+                android:backgroundTint="@color/shimmer"
                 android:textAlignment="center"
                 android:paddingVertical="2dp"
                 android:textColor="@color/white"

@@ -316,7 +316,7 @@
                             android:textSize="16dp"
                             android:hint="Rp."
                             android:padding="8dp"
-
+                            android:inputType="number"
                             android:paddingHorizontal="5dp"
                             android:textAlignment="textStart"
                             app:layout_constraintEnd_toEndOf="parent"

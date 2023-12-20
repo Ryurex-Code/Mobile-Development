@@ -36,19 +36,20 @@ class MainActivity : AppCompatActivity() {
         val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
         val fromEvent = intent.getBooleanExtra(FROM_EVENT, false)
 
-        if (!isLoggedIn) {
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-
-        }
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setupBottomNav()
 
         if (fromEvent) {
+            binding = ActivityMainBinding.inflate(layoutInflater)
             navigation(EventFragment())
+        } else if (!isLoggedIn) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+        setupBottomNav()
     }
 
     private fun setupBottomNav() {

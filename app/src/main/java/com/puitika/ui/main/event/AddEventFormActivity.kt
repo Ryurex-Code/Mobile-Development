@@ -14,7 +14,10 @@ import android.os.Environment
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.InputFilter
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.Base64
 import android.util.Log
 import android.view.View
@@ -43,6 +46,7 @@ import com.puitika.utils.showToast
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -55,6 +59,10 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var etEventTimeEnd: EditText
     private lateinit var binding: ActivityAddEventFormBinding
     private lateinit var factory: ViewModelFactory
+    private lateinit var radioGroup: RadioGroup
+    private lateinit var etTicketPrice: EditText
+    private lateinit var cardview4: MaterialCardView
+    private lateinit var tvTicketprice: TextView
     private val viewModel: AddEventFormViewModel by viewModels { factory }
 
 
@@ -68,7 +76,12 @@ class AddEventFormActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_event_form)
         binding = ActivityAddEventFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupEventNameInput()
         setViewModelFactory()
+        setupCharacterLimits()
+        setupTicketPriceInput()
+        setupEventLocationInput()
+        setupOrganizerInput()
 
         val backButton = findViewById<MaterialButton>(R.id.btn_back)
         backButton.setOnClickListener {
@@ -132,6 +145,29 @@ class AddEventFormActivity : AppCompatActivity() {
                 pickImage()
             }
         }
+        radioGroup = findViewById(R.id.radioGroup)
+        etTicketPrice = findViewById(R.id.et_ticketprice)
+        cardview4 = findViewById(R.id.cardview_4)
+        tvTicketprice = findViewById(R.id.tv_ticketprice)
+
+        cardview4.visibility = View.GONE
+        etTicketPrice.visibility = View.GONE
+        tvTicketprice.visibility = View.GONE
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.rb_opened) {
+                etTicketPrice.setText("0")
+                etTicketPrice.isEnabled = false
+                etTicketPrice.visibility = View.GONE
+                cardview4.visibility = View.GONE
+                tvTicketprice.visibility = View.GONE
+            } else {
+                etTicketPrice.setText("")
+                etTicketPrice.isEnabled = true
+                etTicketPrice.visibility = View.VISIBLE
+                cardview4.visibility = View.VISIBLE
+                tvTicketprice.visibility = View.VISIBLE
+            }
+        }
     }
 
 
@@ -167,7 +203,6 @@ class AddEventFormActivity : AppCompatActivity() {
     }
 
     private fun sendDataToApi() {
-        // Get data from EditText fields
         val eventName = findViewById<EditText>(R.id.et_eventname).text.toString()
         val eventDateDay = findViewById<EditText>(R.id.et_dateday).text.toString()
         val eventDescription = findViewById<EditText>(R.id.et_descevent).text.toString()
@@ -177,10 +212,11 @@ class AddEventFormActivity : AppCompatActivity() {
         val eventLocation = findViewById<EditText>(R.id.et_eventlocation).text.toString()
         val eventTimeStart = etEventTimeStart.text.toString()
         val eventTimeEnd = etEventTimeEnd.text.toString()
+        val formattedStartTime = formatTimeWithAmPm(eventTimeStart)
+        val formattedEndTime = formatTimeWithAmPm(eventTimeEnd)
         val image = imageViewToBase64(findViewById(R.id.iv_bannerimage))
         Log.d("IMAGE", image.take(10))
 
-        // Get selected radio button ID
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
         val checkedRadioButtonId = radioGroup.checkedRadioButtonId
         Log.d("HAHAAHH", checkedRadioButtonId.toString())
@@ -192,13 +228,13 @@ class AddEventFormActivity : AppCompatActivity() {
                     waktu = eventDateDay,
                     description = eventDescription,
                     jenis = checkedRadioButtonId==2131362368,
-                    harga = ticketPrice,
+                    harga = if (ticketPrice=="") "0" else ticketPrice,
                     contact = contactPerson,
                     penyelenggara = organizer,
                     lokasi = eventLocation,
-                    mulai = eventTimeStart,
-                    selesai =eventTimeEnd,
-                    gambar = image
+                    mulai = formattedStartTime,
+                    selesai = formattedEndTime,
+                    gambar = image,
                 )
             ).observe(this){ result ->
                 when (result) {
@@ -219,22 +255,18 @@ class AddEventFormActivity : AppCompatActivity() {
                     }
                 }
             }
-            // Now you can use the eventType variable
         } else {
-            // Handle the case where no radio button is selected
             showToast(this@AddEventFormActivity, "Please Choose Event Type")
         }
     }
 
 
     fun imageViewToBase64(imageView: ImageView): String {
-        val bitmap: Bitmap = imageView.drawable.toBitmap() // Convert ImageView to Bitmap
+        val bitmap: Bitmap = imageView.drawable.toBitmap()
         val byteArrayOutputStream = ByteArrayOutputStream()
 
-        // Compress the Bitmap to PNG format
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
 
-        // Convert ByteArray to Base64 String
         val byteArray = byteArrayOutputStream.toByteArray()
         return "data:image/png;base64,${Base64.encodeToString(byteArray, Base64.NO_WRAP)}"
     }
@@ -253,7 +285,9 @@ class AddEventFormActivity : AppCompatActivity() {
                     set(selectedYear, selectedMonth, selectedDay)
                 }
 
-                val formattedDate = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault())
+                val indonesiaLocale = Locale("id", "ID")
+
+                val formattedDate = SimpleDateFormat("EEEE, dd MMMM yyyy", indonesiaLocale)
                     .format(selectedCalendar.time)
 
                 etDateDay.setText(formattedDate)
@@ -271,6 +305,7 @@ class AddEventFormActivity : AppCompatActivity() {
         etDateDay.inputType = InputType.TYPE_NULL
     }
 
+
     private fun showTimePickerDialog(editText: EditText) {
         editText.isEnabled = false
         val calendar = Calendar.getInstance()
@@ -281,8 +316,9 @@ class AddEventFormActivity : AppCompatActivity() {
             this,
             { _, selectedHour, selectedMinute ->
                 val formattedTime =
-                    String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute)
+                    String.format(Locale("id", "ID"), "%02d:%02d", selectedHour, selectedMinute)
                 editText.setText(formattedTime)
+                editText.isEnabled = true
             },
             hour,
             minute,
@@ -311,7 +347,6 @@ class AddEventFormActivity : AppCompatActivity() {
                 eventDateDay.isNotEmpty() &&
                 eventDescription.isNotEmpty() &&
                 ticketPrice.isNotEmpty() &&
-                contactPerson.isNotEmpty() &&
                 organizer.isNotEmpty() &&
                 eventLocation.isNotEmpty() &&
                 eventTimeStart.isNotEmpty() &&
@@ -390,7 +425,6 @@ class AddEventFormActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
 
-        // Assuming there's a TextView in your layout to display the message
         val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
         messageTextView.text = message
         val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
@@ -409,6 +443,91 @@ class AddEventFormActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             dialog.dismiss()
         }, 2000)
+    }
+    private fun formatTimeWithAmPm(time: String): String {
+        val inputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+
+        try {
+            val date = inputFormat.parse(time)
+            return outputFormat.format(date)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            return time
+        }
+    }
+    private fun setupCharacterLimits() {
+        val etContactPerson = findViewById<EditText>(R.id.et_contactperson)
+        val etDescEvent = findViewById<EditText>(R.id.et_descevent)
+
+        val minDescEventLength = 250 // Jumlah karakter minimum yang diinginkan
+        val maxDescEventLength = 700 // Jumlah karakter maksimum yang diinginkan
+        val maxContactPersonLength = 60 // Jumlah karakter maksimum untuk contact person
+
+        etContactPerson.filters = arrayOf(InputFilter.LengthFilter(maxContactPersonLength))
+        etDescEvent.filters = arrayOf(InputFilter.LengthFilter(maxDescEventLength))
+
+        etDescEvent.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val length = s?.length ?: 0
+                if (length < minDescEventLength) {
+                    etDescEvent.error = "Deskripsi event harus memiliki setidaknya $minDescEventLength karakter."
+                } else if (length > maxDescEventLength) {
+                    etDescEvent.error = "Deskripsi event tidak boleh melebihi $maxDescEventLength karakter."
+                } else {
+                    etDescEvent.error = null
+                }
+            }
+        })
+    }
+    private fun setupTicketPriceInput() {
+        val etTicketPrice = findViewById<EditText>(R.id.et_ticketprice)
+
+        etTicketPrice.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                etTicketPrice.removeTextChangedListener(this)
+
+                val text = s.toString()
+
+                val cleanedText = text.replace("[^\\d]".toRegex(), "")
+
+                val formattedText = if (cleanedText.isNotEmpty()) "Rp $cleanedText" else ""
+
+                etTicketPrice.setText(formattedText)
+                etTicketPrice.setSelection(formattedText.length) // Posisikan kursor di akhir
+
+                etTicketPrice.addTextChangedListener(this)
+            }
+        })
+    }
+    private fun setupEventLocationInput() {
+        val etEventLocation = findViewById<EditText>(R.id.et_eventlocation)
+        val maxEventLocationLength = 40
+
+        val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxEventLocationLength))
+        etEventLocation.filters = filters
+    }
+    private fun setupOrganizerInput() {
+        val etOrganizer = findViewById<EditText>(R.id.et_organizer)
+        val maxOrganizerLength = 58
+
+        val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxOrganizerLength))
+        etOrganizer.filters = filters
+    }
+    private fun setupEventNameInput() {
+        val etEventName = findViewById<EditText>(R.id.et_eventname)
+        val maxEventNameLength = 51
+
+        val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxEventNameLength))
+        etEventName.filters = filters
     }
 }
 

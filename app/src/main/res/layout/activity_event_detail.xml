@@ -11,24 +11,41 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="270dp"
-                android:layout_marginTop="-40dp"
-                app:cardCornerRadius="70dp"
+                android:layout_marginTop="0dp"
                 app:cardElevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/iv_imageview2"
+                    android:id="@+id/zoomableImageView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:elevation="50dp"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/banner_tenun"/>
+                    android:src="@drawable/banner_tenun">
+                </ImageView>
 
             </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="-55dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/brandy"
+            android:elevation="10dp"
+            android:outlineSpotShadowColor="#4F000000"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardview">
+
+    </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/cardview2"
@@ -38,174 +55,235 @@
                 android:layout_marginTop="-55dp"
                 android:layout_marginEnd="50dp"
                 android:background="@color/white_smoke"
-                android:elevation="5dp"
+                android:elevation="50dp"
                 android:outlineSpotShadowColor="#4F000000"
                 app:cardCornerRadius="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardview">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardview1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="-57dp"
-                    android:layout_marginEnd="50dp"
-                    app:cardCornerRadius="25dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:backgroundTint="@color/brandy"
-                    app:layout_constraintTop_toBottomOf="@+id/cardview">
-                </androidx.cardview.widget.CardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <!-- Judul Event -->
                 <TextView
                     android:id="@+id/tv_eventname"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="22dp"
+                    android:padding="17dp"
                     android:text="BATIK BORDIR TENUN DAN CRAFT"
                     android:textAlignment="center"
-                    android:layout_marginBottom="5dp"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="17dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:shadowColor="#32000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_clock"
-                android:textStyle="italic"
-                android:layout_marginTop="72dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_description1"
-                android:layout_marginHorizontal="50dp">
-            </ImageView>
+                <!-- Baris Pertama -->
+                <ImageView
+                    android:id="@+id/iv_imageclock"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_clock"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_eventtimestart"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventname" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_calenders"
-                android:textStyle="italic"
-                android:layout_marginTop="103dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_description1"
-                android:layout_marginHorizontal="50dp">
-            </ImageView>
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_locate"
-                android:textStyle="italic"
-                android:layout_marginTop="136dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_description1"
-                android:layout_marginHorizontal="50dp">
-            </ImageView>
-
-            <TextView
+                <TextView
                     android:id="@+id/tv_eventtimestart"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginStart="25dp"
-                    android:padding="12dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="1dp"
                     android:text="08.00 am"
-                    android:layout_marginEnd="100dp"
                     android:textAlignment="center"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="17dp"
                     android:textStyle="italic"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_description1"
-                    android:layout_marginHorizontal="50dp"/>
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:shadowColor="#32000000"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_strip"
+                    app:layout_constraintStart_toEndOf="@+id/iv_imageclock"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventname" />
 
                 <TextView
                     android:id="@+id/tv_strip"
-                    android:layout_width="match_parent"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:padding="11dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="1dp"
                     android:text="-"
-                    android:layout_marginStart="20dp"
                     android:textAlignment="center"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="17dp"
                     android:textStyle="italic"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_description1" />
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:shadowColor="#32000000"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_eventtimeend"
+                    app:layout_constraintStart_toEndOf="@+id/tv_eventtimestart"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventname" />
 
                 <TextView
                     android:id="@+id/tv_eventtimeend"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginStart="120dp"
-                    android:padding="12dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="1dp"
                     android:text="13.00 pm"
                     android:textAlignment="center"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="17dp"
                     android:textStyle="italic"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_description1" />
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:shadowColor="#32000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_strip"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventname" />
+
+
+                <!-- Baris Kedua -->
+                <ImageView
+                    android:id="@+id/iv_imagecalender"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="11dp"
+                    android:src="@drawable/ic_calenders"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventtimeend" />
 
                 <TextView
                     android:id="@+id/tv_eventdate"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="90dp"
-                    android:padding="12dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="1dp"
                     android:text="Senin, 12 September 2023"
-                    android:layout_marginStart="60dp"
                     android:textAlignment="textStart"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="17dp"
                     android:textStyle="italic"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_description2" />
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:shadowColor="#32000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/iv_imagecalender"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventtimestart" />
+
+                <!-- Baris Ketiga -->
+                <ImageView
+                    android:id="@+id/iv_imagelocate"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_locate"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventdate" />
 
                 <TextView
                     android:id="@+id/tv_location"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginStart="60dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginEnd="20dp"
                     android:padding="12dp"
+                    android:text="Jl Aceh No 66 kota bandung"
                     android:textAlignment="textStart"
-                    android:text="Jl Aceh No 66 Kota Bandung"
                     android:textColor="@color/dark_blue_green"
                     android:textSize="17dp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:shadowColor="#32000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/iv_imagelocate"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_eventdate" />
 
-            </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="-10dp"
+        android:background="@color/geyser"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollview3"
         android:layout_width="match_parent"
-        android:layout_height="355dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@+id/cardview">
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollviewcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:paddingTop="20dp">
+            android:layout_marginBottom="30dp"
+            android:background="@color/geyser"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/tv_title"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="1dp"
+                android:elevation="20dp"
+                android:shadowColor="#4D000000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="15"
                 android:text="Deskripsi"
                 android:textAlignment="textStart"
-                style="@style/TextAppearance.Material3.BodyMedium"
                 android:textColor="@color/dark_blue_green"
-                android:textSize="24dp"
+                android:textSize="19dp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -214,12 +292,17 @@
                 android:id="@+id/tv_detail_event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="8dp"
+                android:elevation="20dp"
                 android:lineSpacingExtra="1dp"
+                android:shadowColor="#40000000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="20"
                 android:text="aku adalah anak gembala , selalu senang serta gembira , karena aku anak paman kuda auuu ashiap santuy apalah aku capek ingin tidur 24 jam dimas anjay mabar valorant kita gaskuy "
                 android:textAlignment="textStart"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title">
@@ -228,68 +311,86 @@
 
             <TextView
                 android:id="@+id/tv_harga_tiket"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:elevation="20dp"
+                android:shadowColor="#4D000000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="15"
                 android:text="Harga Tiket"
                 android:textAlignment="textStart"
-                style="@style/TextAppearance.Material3.BodyMedium"
                 android:textColor="@color/dark_blue_green"
-                android:textSize="24dp"
+                android:textSize="19dp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_detail_event" />
 
             <TextView
                 android:id="@+id/tv_harga_tiket_detail"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.Material3.BodyMedium"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="8dp"
+                android:elevation="20dp"
+                android:shadowColor="#40000000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="20"
                 android:text="Rp 50.000,-"
                 android:textAlignment="textStart"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_harga_tiket" />
 
             <TextView
                 android:id="@+id/tv_contact_person"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:elevation="20dp"
+                android:shadowColor="#4D000000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="15"
                 android:text="Contact Person"
                 android:textAlignment="textStart"
-                style="@style/TextAppearance.Material3.BodyMedium"
                 android:textColor="@color/dark_blue_green"
-                android:textSize="24dp"
+                android:textSize="19dp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_harga_tiket_detail" />
 
             <TextView
                 android:id="@+id/tv_contact_person_detail"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.Material3.BodyMedium"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:elevation="20dp"
+                android:lineSpacingExtra="4dp"
+                android:shadowColor="#40000000"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="20"
                 android:text="John Doe\nEmail: john.doe@example.com\nPhone: 123-456-7890"
                 android:textAlignment="textStart"
-                android:textSize="20dp"
-                android:layout_marginBottom="10dp"
-                android:lineSpacingExtra="4dp"
+                android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_contact_person" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

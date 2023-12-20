@@ -30,7 +30,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factory: ViewModelFactory
     private val viewModel: HomeViewModel by viewModels { factory }
-    private lateinit var progressBarHome: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,11 +53,9 @@ class HomeFragment : Fragment() {
                 is Result.Loading -> {
                 }
                 is Result.Error -> {
-                    progressBarHome.visibility = View.GONE
                 }
                 is Result.Success -> {
                     showRegion(result.data)
-                    progressBarHome.visibility = View.GONE
                 }
             }
         }
@@ -67,11 +64,9 @@ class HomeFragment : Fragment() {
                 is Result.Loading -> {
                 }
                 is Result.Error -> {
-                    progressBarHome.visibility = View.GONE
                 }
                 is Result.Success -> {
                     showTraditionalCloth(result.data)
-                    progressBarHome.visibility = View.GONE
                 }
             }
         }

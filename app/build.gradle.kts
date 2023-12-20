@@ -106,4 +106,5 @@ dependencies {
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
     implementation ("com.airbnb.android:lottie:6.2.0")
+    implementation ("com.google.android.gms:play-services-maps:17.0.1")
 }

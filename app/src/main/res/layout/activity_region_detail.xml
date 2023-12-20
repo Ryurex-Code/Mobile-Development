@@ -148,20 +148,21 @@
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:id="@+id/layout_iv_maps"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="170dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="5dp"
+            android:backgroundTint="@color/brandy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_title_location">
 
-            <ImageView
-                android:id="@+id/iv_maps"
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/maps"
-                android:elevation="5dp"
-                android:scaleType="centerCrop" />
-
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp" />
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView

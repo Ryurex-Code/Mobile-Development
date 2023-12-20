@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.puitika.data.dummy.Event
 import com.puitika.data.local.AccountPreference
+import com.puitika.data.remote.network.ApiConfig
 import com.puitika.data.remote.network.ApiConfig2
 import com.puitika.data.request.RegisterRequest
 import com.puitika.data.remote.network.ApiService
@@ -29,6 +30,7 @@ class PuitikaRepository(
     fun register(body: RegisterRequest): LiveData<Result<RegisterResponse>> = liveData {
         emit(Result.Loading)
         try {
+            apiService = ApiConfig.getApiService()
             val res = apiService.register(body)
             if (res.status == "success") emit(Result.Success(res))
             else emit(Result.Error(res.message))
@@ -40,6 +42,7 @@ class PuitikaRepository(
     fun login(body: LoginRequest): LiveData<Result<LoginResponse>> = liveData {
         emit(Result.Loading)
         try {
+            apiService = ApiConfig.getApiService()
             val res = apiService.login(body)
             if (res.status == "success") emit(Result.Success(res))
             else emit(Result.Error(res.message))
@@ -51,6 +54,7 @@ class PuitikaRepository(
     fun getRegions(): LiveData<Result<RegionResponse>> = liveData {
         emit(Result.Loading)
         try {
+            apiService = ApiConfig.getApiService()
             val res = apiService.getRegion()
             if(!res.error) emit(Result.Success(res))
             else emit(Result.Error(res.status))
@@ -62,6 +66,7 @@ class PuitikaRepository(
     fun getClothes(): LiveData<Result<ClothResponse>> = liveData {
         emit(Result.Loading)
         try {
+            apiService = ApiConfig.getApiService()
             val res = apiService.getCloth()
             if(!res.error) emit(Result.Success(res))
             else emit(Result.Error(res.status))
@@ -73,6 +78,7 @@ class PuitikaRepository(
     fun getEvents(): LiveData<Result<EventResponse>> = liveData {
         emit(Result.Loading)
         try {
+            apiService = ApiConfig.getApiService()
             val res = apiService.getEvent()
             if(!res.error) emit(Result.Success(res))
             else emit(Result.Error(res.status))
@@ -84,6 +90,7 @@ class PuitikaRepository(
     fun createEvent(body: CreateEventRequest): LiveData<Result<CreateEventResponse>> = liveData {
         emit(Result.Loading)
         try {
+            apiService = ApiConfig.getApiService()
             val res = apiService.createEvent(body)
             if (res.status == "success") emit(Result.Success(res))
             else emit(Result.Error(res.message))

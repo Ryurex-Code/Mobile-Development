@@ -77,8 +77,22 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.tvRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+        binding.apply {
+            tvForgotPassword.setOnClickListener {
+                showToast(this@LoginActivity, "Coming Soon!")
+            }
+            tvRegister.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            }
+            ivGoogle.setOnClickListener {
+                showToast(this@LoginActivity, "Coming Soon!")
+            }
+            ivX.setOnClickListener{
+                showToast(this@LoginActivity, "Coming Soon!")
+            }
+            ivFacebook.setOnClickListener{
+                showToast(this@LoginActivity, "Coming Soon!")
+            }
         }
     }
 

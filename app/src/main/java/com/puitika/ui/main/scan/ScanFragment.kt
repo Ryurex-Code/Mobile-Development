@@ -46,6 +46,8 @@ class ScanFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private val viewModel: ScanViewModel by viewModels { factory }
     private var currentImageUri: Uri? = null
+    private var dialog: Dialog? = null
+    private var loadingPopup: PopupWindow? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +59,9 @@ class ScanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnScan.visibility = View.GONE
+        binding.ivPhoto.visibility = View.GONE
+        binding.layoutResult.visibility = View.GONE
         showScanOptionsPopup()
         setViewModelFactory()
 
@@ -71,6 +76,7 @@ class ScanFragment : Fragment() {
     }
 
     private fun processImage() {
+        dialog = Dialog(requireActivity())
         currentImageUri?.let { uri ->
             val file = uriToFile(uri, requireActivity())
             val requestFile = file.asRequestBody("image/jpeg".toMediaType())
@@ -78,17 +84,25 @@ class ScanFragment : Fragment() {
             viewModel.scanCloth(multiPartBody).observe(requireActivity()) { result ->
                 when (result) {
                     is Result.Loading -> {
+                        showLoadingDialog(true)
                     }
 
                     is Result.Error -> {
+                        showLoadingDialog(true)
                         showCustomDialog(result.data, false)
                     }
 
                     is Result.Success -> {
-                        showCustomDialog("Classification Success!", true)
-                        Handler(Looper.getMainLooper()).postDelayed({
+                            showLoadingDialog(false)
+                            showCustomDialog("Classification Success!", true)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                binding.layoutResult.visibility = View.VISIBLE
+                                showResult(result.data.prediksi)
+                            }, 2000)
+
+
+                            binding.layoutResult.visibility = View.VISIBLE
                             showResult(result.data.prediksi)
-                        }, 1000)
                     }
                 }
             }
@@ -112,7 +126,7 @@ class ScanFragment : Fragment() {
     ) { isSuccess ->
         if (isSuccess) {
             showImage()
-        }else{
+        } else {
             showToast(requireActivity(), "No Photo Captured")
         }
     }
@@ -122,7 +136,7 @@ class ScanFragment : Fragment() {
             binding.ivPhoto.setPadding(0, 0, 0, 0)
             binding.ivPhoto.setImageURI(it)
             binding.btnScan.visibility = View.VISIBLE
-            binding.layoutIvPhoto.visibility = View.VISIBLE
+            binding.ivPhoto.visibility = View.VISIBLE
         }
     }
 
@@ -132,14 +146,12 @@ class ScanFragment : Fragment() {
 
         with(bindingPopup) {
             btnCamera.setOnClickListener {
-                showToast(requireActivity(), "Camera")
                 popupWindow.dismiss()
                 currentImageUri = getImageUri(requireActivity())
                 launcherIntentCamera.launch(currentImageUri)
             }
 
             btnGalery.setOnClickListener {
-                showToast(requireActivity(), "Gallery")
                 popupWindow.dismiss()
                 launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
@@ -228,4 +240,26 @@ class ScanFragment : Fragment() {
             dialog.dismiss()
         }, 2000)
     }
+
+    private fun showLoadingDialog(play: Boolean = true) {
+        if (play) {
+            // Show loading popup
+            if (loadingPopup == null) {
+                val loadingView = layoutInflater.inflate(R.layout.scan_loading, null)
+                loadingPopup = PopupWindow(
+                    loadingView,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT
+                )
+                loadingPopup?.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+                loadingPopup?.isOutsideTouchable = false
+                loadingPopup?.isFocusable = true
+            }
+            loadingPopup?.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+        } else {
+            // Dismiss loading popup
+            loadingPopup?.dismiss()
+        }
+    }
+
 }

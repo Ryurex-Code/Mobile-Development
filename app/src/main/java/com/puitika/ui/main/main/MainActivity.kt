@@ -94,6 +94,22 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.show(selectedItem, true)
     }
 
+    private val backStackListener = FragmentManager.OnBackStackChangedListener {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
+
+        when (currentFragment) {
+            is HomeFragment -> binding.bottomNav.show(1, true)
+            is ScanFragment -> binding.bottomNav.show(2, true)
+            is EventFragment -> binding.bottomNav.show(3, true)
+        }
+    }
+
+    override fun onDestroy() {
+        // Remove the back stack listener to avoid memory leaks
+        supportFragmentManager.removeOnBackStackChangedListener(backStackListener)
+        super.onDestroy()
+    }
+
     companion object {
         const val EXTRA_USER = "fromLogin"
         const val FROM_EVENT = "fromAddEvent"

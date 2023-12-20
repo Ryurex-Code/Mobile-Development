@@ -36,9 +36,9 @@
             <LinearLayout
                 android:id="@+id/layout_region"
                 android:layout_width="match_parent"
-                android:paddingHorizontal="16dp"
                 android:background="@color/brandy"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
                 android:orientation="vertical"
                 android:paddingBottom="12dp"
                 app:layout_constraintEnd_toEndOf="parent"

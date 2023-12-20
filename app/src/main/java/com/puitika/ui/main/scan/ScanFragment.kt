@@ -45,7 +45,6 @@ class ScanFragment : Fragment() {
     private lateinit var bindingPopup: FragmentPopupBinding
     private lateinit var factory: ViewModelFactory
     private val viewModel: ScanViewModel by viewModels { factory }
-
     private var currentImageUri: Uri? = null
 
     override fun onCreateView(

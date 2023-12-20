@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
@@ -23,6 +24,8 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -63,6 +66,7 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var etTicketPrice: EditText
     private lateinit var cardview4: MaterialCardView
     private lateinit var tvTicketprice: TextView
+    private var currentImageUri: Uri? = null
     private val viewModel: AddEventFormViewModel by viewModels { factory }
 
 
@@ -131,19 +135,7 @@ class AddEventFormActivity : AppCompatActivity() {
 
         val cardViewBanner = findViewById<MaterialCardView>(R.id.cardview_10)
         cardViewBanner.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    REQUEST_CODE_PERMISSION
-                )
-            } else {
-                pickImage()
-            }
+            launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
         radioGroup = findViewById(R.id.radioGroup)
         etTicketPrice = findViewById(R.id.et_ticketprice)
@@ -528,6 +520,25 @@ class AddEventFormActivity : AppCompatActivity() {
 
         val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxEventNameLength))
         etEventName.filters = filters
+    }
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            showImage()
+        } else {
+            showToast(this@AddEventFormActivity, "No Media Selected")
+        }
+    }
+
+    private fun showImage() {
+        currentImageUri?.let {
+            binding.ivBannerimage.setPadding(0, 0, 0, 0)
+            binding.ivBannerimage.setImageURI(it)
+            binding.ivBannerimage.visibility = View.VISIBLE
+        }
     }
 }
 

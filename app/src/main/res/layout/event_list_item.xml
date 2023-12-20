@@ -37,6 +37,7 @@
                 android:shadowColor="#80000000"
                 android:shadowDx="5"
                 android:shadowDy="5"
+                android:maxLines="1"
                 android:shadowRadius="5"
                 android:text="Kain tenun toraja"
                 android:textAlignment="center"

@@ -39,7 +39,7 @@ class EventDetailActivity : AppCompatActivity() {
             tvEventdate.text = event.waktu
             tvLocation.text = event.lokasi
             tvDetailEvent.text = event.description
-            tvHargaTiketDetail.text = event.harga
+            tvHargaTiketDetail.text = if (event.harga == "Rp 0") "Gratis" else event.harga
             tvContactPersonDetail.text = event.contact
         }
     }

@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardCornerRadius="35dp"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/dark_blue_green"
     android:foreground="?attr/selectableItemBackground"
     app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
@@ -33,7 +35,7 @@
                 android:textColor="@color/white"
                 android:text="25.5%"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                android:textSize="12sp"
+                android:textSize="12dp"
                 android:textStyle="bold" />
 
         </com.google.android.material.circularreveal.cardview.CircularRevealCardView>

@@ -2,25 +2,13 @@ package com.puitika.ui.main.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.WindowManager
-import android.view.animation.TranslateAnimation
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.Toast
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
-import com.puitika.databinding.FragmentPopupBinding
-import com.puitika.databinding.FragmentScanBinding
 import com.puitika.ui.login.LoginActivity
-import com.puitika.ui.main.event.AddEventFormActivity
 import com.puitika.ui.main.event.EventFragment
 import com.puitika.ui.main.home.HomeFragment
 import com.puitika.ui.main.scan.ScanFragment
@@ -32,13 +20,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, true)
         val fromEvent = intent.getBooleanExtra(FROM_EVENT, false)
 
-
         if (fromEvent) {
-            binding = ActivityMainBinding.inflate(layoutInflater)
             navigation(EventFragment())
         } else if (!isLoggedIn) {
             val intent = Intent(this, LoginActivity::class.java)
@@ -46,10 +32,11 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
 
         setContentView(binding.root)
         setupBottomNav()
+        supportFragmentManager.addOnBackStackChangedListener(backStackListener)
     }
 
     private fun setupBottomNav() {

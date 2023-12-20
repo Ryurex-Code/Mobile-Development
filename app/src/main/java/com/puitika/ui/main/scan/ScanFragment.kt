@@ -1,35 +1,39 @@
 package com.puitika.ui.main.scan
 
+import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
 import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.puitika.R
-import com.puitika.data.model.ScanModel
+import com.puitika.data.remote.response.PrediksiItem
 import com.puitika.databinding.FragmentPopupBinding
 import com.puitika.databinding.FragmentScanBinding
-import com.puitika.ml.Model
+import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.profile.ProfileActivity
+import com.puitika.utils.Result
 import com.puitika.utils.getImageUri
+import com.puitika.utils.uriToFile
 import com.puitika.utils.showToast
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.image.ImageProcessor
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 /**
  * A simple [Fragment] subclass.
@@ -39,6 +43,9 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 class ScanFragment : Fragment() {
     private lateinit var binding: FragmentScanBinding
     private lateinit var bindingPopup: FragmentPopupBinding
+    private lateinit var factory: ViewModelFactory
+    private val viewModel: ScanViewModel by viewModels { factory }
+
     private var currentImageUri: Uri? = null
 
     override fun onCreateView(
@@ -52,6 +59,7 @@ class ScanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showScanOptionsPopup()
+        setViewModelFactory()
 
         setAction()
         binding.btnScan.setOnClickListener {
@@ -59,46 +67,36 @@ class ScanFragment : Fragment() {
         }
     }
 
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
     private fun processImage() {
         currentImageUri?.let { uri ->
-            val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
-            val tensorImage = preprocessImage(bitmap)
-            val model = Model.newInstance(requireActivity())
-            val outputs = model.process(createInputBuffer(tensorImage))
-            val confidences: FloatArray = outputs.outputFeature0AsTensorBuffer.floatArray
-            val classes = arrayOf("Bali", "Sumatera Barat", "Lombok", "Palembang", "Riau", "Sumatera Utara")
+            val file = uriToFile(uri, requireActivity())
+            val requestFile = file.asRequestBody("image/jpeg".toMediaType())
+            val multiPartBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            viewModel.scanCloth(multiPartBody).observe(requireActivity()) { result ->
+                when (result) {
+                    is Result.Loading -> {
+                    }
 
-            val scanModelList = createScanModelList(confidences, classes)
+                    is Result.Error -> {
+                        showCustomDialog(result.data, false)
+                    }
 
-            model.close()
-            showResult(scanModelList)
+                    is Result.Success -> {
+                        showCustomDialog("Classification Success!", true)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            showResult(result.data.prediksi)
+                        }, 1000)
+                    }
+                }
+            }
         }
     }
 
-    private fun preprocessImage(bitmap: Bitmap): TensorImage {
-        val imageProcessor = ImageProcessor.Builder().add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR)).build()
-        var tensorImage = TensorImage(DataType.FLOAT32)
-        tensorImage.load(bitmap)
-        return imageProcessor.process(tensorImage)
-    }
-
-    private fun createInputBuffer(tensorImage: TensorImage): TensorBuffer {
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-        inputFeature0.loadBuffer(tensorImage.buffer)
-        return inputFeature0
-    }
-
-    private fun createScanModelList(confidences: FloatArray, classes: Array<String>): List<ScanModel> {
-        val scanModelList = mutableListOf<ScanModel>()
-        for ((index, confidence) in confidences.withIndex()) {
-            val regionName = if (index < classes.size) classes[index] else "Unknown Region"
-            val formattedPercent = String.format("%.2f%%", confidence * 100)
-            scanModelList.add(ScanModel(region = regionName, percent = formattedPercent))
-        }
-        return scanModelList
-    }
-
-    private fun showResult(scanModelList: List<ScanModel>) {
+    private fun showResult(scanModelList: List<PrediksiItem>) {
         val adapter = ScanModelAdapter(requireContext(), scanModelList)
 
         // Use GridLayoutManager with 2 columns
@@ -203,5 +201,32 @@ class ScanFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    private fun showCustomDialog(message: String, success: Boolean) {
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
+
+        // Assuming there's a TextView in your layout to display the message
+        val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
+        messageTextView.text = message
+        val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
+        val cancelImageView: ImageFilterView = dialog.findViewById(R.id.iv_cancel)
+
+        if (success) {
+            checkListImageView.visibility = View.VISIBLE
+            cancelImageView.visibility = View.GONE
+        } else {
+            checkListImageView.visibility = View.GONE
+            cancelImageView.visibility = View.VISIBLE
+        }
+
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismiss()
+        }, 2000)
     }
 }

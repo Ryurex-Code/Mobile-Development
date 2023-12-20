@@ -149,6 +149,7 @@ class AddEventFormActivity : AppCompatActivity() {
                 cardview4.visibility = View.GONE
                 tvTicketprice.visibility = View.GONE
             } else {
+                etTicketPrice.setText("")
                 etTicketPrice.isEnabled = true
                 etTicketPrice.visibility = View.VISIBLE
                 cardview4.visibility = View.VISIBLE

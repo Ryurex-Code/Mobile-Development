@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-11dp"
         android:drawableEnd="@drawable/person_black_ic"
-        android:hint="@string/email_hint"
+        android:hint="@string/username_login_hint"
         android:inputType="textEmailAddress"
         android:importantForAutofill="no"
         android:textCursorDrawable="@color/dark_blue_green"
@@ -180,7 +180,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_or" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_x"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="32dp"
@@ -190,22 +190,22 @@
         app:srcCompat="@drawable/x_ic" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iv_facebook"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/iv_x"
         app:layout_constraintTop_toBottomOf="@+id/tv_or"
         app:srcCompat="@drawable/facebook_ic" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iv_google"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/iv_x"
         app:layout_constraintTop_toBottomOf="@+id/tv_or"
         app:srcCompat="@drawable/google_ic" />
 
@@ -221,7 +221,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tv_register"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_x" />
 
     <TextView
         android:id="@+id/tv_register"
@@ -238,7 +238,7 @@
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_need_account"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_x" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"

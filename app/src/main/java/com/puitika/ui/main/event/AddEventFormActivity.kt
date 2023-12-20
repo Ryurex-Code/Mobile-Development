@@ -61,6 +61,8 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var factory: ViewModelFactory
     private lateinit var radioGroup: RadioGroup
     private lateinit var etTicketPrice: EditText
+    private lateinit var cardview4: MaterialCardView
+    private lateinit var tvTicketprice: TextView
     private val viewModel: AddEventFormViewModel by viewModels { factory }
 
 
@@ -133,13 +135,24 @@ class AddEventFormActivity : AppCompatActivity() {
         }
         radioGroup = findViewById(R.id.radioGroup)
         etTicketPrice = findViewById(R.id.et_ticketprice)
+        cardview4 = findViewById(R.id.cardview_4)
+        tvTicketprice = findViewById(R.id.tv_ticketprice)
 
+        cardview4.visibility = View.GONE
+        etTicketPrice.visibility = View.GONE
+        tvTicketprice.visibility = View.GONE
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.rb_opened) {
                 etTicketPrice.setText("0")
                 etTicketPrice.isEnabled = false
+                etTicketPrice.visibility = View.GONE
+                cardview4.visibility = View.GONE
+                tvTicketprice.visibility = View.GONE
             } else {
                 etTicketPrice.isEnabled = true
+                etTicketPrice.visibility = View.VISIBLE
+                cardview4.visibility = View.VISIBLE
+                tvTicketprice.visibility = View.VISIBLE
             }
         }
     }
@@ -214,7 +227,7 @@ class AddEventFormActivity : AppCompatActivity() {
                     waktu = eventDateDay,
                     description = eventDescription,
                     jenis = checkedRadioButtonId==2131362368,
-                    harga = ticketPrice,
+                    harga = if (ticketPrice=="") "0" else ticketPrice,
                     contact = contactPerson,
                     penyelenggara = organizer,
                     lokasi = eventLocation,
@@ -333,7 +346,6 @@ class AddEventFormActivity : AppCompatActivity() {
                 eventDateDay.isNotEmpty() &&
                 eventDescription.isNotEmpty() &&
                 ticketPrice.isNotEmpty() &&
-                contactPerson.isNotEmpty() &&
                 organizer.isNotEmpty() &&
                 eventLocation.isNotEmpty() &&
                 eventTimeStart.isNotEmpty() &&

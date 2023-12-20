@@ -7,12 +7,18 @@ import com.puitika.data.remote.response.LoginResponse
 import com.puitika.data.remote.response.RegionResponse
 import com.puitika.data.request.RegisterRequest
 import com.puitika.data.remote.response.RegisterResponse
+import com.puitika.data.remote.response.ScanResponse
 import com.puitika.data.request.CreateEventRequest
 import com.puitika.data.request.LoginRequest
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
+import retrofit2.http.Part
 
 
 interface ApiService {
@@ -34,4 +40,10 @@ interface ApiService {
     @Headers("Accept: application/json")
     @POST("/createEvent")
     suspend fun createEvent(@Body body : CreateEventRequest) : CreateEventResponse
+
+    @Multipart
+    @POST("/scan")
+    suspend fun scanCloth(
+        @Part file: MultipartBody.Part,
+    ): ScanResponse
 }

@@ -12,10 +12,12 @@ android {
         debug {
             // Define BASE_URL for the debug build type
             buildConfigField("String", "BASE_URL", "\"http://puitika.my.id/\"")
+            buildConfigField("String", "BASE_URL2", "\"https://ml-puitika-vfxexxvffq-et.a.run.app/\"")
         }
         release {
             // Define BASE_URL for the release build type
             buildConfigField("String", "BASE_URL", "\"http://puitika.my.id/\"")
+            buildConfigField("String", "BASE_URL2", "\"https://ml-puitika-vfxexxvffq-et.a.run.app/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

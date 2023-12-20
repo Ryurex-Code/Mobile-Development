@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, true)
+        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
         val fromEvent = intent.getBooleanExtra(FROM_EVENT, false)
 
         if (fromEvent) {

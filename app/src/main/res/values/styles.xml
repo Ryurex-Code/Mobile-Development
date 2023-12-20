@@ -20,4 +20,11 @@
         <item name="android:shadowRadius">4</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.MyApp.BottomRoundedCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">100dp</item>
+        <item name="cornerSizeBottomRight">100dp</item>
+    </style>
 </resources>

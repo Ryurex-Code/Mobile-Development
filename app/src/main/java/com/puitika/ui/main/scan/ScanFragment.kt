@@ -65,6 +65,7 @@ class ScanFragment : Fragment() {
         binding.btnScan.visibility = View.GONE
         binding.ivPhoto.visibility = View.GONE
         binding.layoutResult.visibility = View.GONE
+        binding.layoutIvPhoto.visibility = View.GONE
         showScanOptionsPopup()
         setViewModelFactory()
 
@@ -137,6 +138,7 @@ class ScanFragment : Fragment() {
             binding.ivPhoto.setImageURI(it)
             binding.btnScan.visibility = View.VISIBLE
             binding.ivPhoto.visibility = View.VISIBLE
+            binding.layoutIvPhoto.visibility = View.VISIBLE
         }
     }
 

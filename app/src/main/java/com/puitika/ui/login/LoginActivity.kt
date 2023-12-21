@@ -58,9 +58,8 @@ class LoginActivity : AppCompatActivity() {
                             showCustomDialog("You are logged in", true)
                             Handler(Looper.getMainLooper()).postDelayed({
                                 val intent = Intent(this, MainActivity::class.java)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                intent.putExtra("fromLogin", true)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.putExtra("from_page", 1)
                                 startActivity(intent)
                             }, 2000)
                         }, 1000)

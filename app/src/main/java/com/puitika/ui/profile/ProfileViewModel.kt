@@ -1,4 +1,4 @@
-package com.puitika.ui.main.main
+package com.puitika.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

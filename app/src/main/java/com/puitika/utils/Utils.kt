@@ -35,8 +35,6 @@ fun getImageUri(context: Context): Uri {
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             contentValues
         )
-        // content://media/external/images/media/1000000062
-        // storage/emulated/0/Pictures/MyCamera/20230825_155303.jpg
     }
     return uri ?: getImageUriForPreQ(context)
 }
@@ -47,7 +45,7 @@ private fun getImageUriForPreQ(context: Context): Uri {
     if (imageFile.parentFile?.exists() == false) imageFile.parentFile?.mkdir()
     return FileProvider.getUriForFile(
         context,
-        "storify.fileprovider",
+        "com.puitika",
         imageFile
     )
     //content://com.dicoding.picodiploma.mycamera.fileprovider/my_images/MyCamera/20230825_133659.jpg

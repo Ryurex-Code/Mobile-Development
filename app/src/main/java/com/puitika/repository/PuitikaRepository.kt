@@ -3,8 +3,6 @@ package com.puitika.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.puitika.data.dummy.Event
-import com.puitika.data.local.AccountPreference
 import com.puitika.data.pref.UserModel
 import com.puitika.data.pref.UserPreference
 import com.puitika.data.remote.network.ApiConfig

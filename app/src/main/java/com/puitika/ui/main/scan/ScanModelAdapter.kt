@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView
 import com.puitika.R
-import com.puitika.data.model.ScanModel
 import com.puitika.data.remote.response.PrediksiItem
 
 class ScanModelAdapter(private val context: Context, private val scanModelList: List<PrediksiItem>) :

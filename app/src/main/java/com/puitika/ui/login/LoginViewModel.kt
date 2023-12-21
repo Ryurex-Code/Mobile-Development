@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.puitika.data.model.LoginModel
-import com.puitika.data.model.RegisterModel
 import com.puitika.data.remote.response.LoginResponse
-import com.puitika.data.remote.response.RegisterResponse
 import com.puitika.data.request.LoginRequest
-import com.puitika.data.request.RegisterRequest
 import com.puitika.repository.PuitikaRepository
 import com.puitika.utils.Result
 

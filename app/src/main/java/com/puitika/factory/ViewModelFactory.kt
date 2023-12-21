@@ -10,7 +10,7 @@ import com.puitika.ui.main.event.AddEventFormViewModel
 import com.puitika.ui.main.event.EventViewModel
 import com.puitika.ui.main.home.HomeViewModel
 import com.puitika.ui.main.main.MainViewModel
-import com.puitika.ui.main.main.ProfileViewModel
+import com.puitika.ui.profile.ProfileViewModel
 import com.puitika.ui.main.scan.ScanViewModel
 import com.puitika.ui.register.RegisterViewModel
 

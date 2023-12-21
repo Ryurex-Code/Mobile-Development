@@ -1,6 +1,5 @@
 package com.puitika.ui.profile
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,24 +9,18 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.PopupWindow
-import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import com.puitika.R
-import com.puitika.databinding.ActivityMainBinding
 import com.puitika.databinding.ActivityProfileBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.login.LoginActivity
-import com.puitika.ui.main.main.MainViewModel
-import com.puitika.ui.main.main.ProfileViewModel
-import com.puitika.ui.profile.ProfileEditActivity
 import com.puitika.utils.showToast
 import de.hdodenhof.circleimageview.CircleImageView
 

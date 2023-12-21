@@ -2,41 +2,42 @@ package com.puitika.ui.main.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
+import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.login.LoginActivity
 import com.puitika.ui.main.event.EventFragment
 import com.puitika.ui.main.home.HomeFragment
+import com.puitika.ui.main.home.HomeViewModel
 import com.puitika.ui.main.scan.ScanFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var factory: ViewModelFactory
+    private val viewModel: MainViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val isLoggedIn = intent.getBooleanExtra(EXTRA_USER, false)
-        val fromEvent = intent.getBooleanExtra(FROM_EVENT, false)
+        setViewModelFactory()
 
-        if (fromEvent) {
-            navigation(EventFragment())
-        } else if (!isLoggedIn) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
+        viewModel.getSession().observe(this){
+            if (!it.isLogin){
+                startActivity(Intent(this,LoginActivity::class.java))
+                finish()
+            }else{
+                setContentView(binding.root)
+                setupBottomNav()
+                supportFragmentManager.addOnBackStackChangedListener(backStackListener)
+            }
         }
-
-
-
-        setContentView(binding.root)
-        setupBottomNav()
-        supportFragmentManager.addOnBackStackChangedListener(backStackListener)
     }
 
     private fun setupBottomNav() {
@@ -97,8 +98,11 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    private fun setViewModelFactory() {
+        factory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
     companion object {
-        const val EXTRA_USER = "fromLogin"
         const val FROM_EVENT = "fromAddEvent"
     }
 }

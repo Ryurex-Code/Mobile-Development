@@ -47,6 +47,7 @@ class ScanFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private val viewModel: ScanViewModel by viewModels { factory }
     private var currentImageUri: Uri? = null
+    private val handler = Handler()
     private var dialog: Dialog? = null
     private var loadingPopup: PopupWindow? = null
     private var popupWindow: PopupWindow? = null
@@ -95,13 +96,14 @@ class ScanFragment : Fragment() {
                     }
 
                     is Result.Success -> {
-                        showLoadingDialog(false)
+                        showLoadingDialog(true)
                         binding.btnScan.visibility = View.GONE
-                        showCustomDialog("Classification Success!", true)
-                        Handler(Looper.getMainLooper()).postDelayed({
+                        handler.postDelayed({
+                            showCustomDialog("Classification Success!", true)
+                            showLoadingDialog(false)
                             binding.layoutResult.visibility = View.VISIBLE
                             showResult(result.data.prediksi)
-                        }, 2000)
+                        }, 4000)
                     }
                 }
             }
@@ -245,7 +247,7 @@ class ScanFragment : Fragment() {
         popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
 
         // Dismiss the PopupWindow after a delay
-        Handler(Looper.getMainLooper()).postDelayed({
+        handler.postDelayed({
             popupWindow.dismiss()
         }, 2000)
     }
@@ -255,7 +257,7 @@ class ScanFragment : Fragment() {
         if (play) {
             // Show loading popup
             if (loadingPopup == null) {
-                val loadingView = layoutInflater.inflate(R.layout.scan_loading, null)
+                val loadingView = layoutInflater.inflate(R.layout.scan_loading2, null)
                 loadingPopup = PopupWindow(
                     loadingView,
                     WindowManager.LayoutParams.MATCH_PARENT,
@@ -272,16 +274,9 @@ class ScanFragment : Fragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        return when (item.itemId) {
-            android.R.id.home -> {
-                requireActivity().onBackPressed()
-                popupWindow?.dismiss()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        popupWindow?.dismiss()
+        handler.removeCallbacksAndMessages(null)
     }
-
 }

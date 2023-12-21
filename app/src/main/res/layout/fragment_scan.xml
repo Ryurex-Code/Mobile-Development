@@ -91,7 +91,7 @@
                 android:layout_marginHorizontal="12dp"
                 android:layout_height="50dp"
                 app:cardCornerRadius="30dp"
-                app:strokeColor="@color/dark_blue_green"
+                app:strokeColor="@color/burnham"
                 app:strokeWidth="3dp"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@color/brandy"
@@ -108,7 +108,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="35dp"
                     android:text="Result"
-                    android:textColor="@color/dark_blue_green"
+                    android:textColor="@color/burnham"
                     android:textFontWeight="900"
                     android:textSize="20sp"
                      />

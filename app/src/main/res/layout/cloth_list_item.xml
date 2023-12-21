@@ -6,6 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:elevation="2dp"
+    app:cardElevation="5dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#1E000000"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="20dp"
     app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">

@@ -1,6 +1,5 @@
 package com.puitika.ui.login
 
-import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -16,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import com.puitika.R
 import com.puitika.data.model.LoginModel
-import com.puitika.data.pref.UserModel
 import com.puitika.databinding.ActivityLoginBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.main.main.MainActivity
@@ -56,14 +53,17 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     is Result.Success -> {
-                        showLoadingDialog(false)
-                        showCustomDialog("You are logged in",true)
                         Handler(Looper.getMainLooper()).postDelayed({
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            intent.putExtra("fromLogin", true)
-                            startActivity(intent)
-                        }, 2000)
+                            showLoadingDialog(false)
+                            showCustomDialog("You are logged in", true)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                intent.putExtra("fromLogin", true)
+                                startActivity(intent)
+                            }, 2000)
+                        }, 1000)
                     }
 
 
@@ -87,10 +87,10 @@ class LoginActivity : AppCompatActivity() {
             ivGoogle.setOnClickListener {
                 showToast(this@LoginActivity, "Coming Soon!")
             }
-            ivX.setOnClickListener{
+            ivX.setOnClickListener {
                 showToast(this@LoginActivity, "Coming Soon!")
             }
-            ivFacebook.setOnClickListener{
+            ivFacebook.setOnClickListener {
                 showToast(this@LoginActivity, "Coming Soon!")
             }
         }

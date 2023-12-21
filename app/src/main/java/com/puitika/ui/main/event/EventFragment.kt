@@ -27,6 +27,7 @@ class EventFragment : Fragment() {
     private lateinit var binding: FragmentEventBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
+    private val handler = Handler()
     private lateinit var factory: ViewModelFactory
     private val viewModel: EventViewModel by viewModels { factory }
 
@@ -51,11 +52,13 @@ class EventFragment : Fragment() {
                 is Result.Loading -> {
                     binding.layoutShimmerEvent.visibility = View.VISIBLE
                 }
+
                 is Result.Error -> {
                     binding.layoutShimmerEvent.visibility = View.VISIBLE
                 }
+
                 is Result.Success -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
+                    handler.postDelayed({
                         binding.layoutShimmerEvent.visibility = View.GONE
                         binding.recyclerivewevents.visibility = View.VISIBLE
                         showEvent(result.data)
@@ -79,7 +82,7 @@ class EventFragment : Fragment() {
         }
     }
 
-    private fun showEvent(event : EventResponse){
+    private fun showEvent(event: EventResponse) {
         recyclerView = binding.recyclerivewevents
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -101,5 +104,10 @@ class EventFragment : Fragment() {
 
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacksAndMessages(null)
     }
 }

@@ -23,6 +23,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+        android:paddingBottom="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_navigation">
@@ -78,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:elevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#1E000000"                    android:elevation="2dp"
                     android:visibility="gone"
                     app:cardCornerRadius="20dp">
 

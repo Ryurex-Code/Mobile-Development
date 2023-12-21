@@ -46,26 +46,15 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_cloth"
             app:layout_constraintStart_toStartOf="@id/iv_cloth" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/layout_ib_favorite"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:elevation="2dp"
-            app:layout_constraintEnd_toEndOf="@id/iv_cloth"
-            app:layout_constraintTop_toTopOf="@+id/iv_cloth" />
-
-        <ImageButton
+        <ImageView
             android:id="@+id/ib_favorite"
             android:layout_width="30dp"
+            android:layout_margin="15dp"
             android:layout_height="30dp"
             android:background="@drawable/favorite_ic"
-            android:elevation="2dp"
-            app:layout_constraintBottom_toBottomOf="@id/layout_ib_favorite"
-            app:layout_constraintEnd_toEndOf="@id/layout_ib_favorite"
-            app:layout_constraintStart_toStartOf="@id/layout_ib_favorite"
-            app:layout_constraintTop_toTopOf="@id/layout_ib_favorite" />
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_cloth"
+            app:layout_constraintTop_toTopOf="@id/iv_cloth" />
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:id="@+id/layout_title_description"

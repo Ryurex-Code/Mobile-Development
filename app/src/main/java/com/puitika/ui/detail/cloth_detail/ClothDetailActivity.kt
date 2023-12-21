@@ -6,14 +6,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import com.bumptech.glide.Glide
+import com.puitika.R
 import com.puitika.data.remote.response.ClothDetail
 import com.puitika.databinding.ActivityClothDetailBinding
+import com.puitika.utils.showToast
 
 class ClothDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClothDetailBinding
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,13 @@ class ClothDetailActivity : AppCompatActivity() {
         if(cloth!=null){
             setupView(cloth)
         }
+        val favoriteButton: ImageView = findViewById(R.id.ib_favorite)
+        setFavoriteIcon()
+        favoriteButton.setOnClickListener {
+            showToast(this, "Coming Soon!")
+            isFavorite = !isFavorite
+            setFavoriteIcon()
+        }
     }
 
     private fun setupView(cloth: ClothDetail) {
@@ -42,4 +54,9 @@ class ClothDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun setFavoriteIcon() {
+        val favoriteButton: ImageView = findViewById(R.id.ib_favorite)
+        val newIcon = if (isFavorite) R.drawable.favorite_fill_ic else R.drawable.favorite_ic
+        favoriteButton.setImageResource(newIcon)
+    }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,14 +16,17 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.puitika.R
 import com.puitika.data.remote.response.RegionCloth
 import com.puitika.data.remote.response.RegionDetail
 import com.puitika.data.dummy.RegionCoordinates
 import com.puitika.data.dummy.mapsList
 import com.puitika.databinding.ActivityRegionDetailBinding
+import com.puitika.utils.showToast
 
 class RegionDetailActivity : AppCompatActivity() {
 
+    private var isFavorite = false // Menyim
     private lateinit var binding: ActivityRegionDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +62,13 @@ class RegionDetailActivity : AppCompatActivity() {
         if (region != null) {
             setupView(region)
             setupRecycleView(region.listKain)
+        }
+        val favoriteButton: ImageView = findViewById(R.id.ib_favorite)
+        setFavoriteIcon()
+        favoriteButton.setOnClickListener {
+            showToast(this, "Coming Soon!")
+            isFavorite = !isFavorite
+            setFavoriteIcon()
         }
     }
 
@@ -109,6 +120,11 @@ class RegionDetailActivity : AppCompatActivity() {
             )
             adapter = regionAdapter
         }
+    }
+    private fun setFavoriteIcon() {
+        val favoriteButton: ImageView = findViewById(R.id.ib_favorite)
+        val newIcon = if (isFavorite) R.drawable.favorite_fill_ic else R.drawable.favorite_ic
+        favoriteButton.setImageResource(newIcon)
     }
 }
 

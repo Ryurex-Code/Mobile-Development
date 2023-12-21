@@ -10,8 +10,10 @@ import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.PopupWindow
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.puitika.utils.showToast
@@ -30,6 +32,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var factory: ViewModelFactory
+    private var loadingPopup: PopupWindow? = null
     private lateinit var progressBar: ProgressBar
     private val viewModel: RegisterViewModel by viewModels { factory }
 
@@ -68,11 +71,11 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.register(registerModel).observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        progressBar.visibility = View.VISIBLE
+                        showLoadingDialog(true)
                     }
 
                     is Result.Error -> {
-                        progressBar.visibility = View.VISIBLE
+                        showLoadingDialog(false)
                         Handler(Looper.getMainLooper()).postDelayed({
                             progressBar.visibility = View.GONE
                             showCustomDialog(result.data, false)
@@ -80,8 +83,8 @@ class RegisterActivity : AppCompatActivity() {
                     }
 
                     is Result.Success -> {
-                        progressBar.visibility = View.GONE
-                        showCustomDialog(result.data.message)
+                        showLoadingDialog(false)
+                        showCustomDialog(result.data.message, true)
                         Handler(Looper.getMainLooper()).postDelayed({
                             if (!isFinishing) {
                                 startActivity(Intent(this, LoginActivity::class.java))
@@ -99,17 +102,16 @@ class RegisterActivity : AppCompatActivity() {
         factory = ViewModelFactory.getInstance(binding.root.context)
     }
 
-    private fun showCustomDialog(message: String, success: Boolean = true) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
+    private fun showCustomDialog(message: String, success: Boolean) {
+        val popupView = layoutInflater.inflate(R.layout.fragment_popup_loggedin, null)
 
-        val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
+        // Find views in the custom layout
+        val messageTextView: TextView = popupView.findViewById(R.id.tv_loggedin)
+        val checkListImageView: ImageFilterView = popupView.findViewById(R.id.iv_checklist)
+        val cancelImageView: ImageFilterView = popupView.findViewById(R.id.iv_cancel)
+
+        // Set message and visibility based on success
         messageTextView.text = message
-        val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
-        val cancelImageView: ImageFilterView = dialog.findViewById(R.id.iv_cancel)
-
         if (success) {
             checkListImageView.visibility = View.VISIBLE
             cancelImageView.visibility = View.GONE
@@ -118,10 +120,42 @@ class RegisterActivity : AppCompatActivity() {
             cancelImageView.visibility = View.VISIBLE
         }
 
-        dialog.show()
+        // Create a PopupWindow
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
 
+        // Set background drawable with a transparent color
+        popupWindow.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+
+        // Show the PopupWindow at the center of the screen
+        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+
+        // Dismiss the PopupWindow after a delay
         Handler(Looper.getMainLooper()).postDelayed({
-            dialog.dismiss()
+            popupWindow.dismiss()
         }, 2000)
+    }
+    private fun showLoadingDialog(play: Boolean = true) {
+        if (play) {
+            // Show loading popup
+            if (loadingPopup == null) {
+                val loadingView = layoutInflater.inflate(R.layout.scan_loading, null)
+                loadingPopup = PopupWindow(
+                    loadingView,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT
+                )
+                loadingPopup?.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+                loadingPopup?.isOutsideTouchable = false
+                loadingPopup?.isFocusable = true
+            }
+            loadingPopup?.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+        } else {
+            // Dismiss loading popup
+            loadingPopup?.dismiss()
+        }
     }
 }

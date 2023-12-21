@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
         binding.topNavigation.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_account -> {
-                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                    startActivity(Intent(requireActivity(), ProfileActivity::class.java))
                     true
                 }
                 else -> false
@@ -107,15 +107,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun showRegion(regionList: RegionResponse) {
-        val regionAdapter = RegionAdapter(requireContext(), regionList.data)
+        val regionAdapter = RegionAdapter(requireActivity(), regionList.data)
         binding.rvRegion.apply {
             layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
             adapter = regionAdapter
         }
         regionAdapter.setOnItemClickListener(object : RegionAdapter.OnItemClickListener {
             override fun onClick(imageView: ImageView, region: RegionDetail) {
-                val intent = Intent(requireContext(), RegionDetailActivity::class.java)
+                val intent = Intent(requireActivity(), RegionDetailActivity::class.java)
                 intent.putExtra("EXTRA_REGION", region)
                 startActivity(intent)
             }
@@ -131,14 +131,14 @@ class HomeFragment : Fragment() {
                 } else {
                     binding.rvRegion.smoothScrollToPosition(0)
                 }
-                handler.postDelayed(this, 3000)
+                handler.postDelayed(this, 5000)
             }
         }
-        handler.postDelayed(runnable, 3000)
+        handler.postDelayed(runnable, 5000)
     }
 
     private fun showTraditionalCloth(clothes: ClothResponse) {
-        val clothAdapter = ClothesAdapter(requireContext(), clothes.data)
+        val clothAdapter = ClothesAdapter(requireActivity(), clothes.data)
         val spanCount = 2
         binding.rvCloth.apply {
             layoutManager =
@@ -147,7 +147,7 @@ class HomeFragment : Fragment() {
         }
         clothAdapter.setOnItemClickListener(object : ClothesAdapter.OnItemClickListener {
             override fun onClick(ivCloth: ImageView, cloth: ClothDetail) {
-                val intent = Intent(requireContext(), ClothDetailActivity::class.java)
+                val intent = Intent(requireActivity(), ClothDetailActivity::class.java)
                 intent.putExtra("EXTRA_CLOTH", cloth)
                 startActivity(intent)
             }

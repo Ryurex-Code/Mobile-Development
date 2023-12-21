@@ -70,7 +70,7 @@ class EventFragment : Fragment() {
         binding.topNavigation.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_addevent -> {
-                    startActivity(Intent(requireContext(), AddEventFormActivity::class.java))
+                    startActivity(Intent(requireActivity(), AddEventFormActivity::class.java))
                     true
                 }
 
@@ -83,7 +83,7 @@ class EventFragment : Fragment() {
         recyclerView = binding.recyclerivewevents
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        eventAdapter = EventAdapter(requireContext(), event.data.events.reversed())
+        eventAdapter = EventAdapter(requireActivity(), event.data.events.reversed())
         recyclerView.adapter = eventAdapter
 
         eventAdapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {

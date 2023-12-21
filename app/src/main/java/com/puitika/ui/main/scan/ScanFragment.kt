@@ -91,16 +91,19 @@ class ScanFragment : Fragment() {
                     is Result.Error -> {
                         showLoadingDialog(true)
                         showCustomDialog(result.data, false)
+                        binding.btnScan.visibility = View.VISIBLE
                     }
 
                     is Result.Success -> {
-                        showLoadingDialog(false)
                         binding.btnScan.visibility = View.GONE
-                        showCustomDialog("Classification Success!", true)
                         handler.postDelayed({
-                            showResult(result.data.prediksi)
-                            binding.layoutResult.visibility = View.VISIBLE
-                        }, 2000)
+                            showLoadingDialog(false)
+                            showCustomDialog("Classification Success!", true)
+                            handler.postDelayed({
+                                showResult(result.data.prediksi)
+                                binding.layoutResult.visibility = View.VISIBLE
+                            }, 2000)
+                        }, 7000)
                     }
                 }
             }

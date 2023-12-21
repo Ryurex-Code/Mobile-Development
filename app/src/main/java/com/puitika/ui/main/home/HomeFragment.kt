@@ -22,8 +22,6 @@ import com.puitika.databinding.FragmentHomeBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.detail.cloth_detail.ClothDetailActivity
 import com.puitika.ui.detail.region_detail.RegionDetailActivity
-import com.puitika.ui.main.event.AddEventFormActivity
-import com.puitika.ui.main.main.MainActivity
 import com.puitika.ui.profile.ProfileActivity
 import com.puitika.utils.Result
 import com.puitika.utils.showToast
@@ -31,6 +29,7 @@ import com.puitika.utils.showToast
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factory: ViewModelFactory
+    private val handler = Handler()
     private val viewModel: HomeViewModel by viewModels { factory }
 
     override fun onCreateView(
@@ -57,10 +56,10 @@ class HomeFragment : Fragment() {
                 }
                 is Result.Error -> {
                     binding.layoutShimmerRegion.visibility = View.VISIBLE
-                    showToast(requireActivity(),result.data)
+                    showToast(requireActivity(), result.data)
                 }
                 is Result.Success -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
+                    handler.postDelayed({
                         binding.layoutShimmerRegion.visibility = View.GONE
                         binding.regionLayout.visibility = View.VISIBLE
                         showRegion(result.data)
@@ -78,7 +77,7 @@ class HomeFragment : Fragment() {
                     showToast(requireActivity(),result.data)
                 }
                 is Result.Success -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
+                    handler.postDelayed({
                         binding.layoutShimmerCloth.visibility = View.GONE
                         binding.rvCloth.visibility = View.VISIBLE
                         showTraditionalCloth(result.data)
@@ -109,33 +108,39 @@ class HomeFragment : Fragment() {
     private fun showRegion(regionList: RegionResponse) {
         val regionAdapter = RegionAdapter(requireActivity(), regionList.data)
         binding.rvRegion.apply {
-            layoutManager =
-                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
             adapter = regionAdapter
         }
-        regionAdapter.setOnItemClickListener(object : RegionAdapter.OnItemClickListener {
-            override fun onClick(imageView: ImageView, region: RegionDetail) {
-                val intent = Intent(requireActivity(), RegionDetailActivity::class.java)
-                intent.putExtra("EXTRA_REGION", region)
-                startActivity(intent)
-            }
-        })
 
-        val handler = Handler()
-        val runnable = object : Runnable {
-            override fun run() {
-                val nextPosition =
-                    (binding.rvRegion.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() + 1
-                if (nextPosition < regionAdapter.itemCount) {
-                    binding.rvRegion.smoothScrollToPosition(nextPosition)
-                } else {
-                    binding.rvRegion.smoothScrollToPosition(0)
+        // Check if RecyclerView is not null before setting the click listener
+        binding.rvRegion?.let {
+            regionAdapter.setOnItemClickListener(object : RegionAdapter.OnItemClickListener {
+                override fun onClick(imageView: ImageView, region: RegionDetail) {
+                    val intent = Intent(requireActivity(), RegionDetailActivity::class.java)
+                    intent.putExtra("EXTRA_REGION", region)
+                    startActivity(intent)
                 }
-                handler.postDelayed(this, 5000)
+            })
+
+            val handler = Handler()
+            val runnable = object : Runnable {
+                override fun run() {
+                    // Check if layoutManager is not null before using it
+                    it.layoutManager?.let { layoutManager ->
+                        val nextPosition = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() + 1
+                        if (nextPosition < regionAdapter.itemCount) {
+                            it.smoothScrollToPosition(nextPosition)
+                        } else {
+                            it.smoothScrollToPosition(0)
+                        }
+                    }
+                    handler.postDelayed(this, 3000)
+                }
             }
+            handler.postDelayed(runnable, 3000)
         }
-        handler.postDelayed(runnable, 5000)
     }
+
 
     private fun showTraditionalCloth(clothes: ClothResponse) {
         val clothAdapter = ClothesAdapter(requireActivity(), clothes.data)
@@ -153,6 +158,11 @@ class HomeFragment : Fragment() {
             }
         })
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacksAndMessages(null)
+    }
+
 }
 
 

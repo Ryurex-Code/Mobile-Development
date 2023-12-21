@@ -1,5 +1,6 @@
 package com.puitika.data.remote.network
 
+import com.puitika.data.remote.response.BiodataResponse
 import com.puitika.data.remote.response.ClothResponse
 import com.puitika.data.remote.response.CreateEventResponse
 import com.puitika.data.remote.response.EventResponse
@@ -27,6 +28,9 @@ interface ApiService {
 
     @POST("/login")
     suspend fun login(@Body body: LoginRequest) : LoginResponse
+
+    @GET("/me")
+    suspend fun getBiodata(@Header("ApiKey") apiKey: String): BiodataResponse
 
     @GET("/region")
     suspend fun getRegion(): RegionResponse

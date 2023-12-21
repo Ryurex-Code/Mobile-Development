@@ -107,42 +107,50 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(languageIntent)
     }
 
+
     private fun showLogoutConfirmationDialog() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.fragment_popup_confirmlogout)
+        val popupView = layoutInflater.inflate(R.layout.fragment_popup_confirmlogout, null)
 
-        val progressBarLogout = dialog.findViewById<ProgressBar>(R.id.progress_bar)
-        val btnNoLogout = dialog.findViewById<Button>(R.id.button_nologout)
-        val btnYesLogout = dialog.findViewById<Button>(R.id.button_yeslogout)
+        val btnNoLogout: Button = popupView.findViewById(R.id.button_nologout)
+        val btnYesLogout: Button = popupView.findViewById(R.id.button_yeslogout)
 
+        // Create a PopupWindow
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+
+        // Set background drawable with a transparent color
+        popupWindow.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+
+        // Show the PopupWindow at the center of the screen
+        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+
+        // Set click listeners for the buttons
         btnNoLogout.setOnClickListener {
-            dialog.dismiss()
+            popupWindow.dismiss()
         }
 
         btnYesLogout.setOnClickListener {
-            dialog.dismiss()
+            popupWindow.dismiss()
+            // Perform logout action here
             showLoadingDialog(true)
 
             Handler(Looper.getMainLooper()).postDelayed({
-
                 showLoadingDialog(false)
                 showCustomDialog("Successfully Logged Out!", true)
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     viewModel.logout()
                     val intent = Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
-
                 }, 2000)
             }, 2000)
         }
-        progressBarLogout.visibility = View.GONE
-
-        dialog.show()
     }
 
     private fun setViewModelFactory() {

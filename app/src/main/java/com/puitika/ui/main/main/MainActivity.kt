@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels { factory }
 
     private var backPressedTime: Long = 0
-    private val BACK_PRESS_INTERVAL = 2000 // 2 seconds
+    private val BACK_PRESS_INTERVAL = 2000
+    private var page = 0// 2 seconds
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +34,18 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getSession().observe(this) {
             if (!it.isLogin) {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+                val loginIntent = Intent(this, LoginActivity::class.java)
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(loginIntent)
             }
         }
-        val fromPage = intent.getIntExtra(FROM_PAGE, 1)
+        val fromPage = intent.getIntExtra(FROM_PAGE, 0)
+        if (fromPage!=0){
+        page = fromPage}
+
         Log.wtf("AHAHAHAA", fromPage.toString())
         setContentView(binding.root)
-        setupBottomNav(fromPage)
+        setupBottomNav(page)
     }
 
     private fun setupBottomNav(navigation: Int = 1) {
@@ -54,9 +59,12 @@ class MainActivity : AppCompatActivity() {
             } else if (navigation == 2) {
                 bottomNav.show(2)
                 navigation(ScanFragment())
-            } else {
+            } else if(navigation == 3){
                 bottomNav.show(3)
                 navigation(EventFragment())
+            } else {
+                bottomNav.show(1)
+                navigation(HomeFragment(),true)
             }
 
             bottomNav.setOnClickMenuListener {

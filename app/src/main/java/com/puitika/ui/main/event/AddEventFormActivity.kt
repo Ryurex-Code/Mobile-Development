@@ -21,8 +21,10 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.Base64
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -66,6 +68,7 @@ class AddEventFormActivity : AppCompatActivity() {
     private lateinit var etTicketPrice: EditText
     private lateinit var cardview4: MaterialCardView
     private lateinit var tvTicketprice: TextView
+    private var loadingPopup: PopupWindow? = null
     private var currentImageUri: Uri? = null
     private val viewModel: AddEventFormViewModel by viewModels { factory }
 
@@ -231,16 +234,18 @@ class AddEventFormActivity : AppCompatActivity() {
             ).observe(this){ result ->
                 when (result) {
                     is Result.Loading -> {
-
+                        showLoadingDialog(true)
                     }
                     is Result.Error -> {
+                        showLoadingDialog(false)
                         showCustomDialog(result.data, false)
                     }
                     is Result.Success -> {
+                        showLoadingDialog(false)
                         showCustomDialog(result.data.message, true)
                         Handler(Looper.getMainLooper()).postDelayed({
                             val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("fromAddEvent", true)
+                            intent.putExtra("from_page", 3)
                             startActivity(intent)
                             finish()
                         }, 2000)
@@ -344,84 +349,79 @@ class AddEventFormActivity : AppCompatActivity() {
                 eventTimeStart.isNotEmpty() &&
                 eventTimeEnd.isNotEmpty()
     }
+
     private fun showConfirmationDialog() {
-        val builder = AlertDialog.Builder(this)
-        val inflater = layoutInflater
-        val dialogView = inflater.inflate(R.layout.fragment_popup_confirmevent, null)
-        builder.setView(dialogView)
+        val popupView = layoutInflater.inflate(R.layout.fragment_popup_confirmevent, null)
 
-        val btnNoConfirm = dialogView.findViewById<Button>(R.id.button_noconfirm)
-        val btnYesConfirm = dialogView.findViewById<Button>(R.id.button_yesconfirm)
-        val tvAskConfirm = dialogView.findViewById<TextView>(R.id.tv_askconfirm)
-        val tvAskDesc = dialogView.findViewById<TextView>(R.id.tv_askdesc)
+        // Find views in the custom layout
+        val tvAskConfirm: TextView = popupView.findViewById(R.id.tv_askconfirm)
+        val tvAskDesc: TextView = popupView.findViewById(R.id.tv_askdesc)
+        val btnNoConfirm: Button = popupView.findViewById(R.id.button_noconfirm)
+        val btnYesConfirm: Button = popupView.findViewById(R.id.button_yesconfirm)
 
+        // Set confirmation message and description
         tvAskConfirm.text = "Are you sure?"
         tvAskDesc.text = "We will inform your event if it fulfills requirements at the notification"
 
-        val alertDialog = builder.create()
+        // Create a PopupWindow
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
 
+        // Set background drawable with a transparent color
+        popupWindow.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+
+        // Show the PopupWindow at the center of the screen
+        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+
+        // Set click listeners for the buttons
         btnNoConfirm.setOnClickListener {
-            alertDialog.dismiss()
+            popupWindow.dismiss()
         }
 
         btnYesConfirm.setOnClickListener {
-            alertDialog.dismiss()
+            popupWindow.dismiss()
             sendDataToApi()
         }
-
-        alertDialog.show()
     }
 
-    // private fun sendDataToApi(dialog: AlertDialog) {
-    //val apiResult = sendDataToApi()
-
-    //    if (apiResult) {
-    //         showSuccessDialog()
-    //    } else {
-    //         showFailureDialog()
-    //    }
-    // }
-    private fun showSuccessDialog() {
-        val successDialog = AlertDialog.Builder(this)
-            .setTitle("Selamat!")
-            .setMessage("Event Anda berhasil didaftarkan.")
-            .setPositiveButton("OK") { _, _ ->
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                intent.putExtra("fromAddEvent", true)
-                startActivity(intent)
-            }
-            .create()
-
-        successDialog.show()
-    }
-
-    private fun showFailureDialog() {
-        val failureDialog = AlertDialog.Builder(this)
-            .setTitle("Gagal")
-            .setMessage("Sepertinya ada gangguan koneksi. Silakan coba lagi nanti.")
-            .setPositiveButton("OK") { _, _ ->
-
-            }
-            .create()
-
-        failureDialog.show()
-    }
     private fun setViewModelFactory() {
         factory = ViewModelFactory.getInstance(binding.root.context)
     }
 
+    private fun showLoadingDialog(play: Boolean = true) {
+        if (play) {
+            // Show loading popup
+            if (loadingPopup == null) {
+                val loadingView = layoutInflater.inflate(R.layout.scan_loading, null)
+                loadingPopup = PopupWindow(
+                    loadingView,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT
+                )
+                loadingPopup?.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+                loadingPopup?.isOutsideTouchable = false
+                loadingPopup?.isFocusable = true
+            }
+            loadingPopup?.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+        } else {
+            // Dismiss loading popup
+            loadingPopup?.dismiss()
+        }
+    }
+
     private fun showCustomDialog(message: String, success: Boolean) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
+        val popupView = layoutInflater.inflate(R.layout.fragment_popup_loggedin, null)
 
-        val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
+        // Find views in the custom layout
+        val messageTextView: TextView = popupView.findViewById(R.id.tv_loggedin)
+        val checkListImageView: ImageFilterView = popupView.findViewById(R.id.iv_checklist)
+        val cancelImageView: ImageFilterView = popupView.findViewById(R.id.iv_cancel)
+
+        // Set message and visibility based on success
         messageTextView.text = message
-        val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
-        val cancelImageView: ImageFilterView = dialog.findViewById(R.id.iv_cancel)
-
         if (success) {
             checkListImageView.visibility = View.VISIBLE
             cancelImageView.visibility = View.GONE
@@ -430,10 +430,22 @@ class AddEventFormActivity : AppCompatActivity() {
             cancelImageView.visibility = View.VISIBLE
         }
 
-        dialog.show()
+        // Create a PopupWindow
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
 
+        // Set background drawable with a transparent color
+        popupWindow.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+
+        // Show the PopupWindow at the center of the screen
+        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+
+        // Dismiss the PopupWindow after a delay
         Handler(Looper.getMainLooper()).postDelayed({
-            dialog.dismiss()
+            popupWindow.dismiss()
         }, 2000)
     }
     private fun formatTimeWithAmPm(time: String): String {

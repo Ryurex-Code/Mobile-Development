@@ -1,6 +1,5 @@
 package com.puitika.ui.login
 
-import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -16,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import com.puitika.R
 import com.puitika.data.model.LoginModel
-import com.puitika.data.pref.UserModel
 import com.puitika.databinding.ActivityLoginBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.main.main.MainActivity

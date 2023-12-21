@@ -35,13 +35,12 @@ class MainActivity : AppCompatActivity() {
             if (!it.isLogin) {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
-            } else {
-                val fromPage = intent.getIntExtra(FROM_PAGE, 1)
-                Log.wtf("AHAHAHAA", fromPage.toString())
-                setContentView(binding.root)
-                setupBottomNav(fromPage)
             }
         }
+        val fromPage = intent.getIntExtra(FROM_PAGE, 1)
+        Log.wtf("AHAHAHAA", fromPage.toString())
+        setContentView(binding.root)
+        setupBottomNav(fromPage)
     }
 
     private fun setupBottomNav(navigation: Int = 1) {
@@ -54,10 +53,10 @@ class MainActivity : AppCompatActivity() {
                 navigation(HomeFragment(), true)
             } else if (navigation == 2) {
                 bottomNav.show(2)
-                navigation(ScanFragment(), true)
+                navigation(ScanFragment())
             } else {
                 bottomNav.show(3)
-                navigation(EventFragment(), true)
+                navigation(EventFragment())
             }
 
             bottomNav.setOnClickMenuListener {
@@ -114,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         if (currentTime - backPressedTime > BACK_PRESS_INTERVAL) {
             // First back press
             backPressedTime = currentTime
-            showToast(this,"Press back again to exit")
+            showToast(this, "Press back again to exit")
         } else {
             // Second back press within the interval, exit the app
             super.onBackPressed()

@@ -1,7 +1,5 @@
 package com.puitika.ui.register
 
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,31 +7,23 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.PopupWindow
-import android.widget.ProgressBar
 import android.widget.TextView
-import com.puitika.utils.showToast
 import androidx.activity.viewModels
 import androidx.constraintlayout.utils.widget.ImageFilterView
-import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.puitika.R
 import com.puitika.data.model.RegisterModel
 import com.puitika.databinding.ActivityRegisterBinding
 import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.login.LoginActivity
 import com.puitika.utils.Result
-import okhttp3.MediaType.Companion.toMediaType
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var factory: ViewModelFactory
     private var loadingPopup: PopupWindow? = null
-    private lateinit var progressBar: ProgressBar
     private val viewModel: RegisterViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +31,6 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setViewModelFactory()
-        progressBar = findViewById(R.id.progress_bar)
         setAction()
     }
 
@@ -77,7 +66,6 @@ class RegisterActivity : AppCompatActivity() {
                     is Result.Error -> {
                         showLoadingDialog(false)
                         Handler(Looper.getMainLooper()).postDelayed({
-                            progressBar.visibility = View.GONE
                             showCustomDialog(result.data, false)
                         }, 500)
                     }

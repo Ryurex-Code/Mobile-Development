@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -48,6 +49,7 @@ class ScanFragment : Fragment() {
     private var currentImageUri: Uri? = null
     private var dialog: Dialog? = null
     private var loadingPopup: PopupWindow? = null
+    private var popupWindow: PopupWindow? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,16 +95,13 @@ class ScanFragment : Fragment() {
                     }
 
                     is Result.Success -> {
-                            showLoadingDialog(false)
-                            showCustomDialog("Classification Success!", true)
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                binding.layoutResult.visibility = View.VISIBLE
-                                showResult(result.data.prediksi)
-                            }, 2000)
-
-
+                        showLoadingDialog(false)
+                        binding.btnScan.visibility = View.GONE
+                        showCustomDialog("Classification Success!", true)
+                        Handler(Looper.getMainLooper()).postDelayed({
                             binding.layoutResult.visibility = View.VISIBLE
                             showResult(result.data.prediksi)
+                        }, 2000)
                     }
                 }
             }
@@ -110,10 +109,10 @@ class ScanFragment : Fragment() {
     }
 
     private fun showResult(scanModelList: List<PrediksiItem>) {
-        val adapter = ScanModelAdapter(requireContext(), scanModelList)
+        val adapter = ScanModelAdapter(requireActivity(), scanModelList)
 
         // Use GridLayoutManager with 2 columns
-        val layoutManager = GridLayoutManager(requireContext(), 2)
+        val layoutManager = GridLayoutManager(requireActivity(), 2)
 
         binding.rvScan.layoutManager = layoutManager
         binding.rvScan.adapter = adapter
@@ -142,36 +141,36 @@ class ScanFragment : Fragment() {
 
     private fun showScanOptionsPopup() {
         bindingPopup = FragmentPopupBinding.inflate(layoutInflater)
-        val popupWindow = createPopupWindow()
+        popupWindow = createPopupWindow()
 
         with(bindingPopup) {
             btnCamera.setOnClickListener {
-                popupWindow.dismiss()
+                popupWindow?.dismiss()
                 currentImageUri = getImageUri(requireActivity())
                 launcherIntentCamera.launch(currentImageUri)
             }
 
             btnGalery.setOnClickListener {
-                popupWindow.dismiss()
+                popupWindow?.dismiss()
                 launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
 
             layoutBtnClose.setOnClickListener {
-                popupWindow.dismiss()
+                popupWindow?.dismiss()
             }
 
             ivClose.setOnClickListener {
-                popupWindow.dismiss()
+                popupWindow?.dismiss()
             }
 
             imageViewCloseup.setOnClickListener {
-                popupWindow.dismiss()
+                popupWindow?.dismiss()
             }
 
-            setPopupAnimation(root, popupWindow)
+            setPopupAnimation(root, popupWindow!!)
         }
 
-        popupWindow.showAtLocation(bindingPopup.root, Gravity.CENTER, 0, 0)
+        popupWindow?.showAtLocation(bindingPopup.root, Gravity.CENTER, 0, 0)
     }
 
     private fun createPopupWindow(): PopupWindow {
@@ -205,7 +204,7 @@ class ScanFragment : Fragment() {
         binding.topNavigation.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_account -> {
-                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                    startActivity(Intent(requireActivity(), ProfileActivity::class.java))
                     true
                 }
 
@@ -215,17 +214,15 @@ class ScanFragment : Fragment() {
     }
 
     private fun showCustomDialog(message: String, success: Boolean) {
-        val dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(com.puitika.R.layout.fragment_popup_loggedin)
+        val popupView = layoutInflater.inflate(R.layout.fragment_popup_loggedin, null)
 
-        // Assuming there's a TextView in your layout to display the message
-        val messageTextView: TextView = dialog.findViewById(R.id.tv_loggedin)
+        // Find views in the custom layout
+        val messageTextView: TextView = popupView.findViewById(R.id.tv_loggedin)
+        val checkListImageView: ImageFilterView = popupView.findViewById(R.id.iv_checklist)
+        val cancelImageView: ImageFilterView = popupView.findViewById(R.id.iv_cancel)
+
+        // Set message and visibility based on success
         messageTextView.text = message
-        val checkListImageView: ImageFilterView = dialog.findViewById(R.id.iv_checklist)
-        val cancelImageView: ImageFilterView = dialog.findViewById(R.id.iv_cancel)
-
         if (success) {
             checkListImageView.visibility = View.VISIBLE
             cancelImageView.visibility = View.GONE
@@ -234,12 +231,25 @@ class ScanFragment : Fragment() {
             cancelImageView.visibility = View.VISIBLE
         }
 
-        dialog.show()
+        // Create a PopupWindow
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
 
+        // Set background drawable with a transparent color
+        popupWindow.setBackgroundDrawable(resources.getDrawable(android.R.color.transparent))
+
+        // Show the PopupWindow at the center of the screen
+        popupWindow.showAtLocation(binding.root, Gravity.CENTER, 0, 0)
+
+        // Dismiss the PopupWindow after a delay
         Handler(Looper.getMainLooper()).postDelayed({
-            dialog.dismiss()
+            popupWindow.dismiss()
         }, 2000)
     }
+
 
     private fun showLoadingDialog(play: Boolean = true) {
         if (play) {
@@ -259,6 +269,18 @@ class ScanFragment : Fragment() {
         } else {
             // Dismiss loading popup
             loadingPopup?.dismiss()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            android.R.id.home -> {
+                requireActivity().onBackPressed()
+                popupWindow?.dismiss()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

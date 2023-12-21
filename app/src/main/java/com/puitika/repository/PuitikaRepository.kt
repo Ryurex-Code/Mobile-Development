@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.puitika.data.dummy.Event
 import com.puitika.data.local.AccountPreference
+import com.puitika.data.pref.UserModel
+import com.puitika.data.pref.UserPreference
 import com.puitika.data.remote.network.ApiConfig
 import com.puitika.data.remote.network.ApiConfig2
 import com.puitika.data.request.RegisterRequest
@@ -19,11 +21,12 @@ import com.puitika.data.remote.response.ScanResponse
 import com.puitika.data.request.CreateEventRequest
 import com.puitika.data.request.LoginRequest
 import com.puitika.utils.Result
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import java.lang.Exception
 
 class PuitikaRepository(
-    private val preference: AccountPreference,
+    private val pref: UserPreference,
     private var apiService: ApiService
 ) {
 
@@ -43,12 +46,28 @@ class PuitikaRepository(
         emit(Result.Loading)
         try {
             apiService = ApiConfig.getApiService()
-            val res = apiService.login(body)
-            if (res.status == "success") emit(Result.Success(res))
-            else emit(Result.Error(res.message))
+            val loginRes = apiService.login(body)
+            if (loginRes.status == "success") {
+                try {
+                    val bioRes = apiService.getBiodata(loginRes.apikey)
+                    pref.saveSession(UserModel(email = bioRes.email, username = bioRes.username, api = loginRes.apikey))
+                }catch (e:Exception) {
+                    Log.e("/me", e.message.toString())
+                }
+                emit(Result.Success(loginRes))
+            }
+            else emit(Result.Error(loginRes.message))
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         }
+    }
+
+    fun getSession(): Flow<UserModel> {
+        return pref.getSession()
+    }
+
+    suspend fun logout() {
+        pref.logout()
     }
 
     fun getRegions(): LiveData<Result<RegionResponse>> = liveData {
@@ -114,11 +133,11 @@ class PuitikaRepository(
         @Volatile
         private var instance: PuitikaRepository? = null
         fun getInstance(
-            preferences: AccountPreference,
+            pref: UserPreference,
             apiService: ApiService
         ): PuitikaRepository =
             instance ?: synchronized(this) {
-                instance ?: PuitikaRepository(preferences, apiService)
+                instance ?: PuitikaRepository(pref, apiService)
             }.also { instance = it }
     }
 }

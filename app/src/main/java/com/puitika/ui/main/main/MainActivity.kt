@@ -2,11 +2,11 @@ package com.puitika.ui.main.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.viewModels
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.puitika.R
 import com.puitika.databinding.ActivityMainBinding
@@ -14,8 +14,8 @@ import com.puitika.factory.ViewModelFactory
 import com.puitika.ui.login.LoginActivity
 import com.puitika.ui.main.event.EventFragment
 import com.puitika.ui.main.home.HomeFragment
-import com.puitika.ui.main.home.HomeViewModel
 import com.puitika.ui.main.scan.ScanFragment
+import com.puitika.utils.showToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,30 +23,42 @@ class MainActivity : AppCompatActivity() {
     private lateinit var factory: ViewModelFactory
     private val viewModel: MainViewModel by viewModels { factory }
 
+    private var backPressedTime: Long = 0
+    private val BACK_PRESS_INTERVAL = 2000 // 2 seconds
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setViewModelFactory()
 
-        viewModel.getSession().observe(this){
-            if (!it.isLogin){
-                startActivity(Intent(this,LoginActivity::class.java))
+        viewModel.getSession().observe(this) {
+            if (!it.isLogin) {
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
-            }else{
+            } else {
+                val fromPage = intent.getIntExtra(FROM_PAGE, 1)
+                Log.wtf("AHAHAHAA", fromPage.toString())
                 setContentView(binding.root)
-                setupBottomNav()
-                supportFragmentManager.addOnBackStackChangedListener(backStackListener)
+                setupBottomNav(fromPage)
             }
         }
     }
 
-    private fun setupBottomNav() {
+    private fun setupBottomNav(navigation: Int = 1) {
         with(binding) {
             bottomNav.add(MeowBottomNavigation.Model(1, R.drawable.home_ic))
             bottomNav.add(MeowBottomNavigation.Model(2, R.drawable.scan_ic))
             bottomNav.add(MeowBottomNavigation.Model(3, R.drawable.event_ic))
-            bottomNav.show(1)
-            navigation(HomeFragment(), true)
+            if (navigation == 1) {
+                bottomNav.show(1)
+                navigation(HomeFragment(), true)
+            } else if (navigation == 2) {
+                bottomNav.show(2)
+                navigation(ScanFragment(), true)
+            } else {
+                bottomNav.show(3)
+                navigation(EventFragment(), true)
+            }
 
             bottomNav.setOnClickMenuListener {
                 when (it.id) {
@@ -56,18 +68,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             bottomNav.setOnReselectListener {
-                when(it.id){
+                when (it.id) {
                     2 -> navigation(ScanFragment())
                 }
             }
         }
     }
 
-    private fun navigation(fragment:Fragment, isFromLogin:Boolean = false){
+    private fun navigation(fragment: Fragment, isFromLogin: Boolean = false) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
-        if (!isFromLogin)fragmentTransaction.addToBackStack(null)
+        if (!isFromLogin) fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
         updateBottomNavigation(fragment)
     }
@@ -82,20 +94,37 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.show(selectedItem, true)
     }
 
-    private val backStackListener = FragmentManager.OnBackStackChangedListener {
+    override fun onBackPressed() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
 
         when (currentFragment) {
-            is HomeFragment -> binding.bottomNav.show(1, true)
-            is ScanFragment -> binding.bottomNav.show(2, true)
-            is EventFragment -> binding.bottomNav.show(3, true)
+            is HomeFragment -> handleBackPressedForHome()
+            is ScanFragment -> navigateToHomeFragment()
+            is EventFragment -> navigateToHomeFragment()
+            else -> {
+                // For other fragments, allow the default back button behavior
+                super.onBackPressed()
+            }
         }
     }
 
-    override fun onDestroy() {
-        // Remove the back stack listener to avoid memory leaks
-        supportFragmentManager.removeOnBackStackChangedListener(backStackListener)
-        super.onDestroy()
+    private fun handleBackPressedForHome() {
+        val currentTime = System.currentTimeMillis()
+
+        if (currentTime - backPressedTime > BACK_PRESS_INTERVAL) {
+            // First back press
+            backPressedTime = currentTime
+            showToast(this,"Press back again to exit")
+        } else {
+            // Second back press within the interval, exit the app
+            super.onBackPressed()
+        }
+    }
+
+    private fun navigateToHomeFragment() {
+        // Navigate back to HomeFragment
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        updateBottomNavigation(HomeFragment())
     }
 
     private fun setViewModelFactory() {
@@ -103,6 +132,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val FROM_EVENT = "fromAddEvent"
+        const val FROM_PAGE = "from_page"
     }
 }
